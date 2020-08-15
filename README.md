@@ -1,6 +1,6 @@
 # rc6
 
-AES candidate RC6 implementation fully templated to accomodate different word sizes.
+RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9bee493796.pdf), fully templated to accomodate different word sizes.
 
 ## Building
 
@@ -10,6 +10,16 @@ $ cmake ..
 $ make
 ```
 
-## Running
+## Running (from `build/` folder)
 
-`./src/rc6`
+* Main program
+    - `./src/rc6`
+* Tests
+    - `./tests/tests`
+
+## TODO
+
+* Fix 8/16-bit word sizes
+* Pad ending blocks that do not align to word size.
+* If b = 0 then c = 1 and L[0] = 0 (Look at key scheduling section of paper)
+
