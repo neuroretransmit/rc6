@@ -22,4 +22,5 @@ $ make
 * Fix 8/16-bit word sizes
 * Pad ending blocks that do not align to word size.
 * If b = 0 then c = 1 and L[0] = 0 (Look at key scheduling section of paper)
-
+* Test different key sizes
+* Add out-vector instead of doing in-place on cleartext/ciphertext
