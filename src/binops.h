@@ -11,7 +11,7 @@ using std::numeric_limits;
  */
 template<class T> inline T rol(T word, int shift)
 {
-    return (word << shift) | (word >> (numeric_limits<T>::digits - shift));
+	return (word << shift) | (word >> (numeric_limits<T>::digits - shift));
 }
 
 /**
@@ -21,5 +21,5 @@ template<class T> inline T rol(T word, int shift)
  */
 template<class T> inline T ror(T word, int shift)
 {
-    return (word >> shift) | (word << (numeric_limits<T>::digits - shift));
+	return (word >> shift) | (word << (numeric_limits<T>::digits - shift));
 }
