@@ -32,9 +32,9 @@ namespace rc6 {
         * Create key schedule @S from input @key
         * @param key: key bytes
         * @param S: destination for key schedule
-        * @param r: number of rounds
+        * @param half_rounds: number of half-rounds
         */
-        template<class T> static void key_schedule(vector<u8>& key, vector<T>& S, unsigned half_rounds = 20) {
+        template<class T> static void key_schedule(vector<u8>& key, vector<T>& schedule, unsigned half_rounds = 20) {
             // The user supplies a key of b bytes
             unsigned key_len_bytes = key.size() / sizeof(u8);
             unsigned key_len_bits = key_len_bytes * 8;
@@ -51,23 +51,23 @@ namespace rc6 {
             
             // key bytes are then loaded in little-endian fashion into an array of c w-bit 
             // words L[0], ..., L[c - 1]
-            const unsigned c = key.size() / sizeof(T);
-            vector<T> L(key.data(), static_cast<u8*>(key.data()) + key_len_bytes);
-            const unsigned v = 3 * max(c, 2 * half_rounds + 4);
+            const unsigned key_as_words_len = key.size() / sizeof(T);
+            vector<T> little_endian_word_key(key.data(), static_cast<u8*>(key.data()) + key_len_bytes);
+            const unsigned v = 3 * max(key_as_words_len, 2 * half_rounds + 4);
             unsigned i = 0, j = 0;
 
             // Populate key schedule with magic constant series
-            S[0] = P<T>;
+            schedule[0] = P<T>;
             for (i = 1; i < 2 * half_rounds + 3; i++)
-                S[i] = S[i - 1] + Q<T>;
+                schedule[i] = schedule[i - 1] + Q<T>;
             
             i = 0;
-            unsigned A = 0, B = 0;
+            unsigned a = 0, b = 0;
             for (unsigned s = 1; s <= v; s++) {
-                A = S[i] = rol(S[i] + A + B, 3);
-                B = L[j] = rol(L[j] + A + B, A + B);
+                a = schedule[i] = rol(schedule[i] + a + b, 3);
+                b = little_endian_word_key[j] = rol(little_endian_word_key[j] + a + b, a + b);
                 i = (i + 1) % (2 * half_rounds + 4);
-                j = (j + 1) % c;
+                j = (j + 1) % key_as_words_len;
             }
         }
         
@@ -78,7 +78,7 @@ namespace rc6 {
         * Encrypt @plaintext using @key for @r rounds
         * @param plaintext: plain text to encrypt
         * @param key: key bytes
-        * @param r: number of rounds
+        * @param half_rounds: number of half-rounds
         */
         template<class T> static void encrypt(vector<T>& plaintext, vector<u8>& key, unsigned half_rounds = 20)
         {
@@ -110,7 +110,7 @@ namespace rc6 {
         * Decrypt @ciphertext using @key for @r rounds
         * @param plaintext: plain text to encrypt
         * @param key: key bytes
-        * @param r: number of rounds
+        * @param half_rounds: number of half-rounds
         */
         template<class T> static void decrypt(vector<T>& ciphertext, vector<u8>& key, unsigned half_rounds = 20)
         {
