@@ -5,6 +5,7 @@
 
 int main()
 {
+    RC6<u32> rc6 = RC6<u32>();
 	vector<u32> plain = { 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 	u8* plain_bytes = reinterpret_cast<u8*>(plain.data());
 	printf("PLAIN   : %02x %02x %02x %02x "
@@ -30,7 +31,7 @@ int main()
 			key[8], key[9], key[10], key[11], 
 			key[12], key[13], key[14], key[15]);
 
-	RC6<u32>::encrypt(plain, key);
+	rc6.encrypt(plain, key);
 	u8* encrypted_bytes = reinterpret_cast<u8*>(plain.data());
 	printf("ENCRYPT : %02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
@@ -42,7 +43,7 @@ int main()
 			encrypted_bytes[12], encrypted_bytes[13], encrypted_bytes[14], encrypted_bytes[15]);
 
 	u8* decrypted_bytes = reinterpret_cast<u8*>(plain.data());
-	RC6<u32>::decrypt(plain, key);
+	rc6.decrypt(plain, key);
 	printf("DECRYPT : %02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
 			"%02x %02x %02x %02x "

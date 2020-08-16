@@ -20,12 +20,17 @@ using std::numeric_limits;
 
 template<class T> class RC6 {
 public:
-    static const unsigned MAX_KEY_LEN = 2040;
+    const unsigned MAX_KEY_LEN = 2040;
     
     /// Binary expansion of e - 2
-    static inline const T P = T(ceil((M_E - 2) * pow(2, numeric_limits<T>::digits)));
+    const T P;
     /// Binary expansion of ϕ - 1 where ϕ is the golden ratio
-    static inline const T Q = T(((1.618033988749895 - 1) * pow(2, numeric_limits<T>::digits)));
+    const T Q;
+    
+    RC6() :
+        P(T(ceil((M_E - 2) * pow(2, numeric_limits<T>::digits)))),
+        Q(T(((1.618033988749895 - 1) * pow(2, numeric_limits<T>::digits))))
+    {}
     
     /**
      * Encrypt @plaintext using @key for @r rounds
@@ -33,7 +38,7 @@ public:
      * @param key: key bytes
      * @param half_rounds: number of half-rounds
      */
-    static void encrypt(vector<T>& plaintext, vector<u8>& key, T half_rounds = 20)
+    void encrypt(vector<T>& plaintext, vector<u8>& key, T half_rounds = 20)
     {
         vector<T> schedule(2 * half_rounds + 4);
         key_schedule(key, schedule, half_rounds);
@@ -66,7 +71,7 @@ public:
      * @param key: key bytes
      * @param half_rounds: number of half-rounds
      */
-    static void decrypt(vector<T>& ciphertext, vector<u8>& key, T half_rounds = 20)
+    void decrypt(vector<T>& ciphertext, vector<u8>& key, T half_rounds = 20)
     {
         vector<T> schedule(2 * half_rounds + 4);
         key_schedule(key, schedule, half_rounds);
@@ -102,7 +107,7 @@ private:
      * @param S: destination for key schedule
      * @param half_rounds: number of half-rounds
      */
-    static void key_schedule(vector<u8>& key, vector<T>& schedule, T half_rounds = 20) {
+    void key_schedule(vector<u8>& key, vector<T>& schedule, T half_rounds = 20) {
         T key_len_bytes = key.size() / sizeof(u8);
         const T key_len_bits = key_len_bytes * 8;
 
