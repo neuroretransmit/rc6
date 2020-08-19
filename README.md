@@ -2,11 +2,38 @@
 
 RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9bee493796.pdf), fully templated to accomodate different word sizes. RC6 is an AES (Advanced Encryption Standard) candidate that was found being used in NSA implants.
 
-## Requirements
+## Usage
 
-To run tests you need GTest and GMock installed on your system.
+Copy `[types.h](src/types.h)`, `[binops.h](src/binops.h)`, and `[rc6.h](src/rc6.h)` to your source directory.
+
+```cpp
+#include "path/to/rc6.h"
+
+using namespace rc6;
+
+void int main()
+{
+    // Initialize RC6 block cipher to use 128-bit blocks (u32 * 4)
+    RC6<u32> rc6 = RC6<u32>();
+    // Encrypt/Decrypt take in a vector of bytes, u8 is defined in types.h
+    vector<u8> block(16);
+    // Please create a random key, although RC6 has no known key weaknesses
+    vector<u8> key(16);
+    
+    rc6.encrypt(block, key);
+    rc6.decrypt(block, key);
+}
+```
 
 ## Building
+
+### Requirements
+
+* CMake >= 3.18
+* GTest
+* GMock
+
+### The Build
 
 ```
 $ mkdir build && cd build
@@ -17,6 +44,8 @@ $ make
 ## Running (from `build/` folder)
 
 ### Main program
+
+The `main.cc` file runs the test vectors from the whitepaper.
 
 ```bash
 $./src/rc6
@@ -56,6 +85,8 @@ ENCRYPT : c8 24 18 16 f0 d7 e4 89 20 ad 16 a1 67 4e 5d 48
 DECRYPT : 02 13 24 35 46 57 68 79 8a 9b ac bd ce df e0 f1
 ```
 ### Tests
+
+Tests run a Google Test suite that test constraints of the paper as well as the test vectors.
 
 ```bash
 $ ./tests/tests
