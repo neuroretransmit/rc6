@@ -58,7 +58,7 @@ public:
             block[B] += S[0];
             block[D] += S[1];
             
-            for (T i = 1; i <= r; i++) {
+            for (size_t i = 1; i <= r; i++) {
                 T t = rol(block[B] * (2 * block[B] + 1), log2(w));
                 T u = rol(block[D] * (2 * block[D] + 1), log2(w));
                 block[A] = rol((block[A] ^ t), u) + S[2 * i];
@@ -89,7 +89,7 @@ public:
             block[C] -= S[2 * r + 3];
             block[A] -= S[2 * r + 2];
 
-            for (T i = r; i >= 1; i--) {
+            for (size_t i = r; i >= 1; i--) {
                 T d = block[D];
                 block[D] = block[C];
                 block[C] = block[B];
@@ -119,7 +119,7 @@ private:
         // Copy key to not augment original by appending bytes and reinterpreting pointer as L
         vector<u8> key_copy = key;
         size_t b = key_copy.size();
-        const T b_bits = b * 8;
+        const size_t b_bits = b * 8;
 
         if (b_bits > MAX_KEY_LEN) {
             cerr << "ERROR: Key can't be greater than 2040 bits, got " << b_bits << ".\n";
@@ -132,7 +132,7 @@ private:
         const size_t c = key_copy.size() / sizeof(T);
         T* L = (T*) key_copy.data();
         
-        const T v = 3 * max((T) c, 2 * (T) r + 4);
+        const size_t v = 3 * max((T) c, 2 * (T) r + 4);
         T i = 0, j = 0;
 
         S[0] = P;
@@ -141,7 +141,7 @@ private:
 
         i = 0;
         T A = 0, B = 0;
-        for (T s = 1; s <= v; s++) {
+        for (size_t s = 1; s <= v; s++) {
             A = S[i] = rol(S[i] + A + B, 3);
             B = L[j] = rol(L[j] + A + B, A + B);
             i = (i + 1) % (2 * r + 4);

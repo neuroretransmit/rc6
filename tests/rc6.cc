@@ -12,7 +12,7 @@ void encrypted_to_bytes(const vector<u32>& encrypted, vector<u8>& output_bytes)
         bytes[2] = (uint8_t)(word >>= 8);
         bytes[3] = (uint8_t)(word >>= 8);
         
-        for (int i = 0; i < sizeof(bytes); i++)
+        for (size_t i = 0; i < sizeof(bytes); i++)
             output_bytes.push_back(bytes[i]);
     }
 }
