@@ -4,7 +4,6 @@
 #include <cstdio>
 #include <cstddef>
 #include <vector>
-#include <limits>
 #include <iostream>
 
 #include "types.h"
@@ -16,13 +15,10 @@ using std::max;
 using std::ceil;
 using std::pow;
 using std::vector;
-using std::numeric_limits;
-
 
 template<class T> class RC6 {
 public:
     const unsigned MAX_KEY_LEN = 2040;
-    
     /// Binary expansion of e - 2
     const T P;
     /// Binary expansion of ϕ - 1 where ϕ is the golden ratio
@@ -34,7 +30,6 @@ public:
     
     /**
      * Constructor for RC6 block cipher.
-     * 
      * @param r: number of half-rounds
      */
     RC6(T r = 20) :
@@ -118,21 +113,19 @@ private:
     void key_schedule(const vector<u8>& key, vector<T>& S) {
         // Copy key to not augment original by appending bytes and reinterpreting pointer as L
         vector<u8> key_copy = key;
-        size_t b = key_copy.size();
-        const size_t b_bits = b * 8;
+        const size_t b_bits = key_copy.size() * 8;
 
         if (b_bits > MAX_KEY_LEN) {
             cerr << "ERROR: Key can't be greater than 2040 bits, got " << b_bits << ".\n";
             exit(1);
         }
 
-        for ( ; key_copy.size() % sizeof(T) != 0; b++)
+        while (key_copy.size() % sizeof(T) != 0)
             key_copy.push_back(0x00);
 
         const size_t c = key_copy.size() / sizeof(T);
         T* L = (T*) key_copy.data();
-        
-        const size_t v = 3 * max((T) c, 2 * (T) r + 4);
+        const size_t v = 3 * max((T) c, 2 * r + 4);
         T i = 0, j = 0;
 
         S[0] = P;
