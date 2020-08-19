@@ -14,6 +14,8 @@ RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9
 
 ## Usage
 
+Doxygen generated files are in `doc/latex` and `doc/html`.
+
 Copy [`types.h`](src/types.h), [`binops.h`](src/binops.h), and [`rc6.h`](src/rc6.h) to your source directory.
 
 ```cpp
