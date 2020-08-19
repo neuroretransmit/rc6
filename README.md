@@ -23,7 +23,7 @@ Copy [`types.h`](src/types.h), [`binops.h`](src/binops.h), and [`rc6.h`](src/rc6
 
 using namespace rc6;
 
-void int main()
+int main()
 {
     // Initialize RC6 block cipher to use 128-bit blocks (u32 * 4)
     RC6<u32> rc6 = RC6<u32>();
