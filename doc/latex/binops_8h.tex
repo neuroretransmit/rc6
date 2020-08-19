@@ -1,0 +1,41 @@
+\hypertarget{binops_8h}{}\doxysection{/home/jonesy/git/rc6/src/binops.h File Reference}
+\label{binops_8h}\index{/home/jonesy/git/rc6/src/binops.h@{/home/jonesy/git/rc6/src/binops.h}}
+{\ttfamily \#include $<$limits$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\T \mbox{\hyperlink{binops_8h_af5aea3b2857e5648cbc66b960862993a}{rol}} (T word, int shift)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \mbox{\hyperlink{binops_8h_ae125a4487df7033773045d8ee965188e}{ror}} (T word, int shift)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{binops_8h_af5aea3b2857e5648cbc66b960862993a}\label{binops_8h_af5aea3b2857e5648cbc66b960862993a}} 
+\index{binops.h@{binops.h}!rol@{rol}}
+\index{rol@{rol}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{rol()}{rol()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T rol (\begin{DoxyParamCaption}\item[{T}]{word,  }\item[{int}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotate a N-\/bit value left 
+\begin{DoxyParams}{Parameters}
+{\em word} & value to rotate \\
+\hline
+{\em shift} & bits to roll \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{binops_8h_ae125a4487df7033773045d8ee965188e}\label{binops_8h_ae125a4487df7033773045d8ee965188e}} 
+\index{binops.h@{binops.h}!ror@{ror}}
+\index{ror@{ror}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{ror()}{ror()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T ror (\begin{DoxyParamCaption}\item[{T}]{word,  }\item[{int}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotate a N-\/bit value right 
+\begin{DoxyParams}{Parameters}
+{\em word} & value to rotate \\
+\hline
+{\em shift} & bits to roll \\
+\hline
+\end{DoxyParams}

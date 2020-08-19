@@ -21,7 +21,7 @@ public:
     const unsigned MAX_KEY_LEN = 2040;
     /// Binary expansion of e - 2
     const T P;
-    /// Binary expansion of ϕ - 1 where ϕ is the golden ratio
+    /// Binary expansion of the golden ratio - 1
     const T Q;
     /// Word bit-length
     const T w;

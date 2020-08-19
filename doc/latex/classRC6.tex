@@ -1,0 +1,133 @@
+\hypertarget{classRC6}{}\doxysection{R\+C6$<$ T $>$ Class Template Reference}
+\label{classRC6}\index{RC6$<$ T $>$@{RC6$<$ T $>$}}
+
+
+{\ttfamily \#include $<$rc6.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRC6_a051c67b814b66b48ff91c36e21b47e54}{R\+C6}} (T \mbox{\hyperlink{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}{r}}=20)
+\item 
+void \mbox{\hyperlink{classRC6_a47380fe24cc7215cef50a7072df03907}{encrypt}} (vector$<$ T $>$ \&plaintext, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key)
+\item 
+void \mbox{\hyperlink{classRC6_ae1b9a4f6cc69d3aedf936d5d25863577}{decrypt}} (vector$<$ T $>$ \&ciphertext, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned \mbox{\hyperlink{classRC6_a3c185971cfef37fa09caee13cf18e196}{M\+A\+X\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}} = 2040
+\item 
+const T \mbox{\hyperlink{classRC6_a255c48ae6858a45d877b6573d3760a18}{P}}
+\begin{DoxyCompactList}\small\item\em Binary expansion of e -\/ 2. \end{DoxyCompactList}\item 
+const T \mbox{\hyperlink{classRC6_ab046619ee0416eb21fa26d97f2fd3439}{Q}}
+\begin{DoxyCompactList}\small\item\em Binary expansion of the golden ratio -\/ 1. \end{DoxyCompactList}\item 
+const T \mbox{\hyperlink{classRC6_a0bf59cfc0e7daa126660d4d2d7cd2474}{w}}
+\begin{DoxyCompactList}\small\item\em Word bit-\/length. \end{DoxyCompactList}\item 
+const T \mbox{\hyperlink{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}{r}}
+\begin{DoxyCompactList}\small\item\em Number of half-\/rounds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRC6_a051c67b814b66b48ff91c36e21b47e54}\label{classRC6_a051c67b814b66b48ff91c36e21b47e54}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!RC6@{RC6}}
+\index{RC6@{RC6}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RC6()}{RC6()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::\mbox{\hyperlink{classRC6}{R\+C6}} (\begin{DoxyParamCaption}\item[{T}]{r = {\ttfamily 20} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor for \mbox{\hyperlink{classRC6}{R\+C6}} block cipher. 
+\begin{DoxyParams}{Parameters}
+{\em r} & number of half-\/rounds \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRC6_ae1b9a4f6cc69d3aedf936d5d25863577}\label{classRC6_ae1b9a4f6cc69d3aedf936d5d25863577}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!decrypt@{decrypt}}
+\index{decrypt@{decrypt}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{decrypt()}{decrypt()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::decrypt (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{ciphertext,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Decrypt @ciphertext using @key for @r rounds 
+\begin{DoxyParams}{Parameters}
+{\em plaintext} & plain text to encrypt \\
+\hline
+{\em key} & key bytes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRC6_a47380fe24cc7215cef50a7072df03907}\label{classRC6_a47380fe24cc7215cef50a7072df03907}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!encrypt@{encrypt}}
+\index{encrypt@{encrypt}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{encrypt()}{encrypt()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::encrypt (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{plaintext,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Encrypt @plaintext using @key for @r rounds 
+\begin{DoxyParams}{Parameters}
+{\em plaintext} & plain text to encrypt \\
+\hline
+{\em key} & key bytes \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classRC6_a3c185971cfef37fa09caee13cf18e196}\label{classRC6_a3c185971cfef37fa09caee13cf18e196}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!MAX\_KEY\_LEN@{MAX\_KEY\_LEN}}
+\index{MAX\_KEY\_LEN@{MAX\_KEY\_LEN}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{MAX\_KEY\_LEN}{MAX\_KEY\_LEN}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const unsigned \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::M\+A\+X\+\_\+\+K\+E\+Y\+\_\+\+L\+EN = 2040}
+
+\mbox{\Hypertarget{classRC6_a255c48ae6858a45d877b6573d3760a18}\label{classRC6_a255c48ae6858a45d877b6573d3760a18}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!P@{P}}
+\index{P@{P}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{P}{P}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::P}
+
+
+
+Binary expansion of e -\/ 2. 
+
+\mbox{\Hypertarget{classRC6_ab046619ee0416eb21fa26d97f2fd3439}\label{classRC6_ab046619ee0416eb21fa26d97f2fd3439}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!Q@{Q}}
+\index{Q@{Q}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::Q}
+
+
+
+Binary expansion of the golden ratio -\/ 1. 
+
+\mbox{\Hypertarget{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}\label{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!r@{r}}
+\index{r@{r}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{r}{r}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::r}
+
+
+
+Number of half-\/rounds. 
+
+\mbox{\Hypertarget{classRC6_a0bf59cfc0e7daa126660d4d2d7cd2474}\label{classRC6_a0bf59cfc0e7daa126660d4d2d7cd2474}} 
+\index{RC6$<$ T $>$@{RC6$<$ T $>$}!w@{w}}
+\index{w@{w}!RC6$<$ T $>$@{RC6$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::w}
+
+
+
+Word bit-\/length. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/jonesy/git/rc6/src/\mbox{\hyperlink{rc6_8h}{rc6.\+h}}\end{DoxyCompactItemize}
