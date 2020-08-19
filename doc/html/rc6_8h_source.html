@@ -103,100 +103,101 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>(<a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {}</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classRC6.html#a47380fe24cc7215cef50a7072df03907">   47</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRC6.html#a47380fe24cc7215cef50a7072df03907">encrypt</a>(vector&lt;T&gt;&amp; plaintext, <span class="keyword">const</span> vector&lt;u8&gt;&amp; key)</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classRC6.html#a73d252ac0ad4902cac504c41914867a4">   47</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRC6.html#a73d252ac0ad4902cac504c41914867a4">encrypt</a>(vector&lt;u8&gt;&amp; block, <span class="keyword">const</span> vector&lt;u8&gt;&amp; key)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        vector&lt;T&gt; S(2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        key_schedule(key, S);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> block = plaintext.begin(); block != plaintext.end(); block += 4) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            block[B] += S[0];</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            block[D] += S[1];</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt;= <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>; i++) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                T t = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(block[B] * (2 * block[B] + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                T u = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(block[D] * (2 * block[D] + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                block[A] = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>((block[A] ^ t), u) + S[2 * i];</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                block[C] = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>((block[C] ^ u), t) + S[2 * i + 1];</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                T a = block[A];</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                block[A] = block[B];</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                block[B] = block[C];</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                block[C] = block[D];</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                block[D] = a;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            block[A] += S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 2];</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            block[C] += S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 3];</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classRC6.html#ae1b9a4f6cc69d3aedf936d5d25863577">   78</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRC6.html#ae1b9a4f6cc69d3aedf936d5d25863577">decrypt</a>(vector&lt;T&gt;&amp; ciphertext, <span class="keyword">const</span> vector&lt;u8&gt;&amp; key)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        vector&lt;T&gt; S(2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        key_schedule(key, S);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> block = ciphertext.begin(); block != ciphertext.end(); block += 4) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            block[C] -= S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 3];</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            block[A] -= S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 2];</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>; i &gt;= 1; i--) {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                T d = block[D];</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                block[D] = block[C];</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                block[C] = block[B];</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                block[B] = block[A];</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                block[A] = d;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                T u = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(block[D] * (2 * block[D] + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                T t = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(block[B] * (2 * block[B] + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                block[C] = <a class="code" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">ror</a>(block[C] - S[2 * i + 1], t) ^ u;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                block[A] = <a class="code" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">ror</a>(block[A] - S[2 * i], u) ^ t;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            }</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            block[D] -= S[1];</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            block[B] -= S[0];</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="comment">// Used for indices on blocks to match paper</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">enum</span> { A, B, C, D };</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        T* block_words = (T*) block.data();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        T&amp; A = block_words[0];</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        T&amp; B = block_words[1];</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        T&amp; C = block_words[2];</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        T&amp; D = block_words[3];</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        vector&lt;T&gt; S(2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        key_schedule(key, S);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        B += S[0];</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        D += S[1];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 1; i &lt;= <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>; i++) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            T t = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(B * (2 * B + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            T u = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(D * (2 * D + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            A = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>((A ^ t), u) + S[2 * i];</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            C = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>((C ^ u), t) + S[2 * i + 1];</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            T a = A;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            A = B;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            B = C;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            C = D;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            D = a;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        A += S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 2];</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        C += S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 3];</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classRC6.html#a67c810c95f5916b8e9640ff74f7aa761">   80</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRC6.html#a67c810c95f5916b8e9640ff74f7aa761">decrypt</a>(vector&lt;u8&gt;&amp; block, <span class="keyword">const</span> vector&lt;u8&gt;&amp; key)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        T* block_words = (T*) block.data();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        T&amp; A = block_words[0];</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        T&amp; B = block_words[1];</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        T&amp; C = block_words[2];</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        T&amp; D = block_words[3];</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        vector&lt;T&gt; S(2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        key_schedule(key, S);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        C -= S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 3];</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        A -= S[2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 2];</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>; i &gt;= 1; i--) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            T d = D;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            D = C;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            C = B;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            B = A;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            A = d;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            T u = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(D * (2 * D + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            T t = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(B * (2 * B + 1), log2(<a class="code" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a>));</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            C = <a class="code" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">ror</a>(C - S[2 * i + 1], t) ^ u;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            A = <a class="code" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">ror</a>(A - S[2 * i], u) ^ t;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        D -= S[1];</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        B -= S[0];</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> key_schedule(<span class="keyword">const</span> vector&lt;u8&gt;&amp; key, vector&lt;T&gt;&amp; S) {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="comment">// Copy key to not augment original by appending bytes and reinterpreting pointer as L</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        vector&lt;u8&gt; key_copy = key;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> b_bits = key_copy.size() * 8;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">if</span> (b_bits &gt; <a class="code" href="classRC6.html#a3c185971cfef37fa09caee13cf18e196">MAX_KEY_LEN</a>) {</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Key can&#39;t be greater than 2040 bits, got &quot;</span> &lt;&lt; b_bits &lt;&lt; <span class="stringliteral">&quot;.\n&quot;</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            exit(1);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        }</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">while</span> (key_copy.size() % <span class="keyword">sizeof</span>(T) != 0)</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            key_copy.push_back(0x00);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> c = key_copy.size() / <span class="keyword">sizeof</span>(T);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        T* L = (T*) key_copy.data();</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> v = 3 * max((T) c, 2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        T i = 0, j = 0;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        S[0] = <a class="code" href="classRC6.html#a255c48ae6858a45d877b6573d3760a18">P</a>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">for</span> (i = 1; i &lt;= 2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 3; i++)</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            S[i] = S[i - 1] + <a class="code" href="classRC6.html#ab046619ee0416eb21fa26d97f2fd3439">Q</a>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        i = 0;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        T A = 0, B = 0;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> s = 1; s &lt;= v; s++) {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            A = S[i] = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(S[i] + A + B, 3);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            B = L[j] = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(L[j] + A + B, A + B);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            i = (i + 1) % (2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            j = (j + 1) % c;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        }</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;};</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> key_schedule(<span class="keyword">const</span> vector&lt;u8&gt;&amp; key, vector&lt;T&gt;&amp; S) {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="comment">// Copy key to not augment original by appending bytes and reinterpreting pointer as L</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        vector&lt;u8&gt; key_copy = key;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> b_bits = key_copy.size() * 8;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordflow">if</span> (b_bits &gt; <a class="code" href="classRC6.html#a3c185971cfef37fa09caee13cf18e196">MAX_KEY_LEN</a>) {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Key can&#39;t be greater than 2040 bits, got &quot;</span> &lt;&lt; b_bits &lt;&lt; <span class="stringliteral">&quot;.\n&quot;</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            exit(1);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">while</span> (key_copy.size() % <span class="keyword">sizeof</span>(T) != 0)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            key_copy.push_back(0x00);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> c = key_copy.size() / <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        T* L = (T*) key_copy.data();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">size_t</span> v = 3 * max((T) c, 2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        T i = 0, j = 0;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        S[0] = <a class="code" href="classRC6.html#a255c48ae6858a45d877b6573d3760a18">P</a>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">for</span> (i = 1; i &lt;= 2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 3; i++)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            S[i] = S[i - 1] + <a class="code" href="classRC6.html#ab046619ee0416eb21fa26d97f2fd3439">Q</a>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        i = 0;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        T A = 0, B = 0;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> s = 1; s &lt;= v; s++) {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            A = S[i] = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(S[i] + A + B, 3);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            B = L[j] = <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(L[j] + A + B, A + B);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            i = (i + 1) % (2 * <a class="code" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a> + 4);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            j = (j + 1) % c;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        }</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;};</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="abinops_8h_html_af5aea3b2857e5648cbc66b960862993a"><div class="ttname"><a href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a></div><div class="ttdeci">T rol(T word, int shift)</div><div class="ttdef"><b>Definition:</b> binops.h:12</div></div>
-<div class="ttc" id="aclassRC6_html_ae1b9a4f6cc69d3aedf936d5d25863577"><div class="ttname"><a href="classRC6.html#ae1b9a4f6cc69d3aedf936d5d25863577">RC6::decrypt</a></div><div class="ttdeci">void decrypt(vector&lt; T &gt; &amp;ciphertext, const vector&lt; u8 &gt; &amp;key)</div><div class="ttdef"><b>Definition:</b> rc6.h:78</div></div>
+<div class="ttc" id="aclassRC6_html_a67c810c95f5916b8e9640ff74f7aa761"><div class="ttname"><a href="classRC6.html#a67c810c95f5916b8e9640ff74f7aa761">RC6::decrypt</a></div><div class="ttdeci">void decrypt(vector&lt; u8 &gt; &amp;block, const vector&lt; u8 &gt; &amp;key)</div><div class="ttdef"><b>Definition:</b> rc6.h:80</div></div>
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
-<div class="ttc" id="aclassRC6_html_a47380fe24cc7215cef50a7072df03907"><div class="ttname"><a href="classRC6.html#a47380fe24cc7215cef50a7072df03907">RC6::encrypt</a></div><div class="ttdeci">void encrypt(vector&lt; T &gt; &amp;plaintext, const vector&lt; u8 &gt; &amp;key)</div><div class="ttdef"><b>Definition:</b> rc6.h:47</div></div>
+<div class="ttc" id="aclassRC6_html_a73d252ac0ad4902cac504c41914867a4"><div class="ttname"><a href="classRC6.html#a73d252ac0ad4902cac504c41914867a4">RC6::encrypt</a></div><div class="ttdeci">void encrypt(vector&lt; u8 &gt; &amp;block, const vector&lt; u8 &gt; &amp;key)</div><div class="ttdef"><b>Definition:</b> rc6.h:47</div></div>
 <div class="ttc" id="aclassRC6_html_a255c48ae6858a45d877b6573d3760a18"><div class="ttname"><a href="classRC6.html#a255c48ae6858a45d877b6573d3760a18">RC6::P</a></div><div class="ttdeci">const T P</div><div class="ttdoc">Binary expansion of e - 2.</div><div class="ttdef"><b>Definition:</b> rc6.h:23</div></div>
 <div class="ttc" id="abinops_8h_html_ae125a4487df7033773045d8ee965188e"><div class="ttname"><a href="binops_8h.html#ae125a4487df7033773045d8ee965188e">ror</a></div><div class="ttdeci">T ror(T word, int shift)</div><div class="ttdef"><b>Definition:</b> binops.h:22</div></div>
 <div class="ttc" id="aclassRC6_html_a3c185971cfef37fa09caee13cf18e196"><div class="ttname"><a href="classRC6.html#a3c185971cfef37fa09caee13cf18e196">RC6::MAX_KEY_LEN</a></div><div class="ttdeci">const unsigned MAX_KEY_LEN</div><div class="ttdef"><b>Definition:</b> rc6.h:21</div></div>

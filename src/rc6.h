@@ -40,71 +40,72 @@ public:
     {}
     
     /**
-     * Encrypt @plaintext using @key for @r rounds
-     * @param plaintext: plain text to encrypt
+     * Encrypt plaintext @block using @key for @r rounds
+     * @param block: plain text block to encrypt
      * @param key: key bytes
      */
-    void encrypt(vector<T>& plaintext, const vector<u8>& key)
+    void encrypt(vector<u8>& block, const vector<u8>& key)
     {
+        T* block_words = (T*) block.data();
+        T& A = block_words[0];
+        T& B = block_words[1];
+        T& C = block_words[2];
+        T& D = block_words[3];
         vector<T> S(2 * r + 4);
         key_schedule(key, S);
-
-        for (auto block = plaintext.begin(); block != plaintext.end(); block += 4) {
-            block[B] += S[0];
-            block[D] += S[1];
-            
-            for (size_t i = 1; i <= r; i++) {
-                T t = rol(block[B] * (2 * block[B] + 1), log2(w));
-                T u = rol(block[D] * (2 * block[D] + 1), log2(w));
-                block[A] = rol((block[A] ^ t), u) + S[2 * i];
-                block[C] = rol((block[C] ^ u), t) + S[2 * i + 1];
-                T a = block[A];
-                block[A] = block[B];
-                block[B] = block[C];
-                block[C] = block[D];
-                block[D] = a;
-            }
-            
-            block[A] += S[2 * r + 2];
-            block[C] += S[2 * r + 3];
+        B += S[0];
+        D += S[1];
+        
+        for (size_t i = 1; i <= r; i++) {
+            T t = rol(B * (2 * B + 1), log2(w));
+            T u = rol(D * (2 * D + 1), log2(w));
+            A = rol((A ^ t), u) + S[2 * i];
+            C = rol((C ^ u), t) + S[2 * i + 1];
+            T a = A;
+            A = B;
+            B = C;
+            C = D;
+            D = a;
         }
+        
+        A += S[2 * r + 2];
+        C += S[2 * r + 3];
     }
 
     /**
-     * Decrypt @ciphertext using @key for @r rounds
-     * @param plaintext: plain text to encrypt
+     * Decrypt encrypted @block using @key for @r rounds
+     * @param block: plain text to encrypt
      * @param key: key bytes
      */
-    void decrypt(vector<T>& ciphertext, const vector<u8>& key)
+    void decrypt(vector<u8>& block, const vector<u8>& key)
     {
+        T* block_words = (T*) block.data();
+        T& A = block_words[0];
+        T& B = block_words[1];
+        T& C = block_words[2];
+        T& D = block_words[3];
         vector<T> S(2 * r + 4);
         key_schedule(key, S);
-        
-        for (auto block = ciphertext.begin(); block != ciphertext.end(); block += 4) {
-            block[C] -= S[2 * r + 3];
-            block[A] -= S[2 * r + 2];
+        C -= S[2 * r + 3];
+        A -= S[2 * r + 2];
 
-            for (size_t i = r; i >= 1; i--) {
-                T d = block[D];
-                block[D] = block[C];
-                block[C] = block[B];
-                block[B] = block[A];
-                block[A] = d;
-                T u = rol(block[D] * (2 * block[D] + 1), log2(w));
-                T t = rol(block[B] * (2 * block[B] + 1), log2(w));
-                block[C] = ror(block[C] - S[2 * i + 1], t) ^ u;
-                block[A] = ror(block[A] - S[2 * i], u) ^ t;
-            }
-
-            block[D] -= S[1];
-            block[B] -= S[0];
+        for (size_t i = r; i >= 1; i--) {
+            T d = D;
+            D = C;
+            C = B;
+            B = A;
+            A = d;
+            T u = rol(D * (2 * D + 1), log2(w));
+            T t = rol(B * (2 * B + 1), log2(w));
+            C = ror(C - S[2 * i + 1], t) ^ u;
+            A = ror(A - S[2 * i], u) ^ t;
         }
+
+        D -= S[1];
+        B -= S[0];
     }
     
 private:
-    // Used for indices on blocks to match paper
-    enum { A, B, C, D };
-    
     /**
      * Create key schedule @S from input @key
      * @param key: key bytes

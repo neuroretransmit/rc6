@@ -23,8 +23,7 @@ $ make
 
 ## TODO
 
-* Read in bytes instead of word size vector for encryption/decryption
-* Mode of operation (accomodate 256 bit blocks parallelized)
+* Implement GCM-SIV as mode of operation
 * Verify that if b = 0 then c = 1 and L[0] = 0 (Look at key scheduling section of paper)
 * Test different key sizes
 * Add out-vector instead of doing in-place on cleartext/ciphertext

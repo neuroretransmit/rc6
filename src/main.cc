@@ -5,16 +5,21 @@
 int main()
 {
     RC6<u32> rc6 = RC6<u32>();
-	vector<u32> plain = { 0x35241302, 0x79685746, 0xbdac9b8a, 0xf1e0dfce };
-	u8* plain_bytes = reinterpret_cast<u8*>(plain.data());
+    vector<u8> plain = { 
+        0x02, 0x13, 0x24, 0x35, 
+        0x46, 0x57, 0x68, 0x79, 
+        0x8a, 0x9b, 0xac, 0xbd, 
+        0xce, 0xdf, 0xe0, 0xf1
+    };
+	//vector<u32> plain = { 0x35241302, 0x79685746, 0xbdac9b8a, 0xf1e0dfce };
 	printf("PLAIN   : %02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
 			"%02x %02x %02x %02x\n", 
-			plain_bytes[0], plain_bytes[1], plain_bytes[2], plain_bytes[3], 
-			plain_bytes[4], plain_bytes[5], plain_bytes[6], plain_bytes[7], 
-			plain_bytes[8], plain_bytes[9], plain_bytes[10], plain_bytes[11], 
-			plain_bytes[12], plain_bytes[13], plain_bytes[14], plain_bytes[15]);
+			plain[0], plain[1], plain[2], plain[3], 
+			plain[4], plain[5], plain[6], plain[7], 
+			plain[8], plain[9], plain[10], plain[11], 
+			plain[12], plain[13], plain[14], plain[15]);
 
 	vector<u8> key = {
 		0x01, 0x23, 0x45, 0x67, 
@@ -48,25 +53,23 @@ int main()
           );
 
 	rc6.encrypt(plain, key);
-	u8* encrypted_bytes = reinterpret_cast<u8*>(plain.data());
 	printf("ENCRYPT : %02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
 			"%02x %02x %02x %02x\n", 
-			encrypted_bytes[0], encrypted_bytes[1], encrypted_bytes[2], encrypted_bytes[3], 
-			encrypted_bytes[4], encrypted_bytes[5], encrypted_bytes[6], encrypted_bytes[7], 
-			encrypted_bytes[8], encrypted_bytes[9], encrypted_bytes[10], encrypted_bytes[11], 
-			encrypted_bytes[12], encrypted_bytes[13], encrypted_bytes[14], encrypted_bytes[15]);
+			plain[0], plain[1], plain[2], plain[3], 
+			plain[4], plain[5], plain[6], plain[7], 
+			plain[8], plain[9], plain[10], plain[11], 
+			plain[12], plain[13], plain[14], plain[15]);
 
-	u8* decrypted_bytes = reinterpret_cast<u8*>(plain.data());
 	rc6.decrypt(plain, key);
 	printf("DECRYPT : %02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
 			"%02x %02x %02x %02x "
 			"%02x %02x %02x %02x\n", 
-			decrypted_bytes[0], decrypted_bytes[1], decrypted_bytes[2], decrypted_bytes[3], 
-			decrypted_bytes[4], decrypted_bytes[5], decrypted_bytes[6], decrypted_bytes[7], 
-			decrypted_bytes[8], decrypted_bytes[9], decrypted_bytes[10], decrypted_bytes[11], 
-			decrypted_bytes[12], decrypted_bytes[13], decrypted_bytes[14], decrypted_bytes[15]);
+			plain[0], plain[1], plain[2], plain[3], 
+			plain[4], plain[5], plain[6], plain[7], 
+			plain[8], plain[9], plain[10], plain[11], 
+			plain[12], plain[13], plain[14], plain[15]);
 	return 0;
 }

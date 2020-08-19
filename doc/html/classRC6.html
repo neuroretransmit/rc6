@@ -77,10 +77,10 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a051c67b814b66b48ff91c36e21b47e54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a051c67b814b66b48ff91c36e21b47e54">RC6</a> (T <a class="el" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>=20)</td></tr>
 <tr class="separator:a051c67b814b66b48ff91c36e21b47e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47380fe24cc7215cef50a7072df03907"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a47380fe24cc7215cef50a7072df03907">encrypt</a> (vector&lt; T &gt; &amp;plaintext, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;key)</td></tr>
-<tr class="separator:a47380fe24cc7215cef50a7072df03907"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1b9a4f6cc69d3aedf936d5d25863577"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#ae1b9a4f6cc69d3aedf936d5d25863577">decrypt</a> (vector&lt; T &gt; &amp;ciphertext, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;key)</td></tr>
-<tr class="separator:ae1b9a4f6cc69d3aedf936d5d25863577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73d252ac0ad4902cac504c41914867a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a73d252ac0ad4902cac504c41914867a4">encrypt</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;block, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;key)</td></tr>
+<tr class="separator:a73d252ac0ad4902cac504c41914867a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67c810c95f5916b8e9640ff74f7aa761"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a67c810c95f5916b8e9640ff74f7aa761">decrypt</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;block, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;key)</td></tr>
+<tr class="separator:a67c810c95f5916b8e9640ff74f7aa761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -135,8 +135,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae1b9a4f6cc69d3aedf936d5d25863577"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1b9a4f6cc69d3aedf936d5d25863577">&#9670;&nbsp;</a></span>decrypt()</h2>
+<a id="a67c810c95f5916b8e9640ff74f7aa761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67c810c95f5916b8e9640ff74f7aa761">&#9670;&nbsp;</a></span>decrypt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,8 +149,8 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::decrypt </td>
           <td>(</td>
-          <td class="paramtype">vector&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>ciphertext</em>, </td>
+          <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -170,9 +170,9 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Decrypt @ciphertext using @key for @r rounds </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Decrypt encrypted @block using @key for @r rounds </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">plaintext</td><td>plain text to encrypt </td></tr>
+    <tr><td class="paramname">block</td><td>plain text to encrypt </td></tr>
     <tr><td class="paramname">key</td><td>key bytes </td></tr>
   </table>
   </dd>
@@ -180,8 +180,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a47380fe24cc7215cef50a7072df03907"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47380fe24cc7215cef50a7072df03907">&#9670;&nbsp;</a></span>encrypt()</h2>
+<a id="a73d252ac0ad4902cac504c41914867a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d252ac0ad4902cac504c41914867a4">&#9670;&nbsp;</a></span>encrypt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,8 +194,8 @@ template&lt;class T &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::encrypt </td>
           <td>(</td>
-          <td class="paramtype">vector&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>plaintext</em>, </td>
+          <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -215,9 +215,9 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Encrypt @plaintext using @key for @r rounds </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Encrypt plaintext @block using @key for @r rounds </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">plaintext</td><td>plain text to encrypt </td></tr>
+    <tr><td class="paramname">block</td><td>plain text block to encrypt </td></tr>
     <tr><td class="paramname">key</td><td>key bytes </td></tr>
   </table>
   </dd>

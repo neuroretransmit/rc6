@@ -9,9 +9,9 @@
 \item 
 \mbox{\hyperlink{classRC6_a051c67b814b66b48ff91c36e21b47e54}{R\+C6}} (T \mbox{\hyperlink{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}{r}}=20)
 \item 
-void \mbox{\hyperlink{classRC6_a47380fe24cc7215cef50a7072df03907}{encrypt}} (vector$<$ T $>$ \&plaintext, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key)
+void \mbox{\hyperlink{classRC6_a73d252ac0ad4902cac504c41914867a4}{encrypt}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&block, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key)
 \item 
-void \mbox{\hyperlink{classRC6_ae1b9a4f6cc69d3aedf936d5d25863577}{decrypt}} (vector$<$ T $>$ \&ciphertext, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key)
+void \mbox{\hyperlink{classRC6_a67c810c95f5916b8e9640ff74f7aa761}{decrypt}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&block, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -44,30 +44,30 @@ Constructor for \mbox{\hyperlink{classRC6}{R\+C6}} block cipher.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classRC6_ae1b9a4f6cc69d3aedf936d5d25863577}\label{classRC6_ae1b9a4f6cc69d3aedf936d5d25863577}} 
+\mbox{\Hypertarget{classRC6_a67c810c95f5916b8e9640ff74f7aa761}\label{classRC6_a67c810c95f5916b8e9640ff74f7aa761}} 
 \index{RC6$<$ T $>$@{RC6$<$ T $>$}!decrypt@{decrypt}}
 \index{decrypt@{decrypt}!RC6$<$ T $>$@{RC6$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{decrypt()}{decrypt()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::decrypt (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{ciphertext,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::decrypt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{block,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Decrypt @ciphertext using @key for @r rounds 
+Decrypt encrypted @block using @key for @r rounds 
 \begin{DoxyParams}{Parameters}
-{\em plaintext} & plain text to encrypt \\
+{\em block} & plain text to encrypt \\
 \hline
 {\em key} & key bytes \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classRC6_a47380fe24cc7215cef50a7072df03907}\label{classRC6_a47380fe24cc7215cef50a7072df03907}} 
+\mbox{\Hypertarget{classRC6_a73d252ac0ad4902cac504c41914867a4}\label{classRC6_a73d252ac0ad4902cac504c41914867a4}} 
 \index{RC6$<$ T $>$@{RC6$<$ T $>$}!encrypt@{encrypt}}
 \index{encrypt@{encrypt}!RC6$<$ T $>$@{RC6$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{encrypt()}{encrypt()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::encrypt (\begin{DoxyParamCaption}\item[{vector$<$ T $>$ \&}]{plaintext,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::encrypt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{block,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Encrypt @plaintext using @key for @r rounds 
+Encrypt plaintext @block using @key for @r rounds 
 \begin{DoxyParams}{Parameters}
-{\em plaintext} & plain text to encrypt \\
+{\em block} & plain text block to encrypt \\
 \hline
 {\em key} & key bytes \\
 \hline
