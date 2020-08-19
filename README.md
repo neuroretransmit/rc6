@@ -1,6 +1,16 @@
 # rc6
 
-RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9bee493796.pdf), fully templated to accomodate different word sizes. RC6 is an AES (Advanced Encryption Standard) candidate that was found being used in NSA implants.
+RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9bee493796.pdf) in C++ fully templated to accomodate different word sizes. RC6 was an AES candidate finalist that was [found being used in NSA implants](https://en.wikipedia.org/wiki/RC6#Possible_use_in_NSA_%22implants%22). The algorithm was an [RSA patent](https://patents.google.com/patent/US5835600A/en) but the patent expired between 2015 and 2017.
+
+## Features
+
+* Key size up to 2040 bits
+* Fully parameterized to support a variety of word-lengths, key sizes and number of rounds.
+
+### Planned Features
+
+* [GCM-SIV](doc/rfc8452.pdf) as mode of operation
+* Flag to use [metamorphic engine from Stone Cipher-192](doc/091101.pdf)
 
 ## Usage
 
@@ -17,7 +27,7 @@ void int main()
     RC6<u32> rc6 = RC6<u32>();
     // Encrypt/Decrypt take in a vector of bytes, u8 is defined in types.h
     vector<u8> block(16);
-    // Please create a random key, although RC6 has no known key weaknesses
+    // Please create a random key, although RC5/RC6 has failed to reveal weakness in key-setup
     vector<u8> key(16);
     
     rc6.encrypt(block, key);
@@ -129,7 +139,6 @@ $ ./tests/tests
 [  PASSED  ] 13 tests.
 ```
 
-## TODO
+## License
 
-* Implement GCM-SIV as mode of operation
-* Flag to use metamorphic engine from Stone cipher
+None, everyone deserves strong encryption.
