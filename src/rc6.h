@@ -62,10 +62,7 @@ public:
             A = rol((A ^ t), u) + S[2 * i];
             C = rol((C ^ u), t) + S[2 * i + 1];
             T a = A;
-            A = B;
-            B = C;
-            C = D;
-            D = a;
+            A = B; B = C; C = D; D = a;
         }
         
         A += S[2 * r + 2];
@@ -91,10 +88,7 @@ public:
 
         for (size_t i = r; i >= 1; i--) {
             T d = D;
-            D = C;
-            C = B;
-            B = A;
-            A = d;
+            D = C; C = B; B = A; A = d;
             T u = rol(D * (2 * D + 1), log2(w));
             T t = rol(B * (2 * B + 1), log2(w));
             C = ror(C - S[2 * i + 1], t) ^ u;
