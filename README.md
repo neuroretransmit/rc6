@@ -25,9 +25,8 @@ using namespace rc6;
 
 int main()
 {
-    // Initialize RC6 block cipher to use 128-bit blocks (u32 * 4)
-    RC6<u32> rc6 = RC6<u32>();
-    // Encrypt/Decrypt take in a vector of bytes, u8 is defined in types.h
+    // Initialize RC6 block cipher to use 128-bit blocks
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
     vector<u8> block(16);
     // Please create a random key, although RC5/RC6 has failed to reveal weakness in key-setup
     vector<u8> key(16);
