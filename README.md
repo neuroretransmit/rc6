@@ -9,7 +9,7 @@ RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9
 
 ### Planned Features
 
-* [GCM-SIV](doc/rfc8452.pdf) as mode of operation
+* In progress: [GCM-SIV](doc/rfc8452.pdf) as mode of operation. (Implemented POLYVAL/AEAD, implementing ECB/CTR modes to fully execute GCM-SIV)
 * Flag to use [metamorphic engine from Stone Cipher-192](doc/091101.pdf)
 
 ## Usage

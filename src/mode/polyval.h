@@ -18,6 +18,7 @@ using std::hex;
 using std::setw;
 using std::setfill;
 
+/// Operater for a 64-bit field
 class FieldElement64
 {
 public:
