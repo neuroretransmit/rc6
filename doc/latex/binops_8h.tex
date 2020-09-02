@@ -1,0 +1,84 @@
+\hypertarget{binops_8h}{}\doxysection{/home/jonesy/git/rc6/src/binops.h File Reference}
+\label{binops_8h}\index{/home/jonesy/git/rc6/src/binops.h@{/home/jonesy/git/rc6/src/binops.h}}
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$climits$>$}\newline
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\T \mbox{\hyperlink{binops_8h_af5aea3b2857e5648cbc66b960862993a}{rol}} (T word, int shift)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \mbox{\hyperlink{binops_8h_ae125a4487df7033773045d8ee965188e}{ror}} (T word, int shift)
+\item 
+\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} \mbox{\hyperlink{binops_8h_aa4430eb407a278c115112217913659e5}{rev64}} (\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} a)
+\item 
+\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} \mbox{\hyperlink{binops_8h_aa4b0c1f95a4940517bdad19388bcb9ac}{bmul64}} (\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} a, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} b)
+\item 
+\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} \mbox{\hyperlink{binops_8h_a29ca66dc36ebc36cbb8f9de1d9d8edfc}{mul\+\_\+reverse\+\_\+shift1}} (\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} a, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} b)
+\item 
+bool \mbox{\hyperlink{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}{is\+\_\+big\+\_\+endian}} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{binops_8h_abfe27713d539cebe09eb37bd83754da3}{swap\+\_\+endian}} (T u)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{binops_8h_aa4b0c1f95a4940517bdad19388bcb9ac}\label{binops_8h_aa4b0c1f95a4940517bdad19388bcb9ac}} 
+\index{binops.h@{binops.h}!bmul64@{bmul64}}
+\index{bmul64@{bmul64}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{bmul64()}{bmul64()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} bmul64 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{a,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}\label{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}} 
+\index{binops.h@{binops.h}!is\_big\_endian@{is\_big\_endian}}
+\index{is\_big\_endian@{is\_big\_endian}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{is\_big\_endian()}{is\_big\_endian()}}
+{\footnotesize\ttfamily bool is\+\_\+big\+\_\+endian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{binops_8h_a29ca66dc36ebc36cbb8f9de1d9d8edfc}\label{binops_8h_a29ca66dc36ebc36cbb8f9de1d9d8edfc}} 
+\index{binops.h@{binops.h}!mul\_reverse\_shift1@{mul\_reverse\_shift1}}
+\index{mul\_reverse\_shift1@{mul\_reverse\_shift1}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{mul\_reverse\_shift1()}{mul\_reverse\_shift1()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} mul\+\_\+reverse\+\_\+shift1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{a,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{binops_8h_aa4430eb407a278c115112217913659e5}\label{binops_8h_aa4430eb407a278c115112217913659e5}} 
+\index{binops.h@{binops.h}!rev64@{rev64}}
+\index{rev64@{rev64}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{rev64()}{rev64()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} rev64 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{a }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{binops_8h_af5aea3b2857e5648cbc66b960862993a}\label{binops_8h_af5aea3b2857e5648cbc66b960862993a}} 
+\index{binops.h@{binops.h}!rol@{rol}}
+\index{rol@{rol}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{rol()}{rol()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T rol (\begin{DoxyParamCaption}\item[{T}]{word,  }\item[{int}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotate a N-\/bit value left 
+\begin{DoxyParams}{Parameters}
+{\em word} & value to rotate \\
+\hline
+{\em shift} & bits to roll \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{binops_8h_ae125a4487df7033773045d8ee965188e}\label{binops_8h_ae125a4487df7033773045d8ee965188e}} 
+\index{binops.h@{binops.h}!ror@{ror}}
+\index{ror@{ror}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{ror()}{ror()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T ror (\begin{DoxyParamCaption}\item[{T}]{word,  }\item[{int}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotate a N-\/bit value right 
+\begin{DoxyParams}{Parameters}
+{\em word} & value to rotate \\
+\hline
+{\em shift} & bits to roll \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{binops_8h_abfe27713d539cebe09eb37bd83754da3}\label{binops_8h_abfe27713d539cebe09eb37bd83754da3}} 
+\index{binops.h@{binops.h}!swap\_endian@{swap\_endian}}
+\index{swap\_endian@{swap\_endian}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{swap\_endian()}{swap\_endian()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T swap\+\_\+endian (\begin{DoxyParamCaption}\item[{T}]{u }\end{DoxyParamCaption})}
+

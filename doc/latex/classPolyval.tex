@@ -1,0 +1,155 @@
+\hypertarget{classPolyval}{}\doxysection{Polyval$<$ T $>$ Class Template Reference}
+\label{classPolyval}\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+
+
+{\ttfamily \#include $<$polyval.\+h$>$}
+
+Inheritance diagram for Polyval$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPolyval}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPolyval_a84c96e7c57a0b807e5e2f7bda1b598e6}{Polyval}} (\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} h0, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} h1)
+\item 
+\mbox{\hyperlink{classPolyval_a03bcf824c091f598ccc0808be7a7eeb2}{Polyval}} (\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} h0, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} h1, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} s0, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} s1)
+\item 
+\mbox{\hyperlink{classPolyval_a46f66ba98806e4be09dff86a91f675e7}{Polyval}} (const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&h)
+\item 
+\mbox{\hyperlink{classPolyval_adca9485d2b6124783ee9d0e246cf2cab}{Polyval}} (const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&h, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&s)
+\item 
+\mbox{\hyperlink{classPolyval_afe203c1a76a130eea298ff684cd962a4}{Polyval}} (const string \&h\+\_\+hex)
+\item 
+\mbox{\hyperlink{classPolyval_ad7715583514ec835327fe3ff5cfb1973}{Polyval}} (const string \&h\+\_\+hex, const string \&s\+\_\+hex)
+\item 
+vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \mbox{\hyperlink{classPolyval_af2f7a002e693394eb53bc60569d3356f}{digest}} ()
+\item 
+void \mbox{\hyperlink{classPolyval_a1f2fdf1f0ea092da31d2d6caafe14aa2}{update}} (const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&bytes)
+\item 
+void \mbox{\hyperlink{classPolyval_a103a16a80b3e2e7c28fab52823ad58c4}{update}} (const string \&hex\+\_\+str)
+\item 
+void \mbox{\hyperlink{classPolyval_a68199e54647e0cba25fa557b54967b6f}{update\+\_\+block}} (const \mbox{\hyperlink{classFieldElement64}{Field\+Element64}} \&\mbox{\hyperlink{classPolyval_a1f2fdf1f0ea092da31d2d6caafe14aa2}{update}})
+\item 
+void \mbox{\hyperlink{classPolyval_ab92e3651bd320854361b63a63de898c9}{update\+\_\+block}} (const string \&update\+\_\+hex)
+\item 
+void \mbox{\hyperlink{classPolyval_a82448c7ba0d723856fa06b7a74beb387}{reset}} ()
+\item 
+string \mbox{\hyperlink{classPolyval_ae2c3076641aa5e41f499609aa3787074}{str}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPolyval_a84c96e7c57a0b807e5e2f7bda1b598e6}\label{classPolyval_a84c96e7c57a0b807e5e2f7bda1b598e6}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!Polyval@{Polyval}}
+\index{Polyval@{Polyval}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polyval()}{Polyval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::\mbox{\hyperlink{classPolyval}{Polyval}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{h0,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{h1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_a03bcf824c091f598ccc0808be7a7eeb2}\label{classPolyval_a03bcf824c091f598ccc0808be7a7eeb2}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!Polyval@{Polyval}}
+\index{Polyval@{Polyval}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polyval()}{Polyval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::\mbox{\hyperlink{classPolyval}{Polyval}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{h0,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{h1,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{s0,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{s1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_a46f66ba98806e4be09dff86a91f675e7}\label{classPolyval_a46f66ba98806e4be09dff86a91f675e7}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!Polyval@{Polyval}}
+\index{Polyval@{Polyval}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polyval()}{Polyval()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::\mbox{\hyperlink{classPolyval}{Polyval}} (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_adca9485d2b6124783ee9d0e246cf2cab}\label{classPolyval_adca9485d2b6124783ee9d0e246cf2cab}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!Polyval@{Polyval}}
+\index{Polyval@{Polyval}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polyval()}{Polyval()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::\mbox{\hyperlink{classPolyval}{Polyval}} (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{h,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_afe203c1a76a130eea298ff684cd962a4}\label{classPolyval_afe203c1a76a130eea298ff684cd962a4}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!Polyval@{Polyval}}
+\index{Polyval@{Polyval}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polyval()}{Polyval()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::\mbox{\hyperlink{classPolyval}{Polyval}} (\begin{DoxyParamCaption}\item[{const string \&}]{h\+\_\+hex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_ad7715583514ec835327fe3ff5cfb1973}\label{classPolyval_ad7715583514ec835327fe3ff5cfb1973}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!Polyval@{Polyval}}
+\index{Polyval@{Polyval}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polyval()}{Polyval()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::\mbox{\hyperlink{classPolyval}{Polyval}} (\begin{DoxyParamCaption}\item[{const string \&}]{h\+\_\+hex,  }\item[{const string \&}]{s\+\_\+hex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPolyval_af2f7a002e693394eb53bc60569d3356f}\label{classPolyval_af2f7a002e693394eb53bc60569d3356f}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!digest@{digest}}
+\index{digest@{digest}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{digest()}{digest()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+vector$<$\mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}}$>$ \mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::digest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classAuthenticator_aa0239c3df199ed3f5a83c4ea5bbf1ce8}{Authenticator}}.
+
+\mbox{\Hypertarget{classPolyval_a82448c7ba0d723856fa06b7a74beb387}\label{classPolyval_a82448c7ba0d723856fa06b7a74beb387}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!reset@{reset}}
+\index{reset@{reset}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classAuthenticator_af908c5d1e84fb26b833d80fd76233a1d}{Authenticator}}.
+
+\mbox{\Hypertarget{classPolyval_ae2c3076641aa5e41f499609aa3787074}\label{classPolyval_ae2c3076641aa5e41f499609aa3787074}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!str@{str}}
+\index{str@{str}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+string \mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_a103a16a80b3e2e7c28fab52823ad58c4}\label{classPolyval_a103a16a80b3e2e7c28fab52823ad58c4}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!update@{update}}
+\index{update@{update}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::update (\begin{DoxyParamCaption}\item[{const string \&}]{hex\+\_\+str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_a1f2fdf1f0ea092da31d2d6caafe14aa2}\label{classPolyval_a1f2fdf1f0ea092da31d2d6caafe14aa2}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!update@{update}}
+\index{update@{update}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::update (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classAuthenticator_a998c07d93b28a1ae1ebc4565888c4d20}{Authenticator}}.
+
+\mbox{\Hypertarget{classPolyval_a68199e54647e0cba25fa557b54967b6f}\label{classPolyval_a68199e54647e0cba25fa557b54967b6f}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!update\_block@{update\_block}}
+\index{update\_block@{update\_block}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{update\_block()}{update\_block()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::update\+\_\+block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classFieldElement64}{Field\+Element64}} \&}]{update }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classPolyval_ab92e3651bd320854361b63a63de898c9}\label{classPolyval_ab92e3651bd320854361b63a63de898c9}} 
+\index{Polyval$<$ T $>$@{Polyval$<$ T $>$}!update\_block@{update\_block}}
+\index{update\_block@{update\_block}!Polyval$<$ T $>$@{Polyval$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{update\_block()}{update\_block()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classPolyval}{Polyval}}$<$ T $>$\+::update\+\_\+block (\begin{DoxyParamCaption}\item[{const string \&}]{update\+\_\+hex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/jonesy/git/rc6/src/mode/\mbox{\hyperlink{polyval_8h}{polyval.\+h}}\end{DoxyCompactItemize}
