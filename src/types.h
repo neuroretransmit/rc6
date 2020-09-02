@@ -1,8 +1,29 @@
 #pragma once
 
 #include <cstdint>
+#include <vector>
 
+using std::vector;
+using std::addressof;
+
+/// 8-bit unsigned integer
 typedef uint8_t   u8;
+/// 16-bit unsgined integer
 typedef uint16_t u16;
+/// 32-bit unsigned integer
 typedef uint32_t u32;
+/// 64-bit unsigned integer
 typedef uint64_t u64;
+
+namespace BlockType
+{
+    typedef u32 BLOCK_128;
+    typedef u64 BLOCK_256;
+};
+
+template<class T> class CipherInterface
+{
+public:
+    virtual void encrypt(vector<u8>& data, const vector<u8>& key) = 0;
+    virtual void decrypt(vector<u8>& data, const vector<u8>& key) = 0;
+};

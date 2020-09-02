@@ -16,31 +16,25 @@ using std::ceil;
 using std::pow;
 using std::vector;
 
-template<class T> class RC6 {
+template<class T> class RC6 : CipherInterface<T> {
 public:
-    const unsigned MAX_KEY_LEN = 2040;
+    const unsigned MAX_KEY_LEN = 8 * 256;
     /// Binary expansion of e - 2
-    const T P;
+    const T P = T(ceil((M_E - 2) * pow(2, numeric_limits<T>::digits)));
     /// Binary expansion of the golden ratio - 1
-    const T Q;
-    /// Word bit-length
-    const T w;
-    /// Number of half-rounds
-    const T r;
+    const T Q = T(((1.618033988749895 - 1) * pow(2, numeric_limits<T>::digits)));
     
     /**
      * Constructor for RC6 block cipher.
      * @param r: number of half-rounds
      */
     RC6(T r = 20) :
-        P(T(ceil((M_E - 2) * pow(2, numeric_limits<T>::digits)))),
-        Q(T(((1.618033988749895 - 1) * pow(2, numeric_limits<T>::digits)))),
         w(numeric_limits<T>::digits),
         r(r)
     {}
     
     /**
-     * Encrypt plaintext @block using @key for @r rounds
+     * Encrypt plaintext block using user-supplied key
      * @param block: plain text block to encrypt
      * @param key: key bytes
      */
@@ -70,8 +64,8 @@ public:
     }
 
     /**
-     * Decrypt encrypted @block using @key for @r rounds
-     * @param block: plain text to encrypt
+     * Decrypt encrypted block using user-supplied key
+     * @param block: encrypted block to decrypt
      * @param key: key bytes
      */
     void decrypt(vector<u8>& block, const vector<u8>& key)
@@ -99,9 +93,19 @@ public:
         B -= S[0];
     }
     
+    virtual size_t block_size()
+    {
+        return sizeof(T);
+    }
+    
 private:
+    /// Word bit-length
+    const T w;
+    /// Number of half-rounds
+    const T r;
+    
     /**
-     * Create key schedule @S from input @key
+     * Create key schedule S from user-supplied key
      * @param key: key bytes
      * @param S: destination for key schedule
      */
@@ -115,8 +119,8 @@ private:
             exit(1);
         }
 
-        while (key_copy.size() % sizeof(T) != 0)
-            key_copy.push_back(0x00);
+        while (key_copy.size() % sizeof(T))
+            key_copy.push_back(0);
 
         const size_t c = key_copy.size() / sizeof(T);
         T* L = (T*) key_copy.data();

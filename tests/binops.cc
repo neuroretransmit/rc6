@@ -16,3 +16,9 @@ TEST(BinOps, ROR)
 	u32 expected = 0b00000001u;
 	ASSERT_EQ(actual, expected);
 }
+
+TEST(BinOps, IsBigEndian)
+{
+    bool actual = is_big_endian();
+    ASSERT_EQ(false, actual);
+}

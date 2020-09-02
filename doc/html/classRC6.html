@@ -75,7 +75,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a051c67b814b66b48ff91c36e21b47e54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a051c67b814b66b48ff91c36e21b47e54">RC6</a> (T <a class="el" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a>=20)</td></tr>
+<tr class="memitem:a051c67b814b66b48ff91c36e21b47e54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a051c67b814b66b48ff91c36e21b47e54">RC6</a> (T r=20)</td></tr>
 <tr class="separator:a051c67b814b66b48ff91c36e21b47e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73d252ac0ad4902cac504c41914867a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a73d252ac0ad4902cac504c41914867a4">encrypt</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;block, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;key)</td></tr>
 <tr class="separator:a73d252ac0ad4902cac504c41914867a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -86,18 +86,12 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a3c185971cfef37fa09caee13cf18e196"><td class="memItemLeft" align="right" valign="top">const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a3c185971cfef37fa09caee13cf18e196">MAX_KEY_LEN</a> = 2040</td></tr>
 <tr class="separator:a3c185971cfef37fa09caee13cf18e196"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a255c48ae6858a45d877b6573d3760a18"><td class="memItemLeft" align="right" valign="top">const T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a255c48ae6858a45d877b6573d3760a18">P</a></td></tr>
+<tr class="memitem:a255c48ae6858a45d877b6573d3760a18"><td class="memItemLeft" align="right" valign="top">const T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a255c48ae6858a45d877b6573d3760a18">P</a> = T(ceil((M_E - 2) * pow(2, numeric_limits&lt;T&gt;::digits)))</td></tr>
 <tr class="memdesc:a255c48ae6858a45d877b6573d3760a18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binary expansion of e - 2.  <a href="classRC6.html#a255c48ae6858a45d877b6573d3760a18">More...</a><br /></td></tr>
 <tr class="separator:a255c48ae6858a45d877b6573d3760a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab046619ee0416eb21fa26d97f2fd3439"><td class="memItemLeft" align="right" valign="top">const T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#ab046619ee0416eb21fa26d97f2fd3439">Q</a></td></tr>
+<tr class="memitem:ab046619ee0416eb21fa26d97f2fd3439"><td class="memItemLeft" align="right" valign="top">const T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#ab046619ee0416eb21fa26d97f2fd3439">Q</a> = T(((1.618033988749895 - 1) * pow(2, numeric_limits&lt;T&gt;::digits)))</td></tr>
 <tr class="memdesc:ab046619ee0416eb21fa26d97f2fd3439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binary expansion of the golden ratio - 1.  <a href="classRC6.html#ab046619ee0416eb21fa26d97f2fd3439">More...</a><br /></td></tr>
 <tr class="separator:ab046619ee0416eb21fa26d97f2fd3439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bf59cfc0e7daa126660d4d2d7cd2474"><td class="memItemLeft" align="right" valign="top">const T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">w</a></td></tr>
-<tr class="memdesc:a0bf59cfc0e7daa126660d4d2d7cd2474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Word bit-length.  <a href="classRC6.html#a0bf59cfc0e7daa126660d4d2d7cd2474">More...</a><br /></td></tr>
-<tr class="separator:a0bf59cfc0e7daa126660d4d2d7cd2474"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc48cd63fd75654cfebb1d92dd6f4fcd"><td class="memItemLeft" align="right" valign="top">const T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">r</a></td></tr>
-<tr class="memdesc:acc48cd63fd75654cfebb1d92dd6f4fcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of half-rounds.  <a href="classRC6.html#acc48cd63fd75654cfebb1d92dd6f4fcd">More...</a><br /></td></tr>
-<tr class="separator:acc48cd63fd75654cfebb1d92dd6f4fcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a051c67b814b66b48ff91c36e21b47e54"></a>
@@ -170,9 +164,9 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Decrypt encrypted @block using @key for @r rounds </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Decrypt encrypted block using user-supplied key </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">block</td><td>plain text to encrypt </td></tr>
+    <tr><td class="paramname">block</td><td>encrypted block to decrypt </td></tr>
     <tr><td class="paramname">key</td><td>key bytes </td></tr>
   </table>
   </dd>
@@ -215,7 +209,7 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Encrypt plaintext @block using @key for @r rounds </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Encrypt plaintext block using user-supplied key </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">block</td><td>plain text block to encrypt </td></tr>
     <tr><td class="paramname">key</td><td>key bytes </td></tr>
@@ -251,7 +245,7 @@ template&lt;class T &gt; </div>
 template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const T <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::P</td>
+          <td class="memname">const T <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::P = T(ceil((M_E - 2) * pow(2, numeric_limits&lt;T&gt;::digits)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -269,48 +263,12 @@ template&lt;class T &gt; </div>
 template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">const T <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::Q</td>
+          <td class="memname">const T <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::Q = T(((1.618033988749895 - 1) * pow(2, numeric_limits&lt;T&gt;::digits)))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Binary expansion of the golden ratio - 1. </p>
-
-</div>
-</div>
-<a id="acc48cd63fd75654cfebb1d92dd6f4fcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc48cd63fd75654cfebb1d92dd6f4fcd">&#9670;&nbsp;</a></span>r</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const T <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::r</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Number of half-rounds. </p>
-
-</div>
-</div>
-<a id="a0bf59cfc0e7daa126660d4d2d7cd2474"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bf59cfc0e7daa126660d4d2d7cd2474">&#9670;&nbsp;</a></span>w</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const T <a class="el" href="classRC6.html">RC6</a>&lt; T &gt;::w</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Word bit-length. </p>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_26',['main',['../main_8cc.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cc']]]
+  ['encrypt_31',['encrypt',['../classAEAD.html#a84287788313c1699bde9fcf1188773ab',1,'AEAD::encrypt(const vector&lt; u8 &gt; &amp;nonce, vector&lt; u8 &gt; &amp;plaintext, const vector&lt; u8 &gt; &amp;authenticated_data)'],['../classAEAD.html#a327001e8daae92a4a04a2728671cb9ec',1,'AEAD::encrypt(vector&lt; u8 &gt; &amp;plaintext, vector&lt; u8 &gt; &amp;authenticated_data)'],['../classRC6.html#a73d252ac0ad4902cac504c41914867a4',1,'RC6::encrypt()']]]
 ];

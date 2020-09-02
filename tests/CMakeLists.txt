@@ -3,5 +3,5 @@ project(tests NONE)
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS} ${GMOCK_INCLUDE_DIRS})
-add_executable(tests main.cc rc6.cc binops.cc)
+add_executable(tests main.cc rc6.cc binops.cc ../src/binops.cc mode/aead.cc mode/fieldelement64.cc mode/polyval.cc)
 target_link_libraries(tests ${GTEST_LIBRARIES} gmock gmock_main pthread)

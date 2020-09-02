@@ -10,9 +10,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 #set(THREADS_PREFER_PTHREAD_FLAG ON)
 #find_package(Threads REQUIRED)
-add_executable(rc6 main.cc)
+add_executable(rc6_test_vectors rc6_test_vectors.cc)
+#add_executable(rc6_gcm_siv rc6_gcm_siv.cc)
 #target_link_libraries(rc6 PRIVATE Threads::Threads)
-install(TARGETS rc6 RUNTIME DESTINATION bin)
+install(TARGETS rc6_test_vectors RUNTIME DESTINATION bin)
 
 if (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease")
 	# first we can indicate the documentation build as an option and set it to ON by default

@@ -1,25 +1,25 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "rc6.h"
+#include "cipher/rc6.h"
 
 using namespace ::testing;
 
 TEST(RC6, MagicConstantP32)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
 	ASSERT_EQ(0xB7E15163, rc6.P);
 }
 
 TEST(RC6, MagicConstantQ32)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
 	ASSERT_EQ(0x9E3779B9, rc6.Q);
 }
 
 TEST(RC6, KeyAbove2048Bits)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
 	const vector<u8> key((rc6.MAX_KEY_LEN + 8) / 8);
 	vector<u8> plain = {
         0x00, 0x00, 0x00, 0x00, 
@@ -32,7 +32,7 @@ TEST(RC6, KeyAbove2048Bits)
 
 TEST(RC6, WordSize32Bit)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
 	const vector<u8> key = {
         0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 
@@ -63,7 +63,7 @@ TEST(RC6, WordSize32Bit)
 
 TEST(RC6, WordSize64Bit)
 {
-    RC6<u64> rc6 = RC6<u64>();
+    RC6<BlockType::BLOCK_256> rc6 = RC6<BlockType::BLOCK_256>();
 	const vector<u8> key = {
         0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 
@@ -94,7 +94,7 @@ TEST(RC6, WordSize64Bit)
 
 TEST(RC6, PaperTestVector1)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
     const vector<u8> key = {        
         0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 
@@ -118,7 +118,7 @@ TEST(RC6, PaperTestVector1)
 
 TEST(RC6, PaperTestVector2)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
     const vector<u8> key = { 
         0x01, 0x23, 0x45, 0x67, 
         0x89, 0xab, 0xcd, 0xef, 
@@ -142,7 +142,7 @@ TEST(RC6, PaperTestVector2)
 
 TEST(RC6, PaperTestVector3)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
     const vector<u8> key = {        
         0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 
@@ -168,7 +168,7 @@ TEST(RC6, PaperTestVector3)
 
 TEST(RC6, PaperTestVector4)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
     const vector<u8> key = {
         0x01, 0x23, 0x45, 0x67, 
         0x89, 0xab, 0xcd, 0xef, 
@@ -194,7 +194,7 @@ TEST(RC6, PaperTestVector4)
 
 TEST(RC6, PaperTestVector5)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
     const vector<u8> key = { 
         0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0x00, 
@@ -222,7 +222,7 @@ TEST(RC6, PaperTestVector5)
 
 TEST(RC6, PaperTestVector6)
 {
-    RC6<u32> rc6 = RC6<u32>();
+    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
     const vector<u8> key = {
         0x01, 0x23, 0x45, 0x67, 
         0x89, 0xab, 0xcd, 0xef, 

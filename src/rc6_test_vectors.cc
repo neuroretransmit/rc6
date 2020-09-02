@@ -1,6 +1,6 @@
 #include <cstdio>
 
-#include "rc6.h"
+#include "cipher/rc6.h"
 
 int main()
 {

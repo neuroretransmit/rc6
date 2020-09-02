@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['encrypt_25',['encrypt',['../classRC6.html#a73d252ac0ad4902cac504c41914867a4',1,'RC6']]]
+  ['decrypt_29',['decrypt',['../classRC6.html#a67c810c95f5916b8e9640ff74f7aa761',1,'RC6']]],
+  ['derive_5fkeys_30',['derive_keys',['../classAEAD.html#aa5125bf25b5622e6fd97fba50f9ee9af',1,'AEAD']]]
 ];

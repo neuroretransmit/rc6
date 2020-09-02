@@ -7,7 +7,7 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classRC6_a051c67b814b66b48ff91c36e21b47e54}{R\+C6}} (T \mbox{\hyperlink{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}{r}}=20)
+\mbox{\hyperlink{classRC6_a051c67b814b66b48ff91c36e21b47e54}{R\+C6}} (T r=20)
 \item 
 void \mbox{\hyperlink{classRC6_a73d252ac0ad4902cac504c41914867a4}{encrypt}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&block, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key)
 \item 
@@ -18,14 +18,10 @@ void \mbox{\hyperlink{classRC6_a67c810c95f5916b8e9640ff74f7aa761}{decrypt}} (vec
 \item 
 const unsigned \mbox{\hyperlink{classRC6_a3c185971cfef37fa09caee13cf18e196}{M\+A\+X\+\_\+\+K\+E\+Y\+\_\+\+L\+EN}} = 2040
 \item 
-const T \mbox{\hyperlink{classRC6_a255c48ae6858a45d877b6573d3760a18}{P}}
+const T \mbox{\hyperlink{classRC6_a255c48ae6858a45d877b6573d3760a18}{P}} = T(ceil((M\+\_\+E -\/ 2) $\ast$ pow(2, numeric\+\_\+limits$<$T$>$\+::digits)))
 \begin{DoxyCompactList}\small\item\em Binary expansion of e -\/ 2. \end{DoxyCompactList}\item 
-const T \mbox{\hyperlink{classRC6_ab046619ee0416eb21fa26d97f2fd3439}{Q}}
-\begin{DoxyCompactList}\small\item\em Binary expansion of the golden ratio -\/ 1. \end{DoxyCompactList}\item 
-const T \mbox{\hyperlink{classRC6_a0bf59cfc0e7daa126660d4d2d7cd2474}{w}}
-\begin{DoxyCompactList}\small\item\em Word bit-\/length. \end{DoxyCompactList}\item 
-const T \mbox{\hyperlink{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}{r}}
-\begin{DoxyCompactList}\small\item\em Number of half-\/rounds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+const T \mbox{\hyperlink{classRC6_ab046619ee0416eb21fa26d97f2fd3439}{Q}} = T(((1.\+618033988749895 -\/ 1) $\ast$ pow(2, numeric\+\_\+limits$<$T$>$\+::digits)))
+\begin{DoxyCompactList}\small\item\em Binary expansion of the golden ratio -\/ 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -51,9 +47,9 @@ Constructor for \mbox{\hyperlink{classRC6}{R\+C6}} block cipher.
 {\footnotesize\ttfamily template$<$class T $>$ \\
 void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::decrypt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{block,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Decrypt encrypted @block using @key for @r rounds 
+Decrypt encrypted block using user-\/supplied key 
 \begin{DoxyParams}{Parameters}
-{\em block} & plain text to encrypt \\
+{\em block} & encrypted block to decrypt \\
 \hline
 {\em key} & key bytes \\
 \hline
@@ -65,7 +61,7 @@ Decrypt encrypted @block using @key for @r rounds
 {\footnotesize\ttfamily template$<$class T $>$ \\
 void \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::encrypt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{block,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Encrypt plaintext @block using @key for @r rounds 
+Encrypt plaintext block using user-\/supplied key 
 \begin{DoxyParams}{Parameters}
 {\em block} & plain text block to encrypt \\
 \hline
@@ -87,7 +83,7 @@ const unsigned \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::M\+A\+X\+\_\+\+K\+
 \index{P@{P}!RC6$<$ T $>$@{RC6$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{P}{P}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::P}
+const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::P = T(ceil((M\+\_\+E -\/ 2) $\ast$ pow(2, numeric\+\_\+limits$<$T$>$\+::digits)))}
 
 
 
@@ -98,33 +94,11 @@ Binary expansion of e -\/ 2.
 \index{Q@{Q}!RC6$<$ T $>$@{RC6$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{Q}{Q}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::Q}
+const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::Q = T(((1.\+618033988749895 -\/ 1) $\ast$ pow(2, numeric\+\_\+limits$<$T$>$\+::digits)))}
 
 
 
 Binary expansion of the golden ratio -\/ 1. 
-
-\mbox{\Hypertarget{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}\label{classRC6_acc48cd63fd75654cfebb1d92dd6f4fcd}} 
-\index{RC6$<$ T $>$@{RC6$<$ T $>$}!r@{r}}
-\index{r@{r}!RC6$<$ T $>$@{RC6$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{r}{r}}
-{\footnotesize\ttfamily template$<$class T $>$ \\
-const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::r}
-
-
-
-Number of half-\/rounds. 
-
-\mbox{\Hypertarget{classRC6_a0bf59cfc0e7daa126660d4d2d7cd2474}\label{classRC6_a0bf59cfc0e7daa126660d4d2d7cd2474}} 
-\index{RC6$<$ T $>$@{RC6$<$ T $>$}!w@{w}}
-\index{w@{w}!RC6$<$ T $>$@{RC6$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{w}{w}}
-{\footnotesize\ttfamily template$<$class T $>$ \\
-const T \mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$\+::w}
-
-
-
-Word bit-\/length. 
 
 
 

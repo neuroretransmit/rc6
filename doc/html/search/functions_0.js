@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['decrypt_24',['decrypt',['../classRC6.html#a67c810c95f5916b8e9640ff74f7aa761',1,'RC6']]]
+  ['aead_28',['AEAD',['../classAEAD.html#a78f2a45b9ecc75afcad62a975e0e9cb8',1,'AEAD']]]
 ];
