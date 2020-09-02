@@ -102,7 +102,7 @@ Tests run a Google Test suite that test constraints of the paper as well as the 
 
 ```bash
 $ ./tests/tests
-[==========] Running 13 tests from 2 test suites.
+[==========] Running 37 tests from 5 test suites.
 [----------] Global test environment set-up.
 [----------] 11 tests from RC6
 [ RUN      ] RC6.MagicConstantP32
@@ -110,7 +110,7 @@ $ ./tests/tests
 [ RUN      ] RC6.MagicConstantQ32
 [       OK ] RC6.MagicConstantQ32 (0 ms)
 [ RUN      ] RC6.KeyAbove2048Bits
-[       OK ] RC6.KeyAbove2048Bits (2 ms)
+[       OK ] RC6.KeyAbove2048Bits (1 ms)
 [ RUN      ] RC6.WordSize32Bit
 [       OK ] RC6.WordSize32Bit (0 ms)
 [ RUN      ] RC6.WordSize64Bit
@@ -127,18 +127,75 @@ $ ./tests/tests
 [       OK ] RC6.PaperTestVector5 (0 ms)
 [ RUN      ] RC6.PaperTestVector6
 [       OK ] RC6.PaperTestVector6 (0 ms)
-[----------] 11 tests from RC6 (2 ms total)
+[----------] 11 tests from RC6 (1 ms total)
 
-[----------] 2 tests from BinOps
+[----------] 3 tests from BinOps
 [ RUN      ] BinOps.ROL
 [       OK ] BinOps.ROL (0 ms)
 [ RUN      ] BinOps.ROR
 [       OK ] BinOps.ROR (0 ms)
-[----------] 2 tests from BinOps (0 ms total)
+[ RUN      ] BinOps.IsBigEndian
+[       OK ] BinOps.IsBigEndian (0 ms)
+[----------] 3 tests from BinOps (0 ms total)
+
+[----------] 2 tests from AEAD
+[ RUN      ] AEAD.DeriveKeys128
+[       OK ] AEAD.DeriveKeys128 (0 ms)
+[ RUN      ] AEAD.DeriveKeys256
+[       OK ] AEAD.DeriveKeys256 (0 ms)
+[----------] 2 tests from AEAD (0 ms total)
+
+[----------] 8 tests from FieldElement64
+[ RUN      ] FieldElement64.ConstructorFromString
+[       OK ] FieldElement64.ConstructorFromString (0 ms)
+[ RUN      ] FieldElement64.ConstructorFromBytes
+[       OK ] FieldElement64.ConstructorFromBytes (0 ms)
+[ RUN      ] FieldElement64.ConstructorFromBytesWithOffset
+[       OK ] FieldElement64.ConstructorFromBytesWithOffset (0 ms)
+[ RUN      ] FieldElement64.ConstructorFromLongs
+[       OK ] FieldElement64.ConstructorFromLongs (0 ms)
+[ RUN      ] FieldElement64.str
+[       OK ] FieldElement64.str (0 ms)
+[ RUN      ] FieldElement64.bytes
+[       OK ] FieldElement64.bytes (0 ms)
+[ RUN      ] FieldElement64.OperatorAdd
+[       OK ] FieldElement64.OperatorAdd (0 ms)
+[ RUN      ] FieldElement64.OperatorMul
+[       OK ] FieldElement64.OperatorMul (1 ms)
+[----------] 8 tests from FieldElement64 (1 ms total)
+
+[----------] 13 tests from Polyval
+[ RUN      ] Polyval.ConstructorFromHLongs
+[       OK ] Polyval.ConstructorFromHLongs (0 ms)
+[ RUN      ] Polyval.ConstructorFromHAndSLongs
+[       OK ] Polyval.ConstructorFromHAndSLongs (0 ms)
+[ RUN      ] Polyval.ConstructFromOwnDigest
+[       OK ] Polyval.ConstructFromOwnDigest (0 ms)
+[ RUN      ] Polyval.ConstructorFromHBytes
+[       OK ] Polyval.ConstructorFromHBytes (0 ms)
+[ RUN      ] Polyval.ConstructorFromHAndSBytes
+[       OK ] Polyval.ConstructorFromHAndSBytes (0 ms)
+[ RUN      ] Polyval.ConstructorFromHString
+[       OK ] Polyval.ConstructorFromHString (0 ms)
+[ RUN      ] Polyval.ConstructorFromHAndSStrings
+[       OK ] Polyval.ConstructorFromHAndSStrings (0 ms)
+[ RUN      ] Polyval.UpdateBlock0
+[       OK ] Polyval.UpdateBlock0 (0 ms)
+[ RUN      ] Polyval.UpdateBlock
+[       OK ] Polyval.UpdateBlock (0 ms)
+[ RUN      ] Polyval.UpdateNotDependingOnZeroBlock
+[       OK ] Polyval.UpdateNotDependingOnZeroBlock (0 ms)
+[ RUN      ] Polyval.Update
+[       OK ] Polyval.Update (0 ms)
+[ RUN      ] Polyval.PadWithZeroes
+[       OK ] Polyval.PadWithZeroes (0 ms)
+[ RUN      ] Polyval.ResetSToZero
+[       OK ] Polyval.ResetSToZero (0 ms)
+[----------] 13 tests from Polyval (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 13 tests from 2 test suites ran. (2 ms total)
-[  PASSED  ] 13 tests.
+[==========] 37 tests from 5 test suites ran. (2 ms total)
+[  PASSED  ] 37 tests.
 ```
 
 ## License
