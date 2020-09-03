@@ -102,14 +102,27 @@ public:
 #ifndef DEBUG
 private:
 #endif
+    /// CTR mode of operation
+    // TODO: See if specification different than default CTR, otherwise move into modes and genericize
     template<class V> class CTR
     {
     public:
+        /**
+         * Constructor for CTR
+         * @param cipher: cipher to use
+         * @param block_size: block cipher size
+         */
         CTR(V& cipher, size_t block_size) :
             cipher(cipher),
             BLOCK_SIZE(block_size)
         {}
         
+        /**
+         * Crypt used for both encrypt and decrypt in counter mode
+         * @param input: message to encrypt
+         * @param encryption_key: message encryption key
+         * @param tag: calculated tag to use as counter
+         */
         void crypt(vector<u8>& input, const vector<u8>& encryption_key, const vector<u8>& tag)
         {
             vector<u8> counter = tag;
@@ -140,27 +153,40 @@ private:
     const size_t MAX_DATA_SIZE = pow(2, 36);
     const vector<u8>& KEY_GENERATING_KEY;
     
+    /**
+     * Calculate tag for authentication
+     * @param message_encryption_key: vector to store message encryption key in
+     * @param message_authentication_key: vector to store message authentication key in
+     * @param plaintext: plaintext message
+     * @param aad: authenticated additional data
+     * @param nonce: nonce
+     */
     vector<u8> get_tag(const vector<u8>& message_encryption_key, const vector<u8>& message_authentication_key, 
                  const vector<u8>& plaintext, const vector<u8>& aad, const vector<u8>& nonce)
     {
         vector<u8> aad_plaintext_lengths(BLOCK_SIZE);
         in_place_update(aad_plaintext_lengths, (u64) aad.size() * 8, 8);
+        
+        // Digest
         Polyval<T> authenticator = Polyval<T>(message_authentication_key);
         authenticator.update(aad);
         authenticator.update(plaintext);
         authenticator.update(aad_plaintext_lengths);
         vector<u8> digest = authenticator.digest();
         
+        // XOR first 96 bytes of digest with nonce
         for (size_t i = 0; i < nonce.size(); i++)
             digest[i] ^= nonce[i];
         
         digest[digest.size() - 1] &= ~0x80;
+        
+        // Encrypt digest
         RC6<T> cipher = RC6<T>();
         ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
         ecb.encrypt(digest, message_encryption_key);
+        
         return digest;
     }
-    
     
     /**
      * Encrypt key counter block
@@ -176,11 +202,10 @@ private:
         for (size_t i = 0; i < sizeof(T); i++)
             ctr_block.push_back(byte_arr[i]);
         
+        // Append nonce
         ctr_block.insert(ctr_block.end(), nonce.begin(), nonce.end());
         rc6.encrypt(ctr_block, KEY_GENERATING_KEY);
     }
-    
-    
     
     /**
      * Derive message authentication/encryption keys
@@ -193,6 +218,7 @@ private:
         RC6<T> rc6 = RC6<T>();
         u32 key_ctr; 
         
+        // 128-bit key key generating key
         for (key_ctr = 0; key_ctr < 4; key_ctr++) {
             vector<u8> ctr_block;
             encrypt_key_ctr_block(rc6, ctr_block, key_ctr, nonce);
@@ -205,6 +231,7 @@ private:
             }
         }
         
+        // 256-bit key generating key
         if (KEY_GENERATING_KEY.size() == 32) {
             for (key_ctr = 4; key_ctr < 6; key_ctr++) {
                 vector<u8> ctr_block;
@@ -231,12 +258,14 @@ private:
             exit(1);
         }
         
+        // Derive keys
         vector<u8> authentication_key;
         vector<u8> encryption_key;
         derive_keys(authentication_key, encryption_key, nonce);
+        
+        // Validate data is < 64GB for plaintext and AAD
         u64 plaintext_size = plaintext.size();
         u64 aad_size = aad.size();
-        
         if (plaintext_size > MAX_DATA_SIZE) {
             cerr << "ERROR: Plaintext must be < 64GB, got " << plaintext_size << ".\n";
             exit(1);
@@ -245,35 +274,25 @@ private:
             exit(1);
         }
         
-        vector<u8> length_block(BLOCK_SIZE);
-        u64* length_block_u64 = (u64*) length_block.data();
-        length_block_u64[0] = aad_size * 8;
-        length_block_u64[1] = plaintext_size * 8;
-        
+        // Pad plaintext/AAD
         size_t plaintext_pad_len;
         for (plaintext_pad_len = 0; needs_padding(plaintext, BLOCK_SIZE); plaintext_pad_len++)
             plaintext.push_back(0);
-        
         while (needs_padding(aad, BLOCK_SIZE))
             aad.push_back(0);
         
+        // Calculate tag
         vector<u8> tag = get_tag(encryption_key, authentication_key, plaintext, aad, nonce);
         
-        #ifdef DEBUG
-            cout << "========= ENCRYPT ==========\n";
-            print_bytes("AEAD ENC KEY     ", encryption_key);
-            print_bytes("AEAD AUTH KEY    ", authentication_key);
-            print_bytes("AEAD AAD         ", aad);
-            print_bytes("AEAD NONCE       ", nonce);
-            print_bytes("AEAD DECRYPTED   ", plaintext);
-            print_bytes("AEAD TAG         ", tag);
-        #endif
-            
+        // Encrypt
         RC6<T> cipher = RC6<T>();
         ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
         CTR<ECB<RC6<T>>> ctr = CTR<ECB<RC6<T>>>(ecb, BLOCK_SIZE);
         ctr.crypt(plaintext, encryption_key, tag);
+        
+        // Snip padding length
         plaintext.erase(plaintext.end() - plaintext_pad_len, plaintext.end());
+        // Append tag
         plaintext.insert(plaintext.end(), tag.begin(), tag.end());
     }
     
@@ -316,18 +335,6 @@ private:
         
         // Snip padding to retrieve encrypted data without modification
         ciphertext = vector<u8>(ciphertext.begin(), ciphertext.end() - ciphertext_pad_len);
-
-        #ifdef DEBUG
-            cout << "========= DECRYPT ==========\n";
-            print_bytes("AEAD ENC KEY     ", encryption_key);
-            print_bytes("AEAD AUTH KEY    ", authentication_key);
-            print_bytes("AEAD AAD         ", aad);
-            print_bytes("AEAD NONCE       ", nonce);
-            print_bytes("AEAD DECRYPTED   ", ciphertext);
-            print_bytes("AEAD ACTUAL TAG  ", actual);
-            print_bytes("AEAD EXPECTED TAG", tag);
-        #endif
-        
         
         // Authenticate data
         if (!equal(actual.begin(), actual.end(), tag.begin())) {
