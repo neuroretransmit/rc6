@@ -17,6 +17,7 @@
 #include "ecb.h"
 #include "polyval.h"
 
+using std::fill;
 using std::vector;
 using std::cerr;
 using std::independent_bits_engine;
@@ -47,10 +48,10 @@ public:
     AEAD(const vector<u8>& key_generating_key) :
         KEY_GENERATING_KEY(key_generating_key)
     {
-        if (KEY_GENERATING_KEY.size() != BLOCK_SIZE || (BLOCK_SIZE != (128 / 8) && BLOCK_SIZE != (256 / 8))) {
-            cerr << "ERROR: Key size for AEAD must match block size. Expected " << BLOCK_SIZE << " bits, got " << KEY_GENERATING_KEY.size() << ".\n";
+        if ((KEY_GENERATING_KEY.size() != (128 / 8) && KEY_GENERATING_KEY.size() != (256 / 8))) {
+            cerr << "ERROR: Key generating key for AEAD must be 16 or 32 bytes. Got " << KEY_GENERATING_KEY.size() << ".\n";
             exit(1);
-        } 
+        }
     }
     
     /**
@@ -95,7 +96,7 @@ public:
         // Retrieve nonce
         const vector<u8> nonce(ciphertext.begin(), ciphertext.begin() + NONCE_BYTE_LEN);
         // Remove nonce from ciphertext
-        ciphertext.erase(ciphertext.begin(), ciphertext.begin() + NONCE_BYTE_LEN);
+        ciphertext = vector<u8>(ciphertext.begin() + NONCE_BYTE_LEN, ciphertext.end());
         open(ciphertext, aad, nonce);
     }
 #ifndef DEBUG
@@ -137,7 +138,6 @@ private:
     const size_t NONCE_BYTE_LEN = 96 / 8;
     const size_t BLOCK_SIZE = sizeof(T) * 4;
     const size_t MAX_DATA_SIZE = pow(2, 36);
-
     const vector<u8>& KEY_GENERATING_KEY;
     
     vector<u8> get_tag(const vector<u8>& message_encryption_key, const vector<u8>& message_authentication_key, 
@@ -245,22 +245,35 @@ private:
             exit(1);
         }
         
-        vector<u8> length_block(16);
+        vector<u8> length_block(BLOCK_SIZE);
         u64* length_block_u64 = (u64*) length_block.data();
         length_block_u64[0] = aad_size * 8;
         length_block_u64[1] = plaintext_size * 8;
         
-        while (plaintext.size() % 16)
+        size_t plaintext_pad_len;
+        for (plaintext_pad_len = 0; needs_padding(plaintext, BLOCK_SIZE); plaintext_pad_len++)
             plaintext.push_back(0);
         
-        while (aad.size() % 16)
+        while (needs_padding(aad, BLOCK_SIZE))
             aad.push_back(0);
         
         vector<u8> tag = get_tag(encryption_key, authentication_key, plaintext, aad, nonce);
+        
+        #ifdef DEBUG
+            cout << "========= ENCRYPT ==========\n";
+            print_bytes("AEAD ENC KEY     ", encryption_key);
+            print_bytes("AEAD AUTH KEY    ", authentication_key);
+            print_bytes("AEAD AAD         ", aad);
+            print_bytes("AEAD NONCE       ", nonce);
+            print_bytes("AEAD DECRYPTED   ", plaintext);
+            print_bytes("AEAD TAG         ", tag);
+        #endif
+            
         RC6<T> cipher = RC6<T>();
         ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
         CTR<ECB<RC6<T>>> ctr = CTR<ECB<RC6<T>>>(ecb, BLOCK_SIZE);
         ctr.crypt(plaintext, encryption_key, tag);
+        plaintext.erase(plaintext.end() - plaintext_pad_len, plaintext.end());
         plaintext.insert(plaintext.end(), tag.begin(), tag.end());
     }
     
@@ -274,7 +287,15 @@ private:
     {
         // Extract tag/ciphertext
         vector<u8> tag(ciphertext.end() - BLOCK_SIZE, ciphertext.end());
-        vector<u8> plaintext(ciphertext.begin(), ciphertext.end() - BLOCK_SIZE);
+        ciphertext = vector<u8>(ciphertext.begin(), ciphertext.end() - BLOCK_SIZE);
+        
+        // Pad ciphertext
+        size_t ciphertext_pad_len = 0;
+        for (ciphertext_pad_len = 0; needs_padding(ciphertext, BLOCK_SIZE); ciphertext_pad_len++)
+            ciphertext.push_back(0);
+        
+        while (needs_padding(aad, BLOCK_SIZE))
+            aad.push_back(0);
         
         // Derive keys
         vector<u8> authentication_key;
@@ -285,18 +306,33 @@ private:
         RC6<T> cipher = RC6<T>();
         ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
         CTR<ECB<RC6<T>>> ctr = CTR<ECB<RC6<T>>>(ecb, BLOCK_SIZE);
-        ctr.crypt(plaintext, encryption_key, tag);
-        vector<u8> actual = get_tag(encryption_key, authentication_key, plaintext, aad, nonce);
+        ctr.crypt(ciphertext, encryption_key, tag);
         
+        // Replace padded portion of decrypted text with zeroes for tag calculation
+        for (size_t i = ciphertext.size() - ciphertext_pad_len; i < ciphertext.size(); i++)
+            ciphertext[i] = 0;
+
+        vector<u8> actual = get_tag(encryption_key, authentication_key, ciphertext, aad, nonce);
+        
+        // Snip padding to retrieve encrypted data without modification
+        ciphertext = vector<u8>(ciphertext.begin(), ciphertext.end() - ciphertext_pad_len);
+
         #ifdef DEBUG
-            print_bytes("AEAD DECRYPTED", plaintext);
+            cout << "========= DECRYPT ==========\n";
+            print_bytes("AEAD ENC KEY     ", encryption_key);
+            print_bytes("AEAD AUTH KEY    ", authentication_key);
+            print_bytes("AEAD AAD         ", aad);
+            print_bytes("AEAD NONCE       ", nonce);
+            print_bytes("AEAD DECRYPTED   ", ciphertext);
+            print_bytes("AEAD ACTUAL TAG  ", actual);
+            print_bytes("AEAD EXPECTED TAG", tag);
         #endif
         
+        
+        // Authenticate data
         if (!equal(actual.begin(), actual.end(), tag.begin())) {
             cerr << "ERROR: Authentication failed.\n";
             exit(1);
         }
-        
-        ciphertext = plaintext;
     }
 };

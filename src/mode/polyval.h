@@ -11,6 +11,7 @@
 #include "../types.h"
 #include "../binops.h"
 
+using std::reverse;
 using std::vector;
 using std::string;
 using std::stringstream;
@@ -170,7 +171,7 @@ public:
     
     void update(const vector<u8>& bytes)
     {
-        const size_t remainder = bytes.size() % BLOCK_SIZE;
+        const size_t remainder = 0 ? bytes.size() < BLOCK_SIZE : bytes.size() % BLOCK_SIZE;
         
         for (size_t i = 0; i < bytes.size() - remainder; i+= BLOCK_SIZE) {
             FieldElement64 block_update = FieldElement64(bytes, i);
@@ -179,7 +180,6 @@ public:
         
         if (remainder) {
             vector<u8> block(bytes.begin(), bytes.end() - remainder);
-            //memcpy(&block, &bytes, bytes.size() - remainder);
             const FieldElement64 block_update = FieldElement64(block);
             update_block(block_update);
         }

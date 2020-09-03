@@ -199,3 +199,41 @@ TEST(AEAD, Open)
     aead.open(ciphertext, aad);
     ASSERT_EQ(plaintext, ciphertext);
 }
+
+TEST(AEAD, DecipheredEqualsPlaintext128)
+{
+    vector<u8> plaintext = {1, 1};
+    
+    vector<u8> aad = { 2, 2 };
+    
+    vector<u8> key_generating_key = {
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+    };
+    
+	AEAD<BlockType::BLOCK_128> aead = AEAD<BlockType::BLOCK_128>(key_generating_key);
+    vector<u8> ciphertext = plaintext;
+    aead.seal(ciphertext, aad);
+    aead.open(ciphertext, aad);
+    ASSERT_EQ(plaintext, ciphertext);
+}
+
+TEST(AEAD, DecipheredEqualsPlaintext256)
+{
+    vector<u8> plaintext = {1, 1};
+    
+    vector<u8> aad = { 2, 2 };
+    
+    vector<u8> key_generating_key = {
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1,
+    };
+    
+	AEAD<BlockType::BLOCK_128> aead = AEAD<BlockType::BLOCK_128>(key_generating_key);
+    vector<u8> ciphertext = plaintext;
+    aead.seal(ciphertext, aad);
+    aead.open(ciphertext, aad);
+    ASSERT_EQ(plaintext, ciphertext);
+}

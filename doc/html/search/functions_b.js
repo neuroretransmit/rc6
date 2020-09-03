@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['test_5fvector_94',['test_vector',['../rc6__test__vectors_8cc.html#a496e7afbe7ef57d07d212ee515e05cd9',1,'rc6_test_vectors.cc']]]
+  ['seal_93',['seal',['../classAEAD.html#a532e28835508ff4d5d20e667a92161b8',1,'AEAD']]],
+  ['str_94',['str',['../classFieldElement64.html#ad967e8f87d5faf641a6a84a4f186c5ca',1,'FieldElement64::str()'],['../classPolyval.html#ae2c3076641aa5e41f499609aa3787074',1,'Polyval::str()']]],
+  ['swap_5fendian_95',['swap_endian',['../binops_8h.html#abfe27713d539cebe09eb37bd83754da3',1,'binops.h']]]
 ];

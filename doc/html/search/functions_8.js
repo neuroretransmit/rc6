@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['polyval_84',['Polyval',['../classPolyval.html#a84c96e7c57a0b807e5e2f7bda1b598e6',1,'Polyval::Polyval(u64 h0, u64 h1)'],['../classPolyval.html#a03bcf824c091f598ccc0808be7a7eeb2',1,'Polyval::Polyval(u64 h0, u64 h1, u64 s0, u64 s1)'],['../classPolyval.html#a46f66ba98806e4be09dff86a91f675e7',1,'Polyval::Polyval(const vector&lt; u8 &gt; &amp;h)'],['../classPolyval.html#adca9485d2b6124783ee9d0e246cf2cab',1,'Polyval::Polyval(const vector&lt; u8 &gt; &amp;h, const vector&lt; u8 &gt; &amp;s)'],['../classPolyval.html#afe203c1a76a130eea298ff684cd962a4',1,'Polyval::Polyval(const string &amp;h_hex)'],['../classPolyval.html#ad7715583514ec835327fe3ff5cfb1973',1,'Polyval::Polyval(const string &amp;h_hex, const string &amp;s_hex)']]],
-  ['print_5fbytes_85',['print_bytes',['../debug_8h.html#adbec943f605f145de6a5bdb465b1019f',1,'debug.h']]]
+  ['open_83',['open',['../classAEAD.html#a86a17c5f1fd39ddf99d7d3c0a540cf1b',1,'AEAD']]],
+  ['operator_2a_84',['operator*',['../classFieldElement64.html#adafeead8b5a25c3d0cad64f471e8be3c',1,'FieldElement64']]],
+  ['operator_2b_85',['operator+',['../classFieldElement64.html#a9d1e67f55e206bc60f9939438f47fbba',1,'FieldElement64']]]
 ];
