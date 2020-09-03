@@ -28,10 +28,11 @@ template<class T> inline T ror(T word, int shift)
 }
 
 u64 rev64(u64 a);
-
 u64 bmul64(u64 a, u64 b);
-
 u64 mul_reverse_shift1(u64 a, u64 b);
+
+void in_place_update(vector<u8>& bytes, u32 n);
+void in_place_update(vector<u8>& bytes, u64 n, u32 offset);
 
 inline bool is_big_endian()
 {

@@ -9,13 +9,9 @@
 \item 
 \mbox{\hyperlink{classAEAD_a78f2a45b9ecc75afcad62a975e0e9cb8}{A\+E\+AD}} (const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&key\+\_\+generating\+\_\+key)
 \item 
-void \mbox{\hyperlink{classAEAD_a50ada67c96eed0cc625c4cb2f912c645}{encrypt}} (const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&nonce, vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&plaintext, vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&authenticated\+\_\+data)
+void \mbox{\hyperlink{classAEAD_a532e28835508ff4d5d20e667a92161b8}{seal}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&plaintext, vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&aad)
 \item 
-void \mbox{\hyperlink{classAEAD_a327001e8daae92a4a04a2728671cb9ec}{encrypt}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&plaintext, vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&authenticated\+\_\+data)
-\item 
-void \mbox{\hyperlink{classAEAD_a88a0842bd7d889d9b90e25d5c87e146e}{encrypt\+\_\+key\+\_\+ctr\+\_\+block}} (\mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$ \&rc6, vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&ctr\+\_\+block, \mbox{\hyperlink{types_8h_afaa62991928fb9fb18ff0db62a040aba}{u32}} key\+\_\+ctr, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&nonce)
-\item 
-void \mbox{\hyperlink{classAEAD_aa5125bf25b5622e6fd97fba50f9ee9af}{derive\+\_\+keys}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&message\+\_\+authentication\+\_\+key, vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&message\+\_\+encryption\+\_\+key, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&nonce)
+void \mbox{\hyperlink{classAEAD_a86a17c5f1fd39ddf99d7d3c0a540cf1b}{open}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&ciphertext, vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&aad)
 \end{DoxyCompactItemize}
 
 
@@ -35,68 +31,32 @@ Constructor for \mbox{\hyperlink{classAEAD}{A\+E\+AD}}.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classAEAD_aa5125bf25b5622e6fd97fba50f9ee9af}\label{classAEAD_aa5125bf25b5622e6fd97fba50f9ee9af}} 
-\index{AEAD$<$ T $>$@{AEAD$<$ T $>$}!derive\_keys@{derive\_keys}}
-\index{derive\_keys@{derive\_keys}!AEAD$<$ T $>$@{AEAD$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{derive\_keys()}{derive\_keys()}}
+\mbox{\Hypertarget{classAEAD_a86a17c5f1fd39ddf99d7d3c0a540cf1b}\label{classAEAD_a86a17c5f1fd39ddf99d7d3c0a540cf1b}} 
+\index{AEAD$<$ T $>$@{AEAD$<$ T $>$}!open@{open}}
+\index{open@{open}!AEAD$<$ T $>$@{AEAD$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-void \mbox{\hyperlink{classAEAD}{A\+E\+AD}}$<$ T $>$\+::derive\+\_\+keys (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{message\+\_\+authentication\+\_\+key,  }\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{message\+\_\+encryption\+\_\+key,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{nonce }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classAEAD}{A\+E\+AD}}$<$ T $>$\+::open (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{ciphertext,  }\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{aad }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Derive message authentication/encryption keys 
+Decrypt/authenticate message 
 \begin{DoxyParams}{Parameters}
-{\em message\+\_\+authentication\+\_\+key} & reference to storage location of message authentication key \\
+{\em ciphertext} & ciphertext to decrypt \\
 \hline
-{\em message\+\_\+encryption\+\_\+key} & reference to storage location of message authentication key \\
-\hline
-{\em nonce} & nonce \\
+{\em aad} & additional authenticated data \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classAEAD_a50ada67c96eed0cc625c4cb2f912c645}\label{classAEAD_a50ada67c96eed0cc625c4cb2f912c645}} 
-\index{AEAD$<$ T $>$@{AEAD$<$ T $>$}!encrypt@{encrypt}}
-\index{encrypt@{encrypt}!AEAD$<$ T $>$@{AEAD$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{encrypt()}{encrypt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\mbox{\Hypertarget{classAEAD_a532e28835508ff4d5d20e667a92161b8}\label{classAEAD_a532e28835508ff4d5d20e667a92161b8}} 
+\index{AEAD$<$ T $>$@{AEAD$<$ T $>$}!seal@{seal}}
+\index{seal@{seal}!AEAD$<$ T $>$@{AEAD$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{seal()}{seal()}}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-void \mbox{\hyperlink{classAEAD}{A\+E\+AD}}$<$ T $>$\+::encrypt (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{nonce,  }\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{plaintext,  }\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{authenticated\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classAEAD}{A\+E\+AD}}$<$ T $>$\+::seal (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{plaintext,  }\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{aad }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Encrypt with provided nonce 
-\begin{DoxyParams}{Parameters}
-{\em nonce} & user-\/provided nonce \\
-\hline
-{\em plaintext} & plaintext to encrypt \\
-\hline
-{\em authenticated\+\_\+data} & authenticated\+\_\+data \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{classAEAD_a327001e8daae92a4a04a2728671cb9ec}\label{classAEAD_a327001e8daae92a4a04a2728671cb9ec}} 
-\index{AEAD$<$ T $>$@{AEAD$<$ T $>$}!encrypt@{encrypt}}
-\index{encrypt@{encrypt}!AEAD$<$ T $>$@{AEAD$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{encrypt()}{encrypt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$class T $>$ \\
-void \mbox{\hyperlink{classAEAD}{A\+E\+AD}}$<$ T $>$\+::encrypt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{plaintext,  }\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{authenticated\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Encrypt with generated nonce 
+Encrypt message with prepended nonce/appended tag 
 \begin{DoxyParams}{Parameters}
 {\em plaintext} & plaintext to encrypt \\
 \hline
-{\em authenticated\+\_\+data} & authenticated\+\_\+data \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{classAEAD_a88a0842bd7d889d9b90e25d5c87e146e}\label{classAEAD_a88a0842bd7d889d9b90e25d5c87e146e}} 
-\index{AEAD$<$ T $>$@{AEAD$<$ T $>$}!encrypt\_key\_ctr\_block@{encrypt\_key\_ctr\_block}}
-\index{encrypt\_key\_ctr\_block@{encrypt\_key\_ctr\_block}!AEAD$<$ T $>$@{AEAD$<$ T $>$}}
-\doxysubsubsection{\texorpdfstring{encrypt\_key\_ctr\_block()}{encrypt\_key\_ctr\_block()}}
-{\footnotesize\ttfamily template$<$class T $>$ \\
-void \mbox{\hyperlink{classAEAD}{A\+E\+AD}}$<$ T $>$\+::encrypt\+\_\+key\+\_\+ctr\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classRC6}{R\+C6}}$<$ T $>$ \&}]{rc6,  }\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{ctr\+\_\+block,  }\item[{\mbox{\hyperlink{types_8h_afaa62991928fb9fb18ff0db62a040aba}{u32}}}]{key\+\_\+ctr,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{nonce }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Encrypt key counter block 
-\begin{DoxyParams}{Parameters}
-{\em rc6} & cipher instance T\+O\+DO\+: use abstract cipher interface \\
-\hline
-{\em ctr\+\_\+block} & counter block \\
-\hline
-{\em key\+\_\+ctr} & key counter \\
-\hline
-{\em nonce} & nonce \\
+{\em aad} & additional authenticated data \\
 \hline
 \end{DoxyParams}
 

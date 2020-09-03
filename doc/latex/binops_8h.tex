@@ -16,6 +16,10 @@
 \item 
 \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} \mbox{\hyperlink{binops_8h_a29ca66dc36ebc36cbb8f9de1d9d8edfc}{mul\+\_\+reverse\+\_\+shift1}} (\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} a, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} b)
 \item 
+void \mbox{\hyperlink{binops_8h_a12d03265a31b036de95acfcfc35d8e64}{in\+\_\+place\+\_\+update}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&bytes, \mbox{\hyperlink{types_8h_afaa62991928fb9fb18ff0db62a040aba}{u32}} n)
+\item 
+void \mbox{\hyperlink{binops_8h_a0f83e81cac65cfdc3853022ad740c03d}{in\+\_\+place\+\_\+update}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&bytes, \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} n, \mbox{\hyperlink{types_8h_afaa62991928fb9fb18ff0db62a040aba}{u32}} offset)
+\item 
 bool \mbox{\hyperlink{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}{is\+\_\+big\+\_\+endian}} ()
 \item 
 {\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{binops_8h_abfe27713d539cebe09eb37bd83754da3}{swap\+\_\+endian}} (T u)
@@ -28,6 +32,18 @@ bool \mbox{\hyperlink{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}{is\+\_\+big\+
 \index{bmul64@{bmul64}!binops.h@{binops.h}}
 \doxysubsubsection{\texorpdfstring{bmul64()}{bmul64()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}} bmul64 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{a,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{binops_8h_a12d03265a31b036de95acfcfc35d8e64}\label{binops_8h_a12d03265a31b036de95acfcfc35d8e64}} 
+\index{binops.h@{binops.h}!in\_place\_update@{in\_place\_update}}
+\index{in\_place\_update@{in\_place\_update}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{in\_place\_update()}{in\_place\_update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void in\+\_\+place\+\_\+update (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{bytes,  }\item[{\mbox{\hyperlink{types_8h_afaa62991928fb9fb18ff0db62a040aba}{u32}}}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{binops_8h_a0f83e81cac65cfdc3853022ad740c03d}\label{binops_8h_a0f83e81cac65cfdc3853022ad740c03d}} 
+\index{binops.h@{binops.h}!in\_place\_update@{in\_place\_update}}
+\index{in\_place\_update@{in\_place\_update}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{in\_place\_update()}{in\_place\_update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void in\+\_\+place\+\_\+update (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{bytes,  }\item[{\mbox{\hyperlink{types_8h_a3f7e2bcbb0b4c338f3c4f6c937cd4234}{u64}}}]{n,  }\item[{\mbox{\hyperlink{types_8h_afaa62991928fb9fb18ff0db62a040aba}{u32}}}]{offset }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}\label{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}} 
 \index{binops.h@{binops.h}!is\_big\_endian@{is\_big\_endian}}

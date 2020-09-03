@@ -77,7 +77,8 @@ Inheritance diagram for CipherInterface&lt; T &gt;:</div>
  <div class="center">
   <img src="classCipherInterface.png" usemap="#CipherInterface_3C_20T_20_3E_map" alt=""/>
   <map id="CipherInterface_3C_20T_20_3E_map" name="CipherInterface_3C_20T_20_3E_map">
-<area href="classRC6.html" alt="RC6&lt; T &gt;" shape="rect" coords="0,56,131,80"/>
+<area href="classECB.html" alt="ECB&lt; T &gt;" shape="rect" coords="0,56,131,80"/>
+<area href="classRC6.html" alt="RC6&lt; T &gt;" shape="rect" coords="141,56,272,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -87,8 +88,39 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9a6282a9e73d5bd9a669e8d68abef12b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15dec2d2b04c035a47772d2539ed9245"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCipherInterface.html#a15dec2d2b04c035a47772d2539ed9245">decrypt</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;data, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;key)=0</td></tr>
 <tr class="separator:a15dec2d2b04c035a47772d2539ed9245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb13ab112c2b6673634d4cd3221648bf"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCipherInterface.html#afb13ab112c2b6673634d4cd3221648bf">block_size</a> ()</td></tr>
+<tr class="separator:afb13ab112c2b6673634d4cd3221648bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="afb13ab112c2b6673634d4cd3221648bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb13ab112c2b6673634d4cd3221648bf">&#9670;&nbsp;</a></span>block_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t <a class="el" href="classCipherInterface.html">CipherInterface</a>&lt; T &gt;::block_size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classRC6.html#a4a82248af7f32bf0a363a396ebb78857">RC6&lt; T &gt;</a>.</p>
+
+</div>
+</div>
 <a id="a15dec2d2b04c035a47772d2539ed9245"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a15dec2d2b04c035a47772d2539ed9245">&#9670;&nbsp;</a></span>decrypt()</h2>
 
@@ -125,7 +157,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classRC6.html#a67c810c95f5916b8e9640ff74f7aa761">RC6&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classECB.html#a654f1c0e4ea4aafa62f300c29a5716cf">ECB&lt; T &gt;</a>, and <a class="el" href="classRC6.html#a67c810c95f5916b8e9640ff74f7aa761">RC6&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -165,7 +197,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classRC6.html#a73d252ac0ad4902cac504c41914867a4">RC6&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classECB.html#a45d5ca36dc9f4ebea7fd9f0b4da0fae5">ECB&lt; T &gt;</a>, and <a class="el" href="classRC6.html#a73d252ac0ad4902cac504c41914867a4">RC6&lt; T &gt;</a>.</p>
 
 </div>
 </div>

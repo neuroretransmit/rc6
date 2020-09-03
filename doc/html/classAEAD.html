@@ -63,6 +63,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classAEAD-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -76,14 +77,10 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a78f2a45b9ecc75afcad62a975e0e9cb8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAEAD.html#a78f2a45b9ecc75afcad62a975e0e9cb8">AEAD</a> (const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;key_generating_key)</td></tr>
 <tr class="separator:a78f2a45b9ecc75afcad62a975e0e9cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50ada67c96eed0cc625c4cb2f912c645"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAEAD.html#a50ada67c96eed0cc625c4cb2f912c645">encrypt</a> (const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;nonce, vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;plaintext, vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;authenticated_data)</td></tr>
-<tr class="separator:a50ada67c96eed0cc625c4cb2f912c645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a327001e8daae92a4a04a2728671cb9ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAEAD.html#a327001e8daae92a4a04a2728671cb9ec">encrypt</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;plaintext, vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;authenticated_data)</td></tr>
-<tr class="separator:a327001e8daae92a4a04a2728671cb9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88a0842bd7d889d9b90e25d5c87e146e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAEAD.html#a88a0842bd7d889d9b90e25d5c87e146e">encrypt_key_ctr_block</a> (<a class="el" href="classRC6.html">RC6</a>&lt; T &gt; &amp;rc6, vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;ctr_block, <a class="el" href="types_8h.html#afaa62991928fb9fb18ff0db62a040aba">u32</a> key_ctr, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;nonce)</td></tr>
-<tr class="separator:a88a0842bd7d889d9b90e25d5c87e146e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5125bf25b5622e6fd97fba50f9ee9af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAEAD.html#aa5125bf25b5622e6fd97fba50f9ee9af">derive_keys</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;message_authentication_key, vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;message_encryption_key, const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;nonce)</td></tr>
-<tr class="separator:aa5125bf25b5622e6fd97fba50f9ee9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a532e28835508ff4d5d20e667a92161b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAEAD.html#a532e28835508ff4d5d20e667a92161b8">seal</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;plaintext, vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;aad)</td></tr>
+<tr class="separator:a532e28835508ff4d5d20e667a92161b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86a17c5f1fd39ddf99d7d3c0a540cf1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAEAD.html#a86a17c5f1fd39ddf99d7d3c0a540cf1b">open</a> (vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;ciphertext, vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;aad)</td></tr>
+<tr class="separator:a86a17c5f1fd39ddf99d7d3c0a540cf1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a78f2a45b9ecc75afcad62a975e0e9cb8"></a>
@@ -121,8 +118,8 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa5125bf25b5622e6fd97fba50f9ee9af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5125bf25b5622e6fd97fba50f9ee9af">&#9670;&nbsp;</a></span>derive_keys()</h2>
+<a id="a86a17c5f1fd39ddf99d7d3c0a540cf1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86a17c5f1fd39ddf99d7d3c0a540cf1b">&#9670;&nbsp;</a></span>open()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -133,22 +130,16 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAEAD.html">AEAD</a>&lt; T &gt;::derive_keys </td>
+          <td class="memname">void <a class="el" href="classAEAD.html">AEAD</a>&lt; T &gt;::open </td>
           <td>(</td>
           <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>message_authentication_key</em>, </td>
+          <td class="paramname"><em>ciphertext</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>message_encryption_key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>nonce</em>&#160;</td>
+          <td class="paramname"><em>aad</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -162,19 +153,18 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Derive message authentication/encryption keys </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Decrypt/authenticate message </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">message_authentication_key</td><td>reference to storage location of message authentication key </td></tr>
-    <tr><td class="paramname">message_encryption_key</td><td>reference to storage location of message authentication key </td></tr>
-    <tr><td class="paramname">nonce</td><td>nonce </td></tr>
+    <tr><td class="paramname">ciphertext</td><td>ciphertext to decrypt </td></tr>
+    <tr><td class="paramname">aad</td><td>additional authenticated data </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a50ada67c96eed0cc625c4cb2f912c645"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50ada67c96eed0cc625c4cb2f912c645">&#9670;&nbsp;</a></span>encrypt() <span class="overload">[1/2]</span></h2>
+<a id="a532e28835508ff4d5d20e667a92161b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a532e28835508ff4d5d20e667a92161b8">&#9670;&nbsp;</a></span>seal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -185,59 +175,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classAEAD.html">AEAD</a>&lt; T &gt;::encrypt </td>
-          <td>(</td>
-          <td class="paramtype">const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>nonce</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>plaintext</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>authenticated_data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Encrypt with provided nonce </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nonce</td><td>user-provided nonce </td></tr>
-    <tr><td class="paramname">plaintext</td><td>plaintext to encrypt </td></tr>
-    <tr><td class="paramname">authenticated_data</td><td>authenticated_data </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a327001e8daae92a4a04a2728671cb9ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a327001e8daae92a4a04a2728671cb9ec">&#9670;&nbsp;</a></span>encrypt() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classAEAD.html">AEAD</a>&lt; T &gt;::encrypt </td>
+          <td class="memname">void <a class="el" href="classAEAD.html">AEAD</a>&lt; T &gt;::seal </td>
           <td>(</td>
           <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>plaintext</em>, </td>
@@ -246,7 +184,7 @@ template&lt;class T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>authenticated_data</em>&#160;</td>
+          <td class="paramname"><em>aad</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -260,69 +198,10 @@ template&lt;class T &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Encrypt with generated nonce </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Encrypt message with prepended nonce/appended tag </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plaintext</td><td>plaintext to encrypt </td></tr>
-    <tr><td class="paramname">authenticated_data</td><td>authenticated_data </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a88a0842bd7d889d9b90e25d5c87e146e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88a0842bd7d889d9b90e25d5c87e146e">&#9670;&nbsp;</a></span>encrypt_key_ctr_block()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classAEAD.html">AEAD</a>&lt; T &gt;::encrypt_key_ctr_block </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classRC6.html">RC6</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>rc6</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>ctr_block</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#afaa62991928fb9fb18ff0db62a040aba">u32</a>&#160;</td>
-          <td class="paramname"><em>key_ctr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const vector&lt; <a class="el" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>nonce</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Encrypt key counter block </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rc6</td><td>cipher instance TODO: use abstract cipher interface </td></tr>
-    <tr><td class="paramname">ctr_block</td><td>counter block </td></tr>
-    <tr><td class="paramname">key_ctr</td><td>key counter </td></tr>
-    <tr><td class="paramname">nonce</td><td>nonce </td></tr>
+    <tr><td class="paramname">aad</td><td>additional authenticated data </td></tr>
   </table>
   </dd>
 </dl>

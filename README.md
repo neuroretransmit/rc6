@@ -4,13 +4,15 @@ RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9
 
 ## Features
 
-* Key size up to 2040 bits
-* Fully parameterized to support a variety of word-lengths, key sizes and number of rounds.
+* GCM-SIV ([RFC here](doc/rfc8452.pdf)) mode of operation
+    - Authentication AND encryption
+* Key size up to 2048 bits
+* Fully parameterized to support a variety of word lengths, key sizes and number of rounds.
 
 ### Planned Features
 
-* In progress: [GCM-SIV](doc/rfc8452.pdf) as mode of operation. (Implemented POLYVAL/AEAD, implementing ECB/CTR modes to fully execute GCM-SIV)
 * Flag to use [metamorphic engine from Stone Cipher-192](doc/091101.pdf)
+* Parallelize
 
 ## Usage
 
@@ -18,10 +20,67 @@ Doxygen generated files are in `doc/latex` and `doc/html`.
 
 Copy [`types.h`](src/types.h), [`binops.h`](src/binops.h), and [`rc6.h`](src/rc6.h) to your source directory.
 
-```cpp
-#include "path/to/rc6.h"
+### In GCM-SIV mode
 
-using namespace rc6;
+```cpp
+#include "rc6/mode/aead.h"
+
+int main()
+{
+    vector<u8> plaintext = {
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    };
+    
+    vector<u8> aad(256);
+    
+    vector<u8> key_generating_key = {
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    };
+    
+	AEAD<BlockType::BLOCK_128> aead = AEAD<BlockType::BLOCK_128>(key_generating_key);
+    vector<u8> ciphertext = plaintext;
+    // Encrypt
+    aead.seal(ciphertext, aad);
+    // Decrypt and authenticate
+    aead.open(ciphertext, aad);
+```
+
+### As a lone block cipher
+
+```cpp
+#include "rc6/mode/rc6.h"
 
 int main()
 {
@@ -101,7 +160,7 @@ Tests run a Google Test suite that test constraints of the paper as well as the 
 
 ```bash
 $ ./tests/tests
-[==========] Running 37 tests from 5 test suites.
+[==========] Running 39 tests from 6 test suites.
 [----------] Global test environment set-up.
 [----------] 11 tests from RC6
 [ RUN      ] RC6.MagicConstantP32
@@ -136,65 +195,8 @@ $ ./tests/tests
 [ RUN      ] BinOps.IsBigEndian
 [       OK ] BinOps.IsBigEndian (0 ms)
 [----------] 3 tests from BinOps (0 ms total)
-
-[----------] 2 tests from AEAD
-[ RUN      ] AEAD.DeriveKeys128
-[       OK ] AEAD.DeriveKeys128 (0 ms)
-[ RUN      ] AEAD.DeriveKeys256
-[       OK ] AEAD.DeriveKeys256 (0 ms)
-[----------] 2 tests from AEAD (0 ms total)
-
-[----------] 8 tests from FieldElement64
-[ RUN      ] FieldElement64.ConstructorFromString
-[       OK ] FieldElement64.ConstructorFromString (0 ms)
-[ RUN      ] FieldElement64.ConstructorFromBytes
-[       OK ] FieldElement64.ConstructorFromBytes (0 ms)
-[ RUN      ] FieldElement64.ConstructorFromBytesWithOffset
-[       OK ] FieldElement64.ConstructorFromBytesWithOffset (0 ms)
-[ RUN      ] FieldElement64.ConstructorFromLongs
-[       OK ] FieldElement64.ConstructorFromLongs (0 ms)
-[ RUN      ] FieldElement64.str
-[       OK ] FieldElement64.str (0 ms)
-[ RUN      ] FieldElement64.bytes
-[       OK ] FieldElement64.bytes (0 ms)
-[ RUN      ] FieldElement64.OperatorAdd
-[       OK ] FieldElement64.OperatorAdd (0 ms)
-[ RUN      ] FieldElement64.OperatorMul
-[       OK ] FieldElement64.OperatorMul (1 ms)
-[----------] 8 tests from FieldElement64 (1 ms total)
-
-[----------] 13 tests from Polyval
-[ RUN      ] Polyval.ConstructorFromHLongs
-[       OK ] Polyval.ConstructorFromHLongs (0 ms)
-[ RUN      ] Polyval.ConstructorFromHAndSLongs
-[       OK ] Polyval.ConstructorFromHAndSLongs (0 ms)
-[ RUN      ] Polyval.ConstructFromOwnDigest
-[       OK ] Polyval.ConstructFromOwnDigest (0 ms)
-[ RUN      ] Polyval.ConstructorFromHBytes
-[       OK ] Polyval.ConstructorFromHBytes (0 ms)
-[ RUN      ] Polyval.ConstructorFromHAndSBytes
-[       OK ] Polyval.ConstructorFromHAndSBytes (0 ms)
-[ RUN      ] Polyval.ConstructorFromHString
-[       OK ] Polyval.ConstructorFromHString (0 ms)
-[ RUN      ] Polyval.ConstructorFromHAndSStrings
-[       OK ] Polyval.ConstructorFromHAndSStrings (0 ms)
-[ RUN      ] Polyval.UpdateBlock0
-[       OK ] Polyval.UpdateBlock0 (0 ms)
-[ RUN      ] Polyval.UpdateBlock
-[       OK ] Polyval.UpdateBlock (0 ms)
-[ RUN      ] Polyval.UpdateNotDependingOnZeroBlock
-[       OK ] Polyval.UpdateNotDependingOnZeroBlock (0 ms)
-[ RUN      ] Polyval.Update
-[       OK ] Polyval.Update (0 ms)
-[ RUN      ] Polyval.PadWithZeroes
-[       OK ] Polyval.PadWithZeroes (0 ms)
-[ RUN      ] Polyval.ResetSToZero
-[       OK ] Polyval.ResetSToZero (0 ms)
-[----------] 13 tests from Polyval (0 ms total)
-
-[----------] Global test environment tear-down
-[==========] 37 tests from 5 test suites ran. (2 ms total)
-[  PASSED  ] 37 tests.
+...
+[  PASSED  ] 39 tests.
 ```
 
 ## License

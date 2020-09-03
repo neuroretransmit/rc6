@@ -11,9 +11,11 @@
 #include <vector>
 #include <random>
 
+#include "../binops.h"
 #include "../types.h"
-#include "polyval.h"
 #include "../cipher/rc6.h"
+#include "ecb.h"
+#include "polyval.h"
 
 using std::vector;
 using std::cerr;
@@ -22,7 +24,18 @@ using std::default_random_engine;
 using std::generate;
 using std::ref;
 using std::numeric_limits;
+using std::equal;
 using random_bytes_engine = independent_bits_engine<default_random_engine, CHAR_BIT, u8>;
+
+#ifdef DEBUG
+#include <iomanip>
+#include "../debug.h"
+
+using std::cout;
+using std::hex;
+using std::setw;
+using std::setfill;
+#endif
 
 template<class T> class AEAD
 {
@@ -34,67 +47,120 @@ public:
     AEAD(const vector<u8>& key_generating_key) :
         KEY_GENERATING_KEY(key_generating_key)
     {
-        if (KEY_GENERATING_KEY.size() != BLOCK_SIZE || (BLOCK_SIZE != 128 && BLOCK_SIZE != 256)) {
+        if (KEY_GENERATING_KEY.size() != BLOCK_SIZE || (BLOCK_SIZE != (128 / 8) && BLOCK_SIZE != (256 / 8))) {
             cerr << "ERROR: Key size for AEAD must match block size. Expected " << BLOCK_SIZE << " bits, got " << KEY_GENERATING_KEY.size() << ".\n";
             exit(1);
-        }
-            
+        } 
     }
     
     /**
-     * Encrypt with provided nonce
-     * @param nonce: user-provided nonce
+     * Encrypt message with prepended nonce/appended tag
      * @param plaintext: plaintext to encrypt
-     * @param authenticated_data: authenticated_data
+     * @param aad: additional authenticated data
      */
-    void encrypt(const vector<u8>& nonce, vector<u8>& plaintext, vector<u8>& authenticated_data)
-    {
-        size_t nonce_size = nonce.size();
-        
-        if (nonce_size != NONCE_SIZE) {
-            cerr << "ERROR: Nonce must be 96-bits, got " << nonce_size << ".\n";
-            exit(1);
-        }
-        
-        vector<u8> message_authentication_key;
-        vector<u8> message_encryption_key;
-        derive_keys(message_authentication_key, message_encryption_key, nonce);
-        u64 plaintext_size = plaintext.size();
-        u64 authenticated_data_size = authenticated_data.size();
-        
-        if (plaintext_size > MAX_DATA_SIZE) {
-            cerr << "ERROR: Plaintext must be < 64GB, got " << plaintext_size << ".\n";
-            exit(1);
-        } else if (authenticated_data_size > MAX_DATA_SIZE) {
-            cerr << "ERROR: Authenticated data must be < 64GB, got " << authenticated_data_size << ".\n";
-            exit(1);
-        }
-        
-        vector<u8> length_block(16);
-        u64* length_block_u64 = (u64*) length_block.data();
-        length_block_u64[0] = authenticated_data_size * 8;
-        length_block_u64[1] = plaintext_size * 8;
-        
-        while (plaintext.size() % 16)
-            plaintext.push_back(0);
-        
-        while (authenticated_data.size() % 16)
-            authenticated_data.push_back(0);
-    }
-    
-    /**
-     * Encrypt with generated nonce
-     * @param plaintext: plaintext to encrypt
-     * @param authenticated_data: authenticated_data
-     */
-    void encrypt(vector<u8>& plaintext, vector<u8>& authenticated_data)
+    void seal(vector<u8>& plaintext, vector<u8>& aad)
     {
         // Generate random nonce -- completely disallow misuse
-        vector<u8> nonce(NONCE_SIZE);
+        vector<u8> nonce(NONCE_BYTE_LEN);
         random_bytes_engine rbe;
         generate(begin(nonce), end(nonce), ref(rbe));
-        encrypt(nonce, plaintext, authenticated_data);
+        #ifdef DEBUG
+            print_bytes("AEAD PLAINTEXT", plaintext);
+            print_bytes("AEAD NONCE\t", nonce);
+        #endif
+        // Encrypt
+        seal(plaintext, aad, nonce);
+        // Insert nonce into beginning of  plaintext
+        plaintext.insert(plaintext.begin(), nonce.begin(), nonce.end());
+        #ifdef DEBUG
+            print_bytes("AEAD ENCRYPTED", plaintext);
+        #endif
     }
+
+    /**
+     * Decrypt/authenticate message
+     * @param ciphertext: ciphertext to decrypt
+     * @param aad: additional authenticated data
+     */
+    void open(vector<u8>& ciphertext, vector<u8>& aad)
+    {
+        size_t ciphertext_size = ciphertext.size();
+        
+        // TODO: Test
+        if (ciphertext.size() < NONCE_BYTE_LEN) {
+            cerr << "ERROR: Ciphertext to be at least the 96 bytes (nonce size), got " << ciphertext_size << "\n";
+            exit(1);
+        }
+        
+        // Retrieve nonce
+        const vector<u8> nonce(ciphertext.begin(), ciphertext.begin() + NONCE_BYTE_LEN);
+        // Remove nonce from ciphertext
+        ciphertext.erase(ciphertext.begin(), ciphertext.begin() + NONCE_BYTE_LEN);
+        open(ciphertext, aad, nonce);
+    }
+#ifndef DEBUG
+private:
+#endif
+    template<class V> class CTR
+    {
+    public:
+        CTR(V& cipher, size_t block_size) :
+            cipher(cipher),
+            BLOCK_SIZE(block_size)
+        {}
+        
+        void crypt(vector<u8>& input, const vector<u8>& encryption_key, const vector<u8>& tag)
+        {
+            vector<u8> counter = tag;
+            counter[counter.size() - 1] |= 0x80;
+            
+            for (size_t i = 0; i < input.size(); i += BLOCK_SIZE) {
+                vector<u8> key(BLOCK_SIZE);
+                key.insert(key.begin(), counter.begin(), counter.end());
+                cipher.encrypt(key, encryption_key);
+                
+                for (size_t j = 0; j < min(BLOCK_SIZE, input.size() - i); j++)
+                    input[i + j] = input[i + j] ^ key[j];
+                
+                for (int k = 0; k < 4; k++)
+                    if (++counter[k] != 0)
+                        break;
+            }
+        }
+        
+    private:
+        V& cipher;
+        size_t BLOCK_SIZE;
+        
+    };
+    
+    const size_t NONCE_BYTE_LEN = 96 / 8;
+    const size_t BLOCK_SIZE = sizeof(T) * 4;
+    const size_t MAX_DATA_SIZE = pow(2, 36);
+
+    const vector<u8>& KEY_GENERATING_KEY;
+    
+    vector<u8> get_tag(const vector<u8>& message_encryption_key, const vector<u8>& message_authentication_key, 
+                 const vector<u8>& plaintext, const vector<u8>& aad, const vector<u8>& nonce)
+    {
+        vector<u8> aad_plaintext_lengths(BLOCK_SIZE);
+        in_place_update(aad_plaintext_lengths, (u64) aad.size() * 8, 8);
+        Polyval<T> authenticator = Polyval<T>(message_authentication_key);
+        authenticator.update(aad);
+        authenticator.update(plaintext);
+        authenticator.update(aad_plaintext_lengths);
+        vector<u8> digest = authenticator.digest();
+        
+        for (size_t i = 0; i < nonce.size(); i++)
+            digest[i] ^= nonce[i];
+        
+        digest[digest.size() - 1] &= ~0x80;
+        RC6<T> cipher = RC6<T>();
+        ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
+        ecb.encrypt(digest, message_encryption_key);
+        return digest;
+    }
+    
     
     /**
      * Encrypt key counter block
@@ -113,6 +179,8 @@ public:
         ctr_block.insert(ctr_block.end(), nonce.begin(), nonce.end());
         rc6.encrypt(ctr_block, KEY_GENERATING_KEY);
     }
+    
+    
     
     /**
      * Derive message authentication/encryption keys
@@ -148,12 +216,87 @@ public:
         }
     }
     
-private:
-    const size_t NONCE_SIZE = 96;
-    const size_t BLOCK_SIZE = numeric_limits<T>::digits * 4;
-    const size_t MESSAGE_ENCRYPTION_KEY_LEN = BLOCK_SIZE;
-    const size_t MESSAGE_AUTHENTICATION_KEY_LEN = 128;
-    const size_t MAX_DATA_SIZE = pow(2, 36);
-
-    const vector<u8>& KEY_GENERATING_KEY; 
+    /**
+     * Encrypt message and append tag
+     * @param plaintext: plaintext to encrypt
+     * @param aad: additional authenticated data
+     * @param nonce: user-provided nonce
+     */
+    void seal(vector<u8>& plaintext, vector<u8>& aad, const vector<u8>& nonce)
+    {
+        size_t nonce_size = nonce.size();
+        
+        if (nonce_size != NONCE_BYTE_LEN) {
+            cerr << "ERROR: Nonce must be 96-bits, got " << nonce_size << ".\n";
+            exit(1);
+        }
+        
+        vector<u8> authentication_key;
+        vector<u8> encryption_key;
+        derive_keys(authentication_key, encryption_key, nonce);
+        u64 plaintext_size = plaintext.size();
+        u64 aad_size = aad.size();
+        
+        if (plaintext_size > MAX_DATA_SIZE) {
+            cerr << "ERROR: Plaintext must be < 64GB, got " << plaintext_size << ".\n";
+            exit(1);
+        } else if (aad_size > MAX_DATA_SIZE) {
+            cerr << "ERROR: Authenticated data must be < 64GB, got " << aad_size << ".\n";
+            exit(1);
+        }
+        
+        vector<u8> length_block(16);
+        u64* length_block_u64 = (u64*) length_block.data();
+        length_block_u64[0] = aad_size * 8;
+        length_block_u64[1] = plaintext_size * 8;
+        
+        while (plaintext.size() % 16)
+            plaintext.push_back(0);
+        
+        while (aad.size() % 16)
+            aad.push_back(0);
+        
+        vector<u8> tag = get_tag(encryption_key, authentication_key, plaintext, aad, nonce);
+        RC6<T> cipher = RC6<T>();
+        ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
+        CTR<ECB<RC6<T>>> ctr = CTR<ECB<RC6<T>>>(ecb, BLOCK_SIZE);
+        ctr.crypt(plaintext, encryption_key, tag);
+        plaintext.insert(plaintext.end(), tag.begin(), tag.end());
+    }
+    
+    /**
+     * Decrypt and authenticate message
+     * @param ciphertext: ciphertext to decrypt and authenticate
+     * @param aad: additional authenticated data
+     * @param nonce: nonce
+     */
+    void open(vector<u8>& ciphertext, vector<u8>& aad, const vector<u8>& nonce)
+    {
+        // Extract tag/ciphertext
+        vector<u8> tag(ciphertext.end() - BLOCK_SIZE, ciphertext.end());
+        vector<u8> plaintext(ciphertext.begin(), ciphertext.end() - BLOCK_SIZE);
+        
+        // Derive keys
+        vector<u8> authentication_key;
+        vector<u8> encryption_key;
+        derive_keys(authentication_key, encryption_key, nonce);
+        
+        // Decrypt
+        RC6<T> cipher = RC6<T>();
+        ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
+        CTR<ECB<RC6<T>>> ctr = CTR<ECB<RC6<T>>>(ecb, BLOCK_SIZE);
+        ctr.crypt(plaintext, encryption_key, tag);
+        vector<u8> actual = get_tag(encryption_key, authentication_key, plaintext, aad, nonce);
+        
+        #ifdef DEBUG
+            print_bytes("AEAD DECRYPTED", plaintext);
+        #endif
+        
+        if (!equal(actual.begin(), actual.end(), tag.begin())) {
+            cerr << "ERROR: Authentication failed.\n";
+            exit(1);
+        }
+        
+        ciphertext = plaintext;
+    }
 };

@@ -16,7 +16,8 @@ using std::ceil;
 using std::pow;
 using std::vector;
 
-template<class T> class RC6 : CipherInterface<T> {
+template<class T> class RC6 : CipherInterface<T>
+{
 public:
     const unsigned MAX_KEY_LEN = 8 * 256;
     /// Binary expansion of e - 2

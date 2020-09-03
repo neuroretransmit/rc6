@@ -40,5 +40,22 @@ u64 mul_reverse_shift1(u64 a, u64 b)
     return rev64(bmul64(a, b)) >> 1;
 }
 
+void in_place_update(vector<u8>& bytes, u32 n)
+{
+    bytes[0] = (u8) n;
+    bytes[1] = (u8) (n >> 8);
+    bytes[2] = (u8) (n >> 16);
+    bytes[3] = (u8) (n >> 24);
+}
 
-
+void in_place_update(vector<u8>& bytes, u64 n, u32 offset)
+{
+    bytes[0] = (u8) n;
+    bytes[1] = (u8) (n >> 8);
+    bytes[2] = (u8) (n >> 16);
+    bytes[3] = (u8) (n >> 24);
+    bytes[4] = (u8) (n >> 32);
+    bytes[5] = (u8) (n >> 40);
+    bytes[6] = (u8) (n >> 48);
+    bytes[7] = (u8) (n >> 56);
+}

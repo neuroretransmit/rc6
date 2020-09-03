@@ -6,5 +6,5 @@ INPUT                  = @doxy_main_page@ \
 						 @CMAKE_CURRENT_SOURCE_DIR@/doc
 FILE_PATTERNS          = *.h *.cc *.md
 RECURSIVE              = YES
-USE_MDFILE_AS_MAINPAGE = @CMAKE_CURRENT_SOURCE_DIR@/README.md
+USE_MDFILE_AS_MAINPAGE = ../README.md
 EXTRACT_ALL = YES
