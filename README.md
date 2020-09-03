@@ -77,7 +77,7 @@ $ make
 
 ### Main program
 
-The `main.cc` file runs the test vectors from the whitepaper.
+The `rc6_test_vectors.cc` file runs the test vectors from the whitepaper as well as an AEAD test.
 
 ```bash
 $ ./src/rc6_test_vectors
