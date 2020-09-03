@@ -178,8 +178,8 @@ public:
         }
         
         if (remainder) {
-            vector<u8> block(BLOCK_SIZE);
-            memcpy(&block, &bytes, bytes.size() - remainder);
+            vector<u8> block(bytes.begin(), bytes.end() - remainder);
+            //memcpy(&block, &bytes, bytes.size() - remainder);
             const FieldElement64 block_update = FieldElement64(block);
             update_block(block_update);
         }

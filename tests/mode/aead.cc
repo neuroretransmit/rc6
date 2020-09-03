@@ -24,7 +24,7 @@ TEST(AEAD, DeriveKeys128)
     
     vector<u8> message_authentication_key;
     vector<u8> message_encryption_key;
-	AEAD<u32> aead = AEAD<u32>(key_generating_key);
+	AEAD<BlockType::BLOCK_128> aead = AEAD<BlockType::BLOCK_128>(key_generating_key);
     aead.derive_keys(message_authentication_key, message_encryption_key, nonce);
     ASSERT_EQ(message_authentication_key.size(), 128 / 8);
     ASSERT_EQ(message_encryption_key.size(), 128 / 8);
@@ -108,7 +108,7 @@ TEST(AEAD, Seal)
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     };
     
-	AEAD<u32> aead = AEAD<u32>(key_generating_key);
+	AEAD<BlockType::BLOCK_128> aead = AEAD<BlockType::BLOCK_128>(key_generating_key);
     vector<u8> ciphertext = plaintext;
     aead.seal(ciphertext, aad);
     ASSERT_NE(plaintext, ciphertext);
@@ -193,7 +193,7 @@ TEST(AEAD, Open)
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     };
     
-	AEAD<u32> aead = AEAD<u32>(key_generating_key);
+	AEAD<BlockType::BLOCK_128> aead = AEAD<BlockType::BLOCK_128>(key_generating_key);
     vector<u8> ciphertext = plaintext;
     aead.seal(ciphertext, aad);
     aead.open(ciphertext, aad);

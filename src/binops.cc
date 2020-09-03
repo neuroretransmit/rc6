@@ -50,12 +50,12 @@ void in_place_update(vector<u8>& bytes, u32 n)
 
 void in_place_update(vector<u8>& bytes, u64 n, u32 offset)
 {
-    bytes[0] = (u8) n;
-    bytes[1] = (u8) (n >> 8);
-    bytes[2] = (u8) (n >> 16);
-    bytes[3] = (u8) (n >> 24);
-    bytes[4] = (u8) (n >> 32);
-    bytes[5] = (u8) (n >> 40);
-    bytes[6] = (u8) (n >> 48);
-    bytes[7] = (u8) (n >> 56);
+    bytes[offset] = (u8) n;
+    bytes[offset + 1] = (u8) (n >> 8);
+    bytes[offset + 2] = (u8) (n >> 16);
+    bytes[offset + 3] = (u8) (n >> 24);
+    bytes[offset + 4] = (u8) (n >> 32);
+    bytes[offset + 5] = (u8) (n >> 40);
+    bytes[offset + 6] = (u8) (n >> 48);
+    bytes[offset + 7] = (u8) (n >> 56);
 }
