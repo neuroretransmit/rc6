@@ -205,7 +205,7 @@ private:
             }
         }
         
-        if (KEY_GENERATING_KEY.size() == 256) {
+        if (KEY_GENERATING_KEY.size() == 32) {
             for (key_ctr = 4; key_ctr < 6; key_ctr++) {
                 vector<u8> ctr_block;
                 encrypt_key_ctr_block(rc6, ctr_block, key_ctr, nonce);
