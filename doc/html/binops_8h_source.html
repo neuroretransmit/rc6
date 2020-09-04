@@ -72,19 +72,19 @@ $(function() {
 <div class="contents">
 <a href="binops_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;climits&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;climits&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;limits&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span>std;</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">   15</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">inline</span> T <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(T word, <span class="keywordtype">int</span> shift)</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">   15</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">inline</span> T <a class="code" href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a>(T word, <span class="keywordtype">int</span> shift)</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">return</span> (word &lt;&lt; shift) | (word &gt;&gt; (numeric_limits&lt;T&gt;::digits - shift));</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">   25</a></span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">inline</span> T <a class="code" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">ror</a>(T word, <span class="keywordtype">int</span> shift)</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">   25</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">inline</span> T <a class="code" href="binops_8h.html#ae125a4487df7033773045d8ee965188e">ror</a>(T word, <span class="keywordtype">int</span> shift)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">return</span> (word &gt;&gt; shift) | (word &lt;&lt; (numeric_limits&lt;T&gt;::digits - shift));</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
@@ -96,14 +96,14 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">char</span> c[4];</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    } bint = {0x01020304};</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> bint.c[0] == 1; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> bint.c[0] == 1;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="binops_8h.html#abfe27713d539cebe09eb37bd83754da3">   47</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T <a class="code" href="binops_8h.html#abfe27713d539cebe09eb37bd83754da3">swap_endian</a>(T u)</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    static_assert (CHAR_BIT == 8, <span class="stringliteral">&quot;CHAR_BIT != 8&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    static_assert(CHAR_BIT == 8, <span class="stringliteral">&quot;CHAR_BIT != 8&quot;</span>);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">union</span>{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">union </span>{</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        T u;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a>[<span class="keyword">sizeof</span>(T)];</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    } source, dest;</div>

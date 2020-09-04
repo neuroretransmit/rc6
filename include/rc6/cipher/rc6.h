@@ -1,66 +1,65 @@
 #pragma once
 
 #include <cmath>
-#include <cstdio>
 #include <cstddef>
-#include <vector>
+#include <cstdio>
 #include <iostream>
+#include <vector>
 
-#include "rc6/types.h"
 #include "rc6/binops.h"
 
-using std::size_t;
+using std::ceil;
 using std::cerr;
 using std::max;
-using std::ceil;
 using std::pow;
+using std::size_t;
 using std::vector;
 
 /// Rivest cipher 6 implementation
-template<class T> class RC6 : CipherInterface<T>
+template <class T> class RC6 : CipherInterface<T>
 {
-public:
-    const unsigned MAX_KEY_LEN = 8 * 256;
+  public:
+    const unsigned MAX_KEY_LEN = 8 * 255;
     /// Binary expansion of e - 2
     const T P = T(ceil((M_E - 2) * pow(2, numeric_limits<T>::digits)));
     /// Binary expansion of the golden ratio - 1
     const T Q = T(((1.618033988749895 - 1) * pow(2, numeric_limits<T>::digits)));
-    
+
     /**
      * Constructor for RC6 block cipher.
      * @param r: number of half-rounds
      */
-    RC6(T r = 20) :
-        w(numeric_limits<T>::digits),
-        r(r)
-    {}
-    
+    RC6(T r = 20) : w(numeric_limits<T>::digits), r(r) {}
+
     /**
      * Encrypt plaintext block using user-supplied key
      * @param block: plain text block to encrypt
      * @param key: key bytes
      */
-    void encrypt(vector<u8>& block, const vector<u8>& key)
+    void encrypt(vector<u8> &block, const vector<u8> &key)
     {
-        T* block_words = (T*) block.data();
-        T& A = block_words[0];
-        T& B = block_words[1];
-        T& C = block_words[2];
-        T& D = block_words[3];
+        T *block_words = (T *)block.data();
+        T &A = block_words[0];
+        T &B = block_words[1];
+        T &C = block_words[2];
+        T &D = block_words[3];
         vector<T> S(2 * r + 4);
         key_schedule(key, S);
         B += S[0];
         D += S[1];
-        
+
         for (size_t i = 1; i <= r; i++) {
             T t = rol(B * (2 * B + 1), log2(w));
             T u = rol(D * (2 * D + 1), log2(w));
             A = rol((A ^ t), u) + S[2 * i];
             C = rol((C ^ u), t) + S[2 * i + 1];
             T a = A;
-            A = B; B = C; C = D; D = a;
+            A = B;
+            B = C;
+            C = D;
+            D = a;
         }
-        
+
         A += S[2 * r + 2];
         C += S[2 * r + 3];
     }
@@ -70,13 +69,13 @@ public:
      * @param block: encrypted block to decrypt
      * @param key: key bytes
      */
-    void decrypt(vector<u8>& block, const vector<u8>& key)
+    void decrypt(vector<u8> &block, const vector<u8> &key)
     {
-        T* block_words = (T*) block.data();
-        T& A = block_words[0];
-        T& B = block_words[1];
-        T& C = block_words[2];
-        T& D = block_words[3];
+        T *block_words = (T *)block.data();
+        T &A = block_words[0];
+        T &B = block_words[1];
+        T &C = block_words[2];
+        T &D = block_words[3];
         vector<T> S(2 * r + 4);
         key_schedule(key, S);
         C -= S[2 * r + 3];
@@ -84,7 +83,10 @@ public:
 
         for (size_t i = r; i >= 1; i--) {
             T d = D;
-            D = C; C = B; B = A; A = d;
+            D = C;
+            C = B;
+            B = A;
+            A = d;
             T u = rol(D * (2 * D + 1), log2(w));
             T t = rol(B * (2 * B + 1), log2(w));
             C = ror(C - S[2 * i + 1], t) ^ u;
@@ -94,25 +96,24 @@ public:
         D -= S[1];
         B -= S[0];
     }
-    
-    virtual size_t block_size()
-    {
-        return sizeof(T);
-    }
-    
-private:
+
+    virtual size_t block_size() { return sizeof(T); }
+
+  private:
     /// Word bit-length
     const T w;
     /// Number of half-rounds
     const T r;
-    
+
     /**
      * Create key schedule S from user-supplied key
      * @param key: key bytes
      * @param S: destination for key schedule
      */
-    void key_schedule(const vector<u8>& key, vector<T>& S) {
-        // Copy key to not augment original by appending bytes and reinterpreting pointer as L
+    void key_schedule(const vector<u8> &key, vector<T> &S)
+    {
+        // Copy key to not augment original by appending bytes and reinterpreting
+        // pointer as L
         vector<u8> key_copy = key;
         const size_t b_bits = key_copy.size() * 8;
 
@@ -125,8 +126,8 @@ private:
             key_copy.push_back(0);
 
         const size_t c = key_copy.size() / sizeof(T);
-        T* L = (T*) key_copy.data();
-        const size_t v = 3 * max((T) c, 2 * r + 4);
+        T *L = (T *)key_copy.data();
+        const size_t v = 3 * max((T)c, 2 * r + 4);
         T i = 0, j = 0;
 
         S[0] = P;
@@ -143,4 +144,3 @@ private:
         }
     }
 };
-

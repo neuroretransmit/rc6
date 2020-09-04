@@ -1,7 +1,7 @@
 #pragma once
 
-#include <limits>
 #include <climits>
+#include <limits>
 
 #include "types.h"
 
@@ -12,9 +12,9 @@ using namespace std;
  * @param word: value to rotate
  * @param shift: bits to roll
  */
-template<class T> inline T rol(T word, int shift)
+template <class T> inline T rol(T word, int shift)
 {
-	return (word << shift) | (word >> (numeric_limits<T>::digits - shift));
+    return (word << shift) | (word >> (numeric_limits<T>::digits - shift));
 }
 
 /**
@@ -22,9 +22,9 @@ template<class T> inline T rol(T word, int shift)
  * @param word: value to rotate
  * @param shift: bits to roll
  */
-template<class T> inline T ror(T word, int shift)
+template <class T> inline T ror(T word, int shift)
 {
-	return (word >> shift) | (word << (numeric_limits<T>::digits - shift));
+    return (word >> shift) | (word << (numeric_limits<T>::digits - shift));
 }
 
 /**
@@ -37,7 +37,7 @@ inline bool is_big_endian()
         char c[4];
     } bint = {0x01020304};
 
-    return bint.c[0] == 1; 
+    return bint.c[0] == 1;
 }
 
 /**
@@ -46,9 +46,9 @@ inline bool is_big_endian()
  */
 template <typename T> T swap_endian(T u)
 {
-    static_assert (CHAR_BIT == 8, "CHAR_BIT != 8");
+    static_assert(CHAR_BIT == 8, "CHAR_BIT != 8");
 
-    union{
+    union {
         T u;
         unsigned char u8[sizeof(T)];
     } source, dest;

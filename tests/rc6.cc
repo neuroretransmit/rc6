@@ -17,7 +17,7 @@ TEST(RC6, MagicConstantQ32)
 	ASSERT_EQ(0x9E3779B9, rc6.Q);
 }
 
-TEST(RC6, KeyAbove2048Bits)
+TEST(RC6, KeyAbove2040Bits)
 {
     RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
 	const vector<u8> key((rc6.MAX_KEY_LEN + 8) / 8);
