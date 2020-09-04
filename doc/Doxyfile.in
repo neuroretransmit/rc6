@@ -2,7 +2,6 @@ PROJECT_NAME           = "@CMAKE_PROJECT_NAME@"
 PROJECT_NUMBER         = @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@
 OUTPUT_DIRECTORY       = @CMAKE_CURRENT_SOURCE_DIR@/../doc
 INPUT                  = @doxy_main_page@ \
-						 @CMAKE_CURRENT_SOURCE_DIR@/../src \
 						 @CMAKE_CURRENT_SOURCE_DIR@/../include \
 						 @CMAKE_CURRENT_SOURCE_DIR@/../README.md
 FILE_PATTERNS          = *.h *.cc *.md

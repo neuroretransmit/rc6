@@ -9,10 +9,8 @@
 #include <random>
 #include <vector>
 
-#include "../binops.h"
 #include "../cipher/rc6.h"
-#include "../types.h"
-#include "ecb.h"
+#include "../mode/ecb.h"
 #include "polyval.h"
 
 using std::cerr;
@@ -137,8 +135,7 @@ template <class T> class AEAD
     /**
      * Calculate tag for authentication
      * @param message_encryption_key: vector to store message encryption key in
-     * @param message_authentication_key: vector to store message authentication
-     * key in
+     * @param message_authentication_key: vector to store message authentication key in
      * @param plaintext: plaintext message
      * @param aad: authenticated additional data
      * @param nonce: nonce

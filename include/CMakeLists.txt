@@ -15,8 +15,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #)
 #target_link_libraries(rc6 PRIVATE Threads::Threads)
 #install(TARGETS rc6 RUNTIME DESTINATION bin INCLUDES include DESTINATION include)
+
 install(DIRECTORY ./ DESTINATION include
         FILES_MATCHING PATTERN "*.h")
+
 if (CMAKE_BUILD_TYPE MATCHES "^[Rr]elease")
 	# first we can indicate the documentation build as an option and set it to ON by default
 	option(BUILD_DOC "Build documentation" ON)

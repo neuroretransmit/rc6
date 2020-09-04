@@ -49,7 +49,7 @@ int main()
 ### As a lone block cipher
 
 ```cpp
-#include <rc6/mode/rc6.h>
+#include <rc6/cipher/rc6.h>
 
 int main()
 {

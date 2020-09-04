@@ -19,6 +19,7 @@ using std::vector;
 template <class T> class RC6 : CipherInterface<T>
 {
   public:
+    /// 2040-bit max key length
     const unsigned MAX_KEY_LEN = 8 * 255;
     /// Binary expansion of e - 2
     const T P = T(ceil((M_E - 2) * pow(2, numeric_limits<T>::digits)));
