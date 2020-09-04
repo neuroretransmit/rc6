@@ -2,8 +2,6 @@
 
 RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9bee493796.pdf) in C++ fully templated to accomodate different word sizes. RC6 was an AES candidate finalist that was [found being used in NSA implants](https://en.wikipedia.org/wiki/RC6#Possible_use_in_NSA_%22implants%22). The algorithm was an [RSA patent](https://patents.google.com/patent/US5835600A/en) but the patent expired between 2015 and 2017.
 
-<div style="text-align:center"><img src="doc/img/rc6_feistel.png" /></div>
-
 ## Features
 
 * GCM-SIV ([RFC here](doc/rfc8452.pdf)) mode of operation
@@ -31,7 +29,7 @@ int main()
 {
     // Secret to encrypt
     vector<u8> plaintext(256);
-    // Authenticated additional data to digest for authentication
+    // Authenticated additional data to digest
     vector<u8> aad(256);
     // Master key to be used for derivation
     vector<u8> key_generating_key(32);
