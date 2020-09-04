@@ -16,6 +16,7 @@ using std::reverse;
 using std::vector;
 using std::string;
 
+/// Abstract authenticator
 class Authenticator
 {
 public:
@@ -24,6 +25,7 @@ public:
     virtual void reset() = 0;
 };
 
+/// Polyval authenticator
 template<class T> class Polyval : public Authenticator
 {
 private:

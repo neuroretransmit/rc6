@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['mul_5freverse_5fshift1_78',['mul_reverse_shift1',['../binops_8cc.html#a29ca66dc36ebc36cbb8f9de1d9d8edfc',1,'binops.cc']]]
+  ['open_69',['open',['../classAEAD.html#a86a17c5f1fd39ddf99d7d3c0a540cf1b',1,'AEAD']]],
+  ['operator_2a_70',['operator*',['../classFieldElement64.html#adafeead8b5a25c3d0cad64f471e8be3c',1,'FieldElement64']]],
+  ['operator_2b_71',['operator+',['../classFieldElement64.html#a9d1e67f55e206bc60f9939438f47fbba',1,'FieldElement64']]]
 ];

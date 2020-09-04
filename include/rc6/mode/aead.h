@@ -1,7 +1,5 @@
 #pragma once
 
-// AEAD = Authenticated Encryption with Additional Data
-
 #include <algorithm>
 #include <climits>
 #include <cstdlib>
@@ -28,6 +26,7 @@ using std::numeric_limits;
 using std::equal;
 using random_bytes_engine = independent_bits_engine<default_random_engine, CHAR_BIT, u8>;
 
+// Authenticated Encryption with Additional Data
 template<class T> class AEAD
 {
 public:
@@ -324,6 +323,16 @@ private:
             cerr << "ERROR: Authentication failed.\n";
             exit(1);
         }
+    }
+    
+    /**
+     * Check if byte array needs to be padded to block size
+     * @param bytes: byte array to check
+     * @param block_size: target block size
+     */
+    bool needs_padding(const vector<u8>& bytes, size_t block_size)
+    {
+        return ((bytes.size() < block_size) && block_size - bytes.size()) || (bytes.size() % block_size);
     }
     
     void in_place_update(vector<u8>& bytes, u32 n)

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['polyval_83',['Polyval',['../classPolyval.html#a84c96e7c57a0b807e5e2f7bda1b598e6',1,'Polyval::Polyval(u64 h0, u64 h1)'],['../classPolyval.html#a03bcf824c091f598ccc0808be7a7eeb2',1,'Polyval::Polyval(u64 h0, u64 h1, u64 s0, u64 s1)'],['../classPolyval.html#a46f66ba98806e4be09dff86a91f675e7',1,'Polyval::Polyval(const vector&lt; u8 &gt; &amp;h)'],['../classPolyval.html#adca9485d2b6124783ee9d0e246cf2cab',1,'Polyval::Polyval(const vector&lt; u8 &gt; &amp;h, const vector&lt; u8 &gt; &amp;s)'],['../classPolyval.html#afe203c1a76a130eea298ff684cd962a4',1,'Polyval::Polyval(const string &amp;h_hex)'],['../classPolyval.html#ad7715583514ec835327fe3ff5cfb1973',1,'Polyval::Polyval(const string &amp;h_hex, const string &amp;s_hex)']]]
+  ['seal_77',['seal',['../classAEAD.html#a532e28835508ff4d5d20e667a92161b8',1,'AEAD']]],
+  ['str_78',['str',['../classFieldElement64.html#ad967e8f87d5faf641a6a84a4f186c5ca',1,'FieldElement64::str()'],['../classPolyval.html#ae2c3076641aa5e41f499609aa3787074',1,'Polyval::str()']]],
+  ['swap_5fendian_79',['swap_endian',['../binops_8h.html#abfe27713d539cebe09eb37bd83754da3',1,'binops.h']]]
 ];

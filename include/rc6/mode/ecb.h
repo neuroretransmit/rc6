@@ -1,7 +1,5 @@
 #pragma once
 
-/// Electronic Code Book mode of operation
-
 #include <vector>
 #include <iterator>
 
@@ -10,6 +8,7 @@
 using std::vector;
 using std::iterator;
 
+/// Electronic Code Book mode of operation
 template<class T> class ECB : CipherInterface<T>
 {
 public:

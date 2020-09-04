@@ -54,8 +54,3 @@ T swap_endian(T u)
 
     return dest.u;
 }
-
-inline bool needs_padding(const vector<u8>& bytes, const size_t BLOCK_SIZE)
-{
-    return ((bytes.size() < BLOCK_SIZE) && BLOCK_SIZE - bytes.size()) || (bytes.size() % BLOCK_SIZE);
-}

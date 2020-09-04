@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['open_80',['open',['../classAEAD.html#a86a17c5f1fd39ddf99d7d3c0a540cf1b',1,'AEAD']]],
-  ['operator_2a_81',['operator*',['../classFieldElement64.html#adafeead8b5a25c3d0cad64f471e8be3c',1,'FieldElement64']]],
-  ['operator_2b_82',['operator+',['../classFieldElement64.html#a9d1e67f55e206bc60f9939438f47fbba',1,'FieldElement64']]]
+  ['rc6_73',['RC6',['../classRC6.html#a051c67b814b66b48ff91c36e21b47e54',1,'RC6']]],
+  ['reset_74',['reset',['../classAuthenticator.html#af908c5d1e84fb26b833d80fd76233a1d',1,'Authenticator::reset()'],['../classPolyval.html#a82448c7ba0d723856fa06b7a74beb387',1,'Polyval::reset()']]],
+  ['rol_75',['rol',['../binops_8h.html#af5aea3b2857e5648cbc66b960862993a',1,'binops.h']]],
+  ['ror_76',['ror',['../binops_8h.html#ae125a4487df7033773045d8ee965188e',1,'binops.h']]]
 ];

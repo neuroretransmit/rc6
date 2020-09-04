@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['rc6_84',['RC6',['../classRC6.html#a051c67b814b66b48ff91c36e21b47e54',1,'RC6']]],
-  ['reset_85',['reset',['../classAuthenticator.html#af908c5d1e84fb26b833d80fd76233a1d',1,'Authenticator::reset()'],['../classPolyval.html#a82448c7ba0d723856fa06b7a74beb387',1,'Polyval::reset()']]],
-  ['rev64_86',['rev64',['../binops_8cc.html#aa4430eb407a278c115112217913659e5',1,'binops.cc']]],
-  ['rol_87',['rol',['../binops_8h.html#af5aea3b2857e5648cbc66b960862993a',1,'binops.h']]],
-  ['ror_88',['ror',['../binops_8h.html#ae125a4487df7033773045d8ee965188e',1,'binops.h']]]
+  ['update_80',['update',['../classAuthenticator.html#a998c07d93b28a1ae1ebc4565888c4d20',1,'Authenticator::update()'],['../classPolyval.html#a1f2fdf1f0ea092da31d2d6caafe14aa2',1,'Polyval::update(const vector&lt; u8 &gt; &amp;bytes)'],['../classPolyval.html#a103a16a80b3e2e7c28fab52823ad58c4',1,'Polyval::update(const string &amp;hex_str)']]],
+  ['update_5fblock_81',['update_block',['../classPolyval.html#a68199e54647e0cba25fa557b54967b6f',1,'Polyval::update_block(const FieldElement64 &amp;update)'],['../classPolyval.html#ab92e3651bd320854361b63a63de898c9',1,'Polyval::update_block(const string &amp;update_hex)']]]
 ];

@@ -5,7 +5,7 @@ RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9
 ## Features
 
 * GCM-SIV ([RFC here](doc/rfc8452.pdf)) mode of operation
-    - Authentication AND encryption
+    - Authenticated Encryption with Additional Data
 * Key size up to 2048 bits
 * Fully parameterized to support a variety of word lengths, key sizes and number of rounds.
 
@@ -16,9 +16,9 @@ RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9
 
 ## Usage
 
-Doxygen generated files are in `doc/latex` and `doc/html`.
+### Documentation
 
-Copy [`types.h`](src/types.h), [`binops.h`](src/binops.h), and [`rc6.h`](src/rc6.h) to your source directory.
+Doxygen generated files are in [`doc/latex`](doc/latex) and [`doc/html`](doc/html).
 
 ### In GCM-SIV mode
 
@@ -43,6 +43,7 @@ int main()
     aead.seal(plaintext, aad);
     // Decrypt and authenticate
     aead.open(ciphertext, aad);
+}
 ```
 
 ### As a lone block cipher

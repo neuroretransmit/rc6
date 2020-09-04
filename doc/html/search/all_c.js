@@ -1,12 +1,6 @@
 var searchData=
 [
-  ['rc6_31',['rc6',['../md__home_jonesy_git_rc6_README.html',1,'']]],
-  ['random_5fbytes_5fengine_32',['random_bytes_engine',['../aead_8h.html#aeec28ed2c996afddd490ab7e523e7cf6',1,'aead.h']]],
-  ['rc6_33',['RC6',['../classRC6.html',1,'RC6&lt; T &gt;'],['../classRC6.html#a051c67b814b66b48ff91c36e21b47e54',1,'RC6::RC6()']]],
-  ['rc6_2eh_34',['rc6.h',['../rc6_8h.html',1,'']]],
-  ['readme_2emd_35',['README.md',['../README_8md.html',1,'']]],
-  ['reset_36',['reset',['../classAuthenticator.html#af908c5d1e84fb26b833d80fd76233a1d',1,'Authenticator::reset()'],['../classPolyval.html#a82448c7ba0d723856fa06b7a74beb387',1,'Polyval::reset()']]],
-  ['rev64_37',['rev64',['../binops_8cc.html#aa4430eb407a278c115112217913659e5',1,'binops.cc']]],
-  ['rol_38',['rol',['../binops_8h.html#af5aea3b2857e5648cbc66b960862993a',1,'binops.h']]],
-  ['ror_39',['ror',['../binops_8h.html#ae125a4487df7033773045d8ee965188e',1,'binops.h']]]
+  ['seal_34',['seal',['../classAEAD.html#a532e28835508ff4d5d20e667a92161b8',1,'AEAD']]],
+  ['str_35',['str',['../classFieldElement64.html#ad967e8f87d5faf641a6a84a4f186c5ca',1,'FieldElement64::str()'],['../classPolyval.html#ae2c3076641aa5e41f499609aa3787074',1,'Polyval::str()']]],
+  ['swap_5fendian_36',['swap_endian',['../binops_8h.html#abfe27713d539cebe09eb37bd83754da3',1,'binops.h']]]
 ];

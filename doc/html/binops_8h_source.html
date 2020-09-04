@@ -116,15 +116,9 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> dest.u;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="binops_8h.html#a9df95160cbcb8ffad49299c312dee68f">   58</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="binops_8h.html#a9df95160cbcb8ffad49299c312dee68f">needs_padding</a>(<span class="keyword">const</span> vector&lt;u8&gt;&amp; bytes, <span class="keyword">const</span> <span class="keywordtype">size_t</span> BLOCK_SIZE)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> ((bytes.size() &lt; BLOCK_SIZE) &amp;&amp; BLOCK_SIZE - bytes.size()) || (bytes.size() % BLOCK_SIZE);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="abinops_8h_html_af5aea3b2857e5648cbc66b960862993a"><div class="ttname"><a href="binops_8h.html#af5aea3b2857e5648cbc66b960862993a">rol</a></div><div class="ttdeci">T rol(T word, int shift)</div><div class="ttdef"><b>Definition:</b> binops.h:15</div></div>
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
-<div class="ttc" id="abinops_8h_html_a9df95160cbcb8ffad49299c312dee68f"><div class="ttname"><a href="binops_8h.html#a9df95160cbcb8ffad49299c312dee68f">needs_padding</a></div><div class="ttdeci">bool needs_padding(const vector&lt; u8 &gt; &amp;bytes, const size_t BLOCK_SIZE)</div><div class="ttdef"><b>Definition:</b> binops.h:58</div></div>
 <div class="ttc" id="atypes_8h_html_a92c50087ca0e64fa93fc59402c55f8ca"><div class="ttname"><a href="types_8h.html#a92c50087ca0e64fa93fc59402c55f8ca">u8</a></div><div class="ttdeci">uint8_t u8</div><div class="ttdoc">8-bit unsigned integer</div><div class="ttdef"><b>Definition:</b> types.h:10</div></div>
 <div class="ttc" id="abinops_8h_html_aed5f3e73e01248d8a2d6792a69081f9e"><div class="ttname"><a href="binops_8h.html#aed5f3e73e01248d8a2d6792a69081f9e">is_big_endian</a></div><div class="ttdeci">bool is_big_endian()</div><div class="ttdef"><b>Definition:</b> binops.h:30</div></div>
 <div class="ttc" id="abinops_8h_html_abfe27713d539cebe09eb37bd83754da3"><div class="ttname"><a href="binops_8h.html#abfe27713d539cebe09eb37bd83754da3">swap_endian</a></div><div class="ttdeci">T swap_endian(T u)</div><div class="ttdef"><b>Definition:</b> binops.h:41</div></div>

@@ -3,7 +3,7 @@
 \begin{DoxyItemize}
 \item G\+C\+M-\/\+S\+IV (\href{doc/rfc8452.pdf}{\texttt{ R\+FC here}}) mode of operation
 \begin{DoxyItemize}
-\item Authentication A\+ND encryption
+\item Authenticated Encryption with Additional Data
 \end{DoxyItemize}
 \item Key size up to 2048 bits
 \item Fully parameterized to support a variety of word lengths, key sizes and number of rounds.
@@ -13,9 +13,8 @@
 \item Flag to use \href{doc/091101.pdf}{\texttt{ metamorphic engine from Stone Cipher-\/192}}
 \item Parallelize
 \end{DoxyItemize}\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md3}{}\doxysection{Usage}\label{md__home_jonesy_git_rc6_README_autotoc_md3}
-Doxygen generated files are in {\ttfamily doc/latex} and {\ttfamily doc/html}.
-
-Copy \href{src/types.h}{\texttt{ {\ttfamily types.\+h}}}, \href{src/binops.h}{\texttt{ {\ttfamily binops.\+h}}}, and \href{src/rc6.h}{\texttt{ {\ttfamily rc6.\+h}}} to your source directory.\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md4}{}\doxysubsection{In G\+C\+M-\/\+S\+I\+V mode}\label{md__home_jonesy_git_rc6_README_autotoc_md4}
+\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md4}{}\doxysubsection{Documentation}\label{md__home_jonesy_git_rc6_README_autotoc_md4}
+Doxygen generated files are in \href{doc/latex}{\texttt{ {\ttfamily doc/latex}}} and \href{doc/html}{\texttt{ {\ttfamily doc/html}}}.\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md5}{}\doxysubsection{In G\+C\+M-\/\+S\+I\+V mode}\label{md__home_jonesy_git_rc6_README_autotoc_md5}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <\mbox{\hyperlink{aead_8h}{rc6/mode/aead.h}}>}}
@@ -38,8 +37,9 @@ Copy \href{src/types.h}{\texttt{ {\ttfamily types.\+h}}}, \href{src/binops.h}{\t
 \DoxyCodeLine{    aead.\mbox{\hyperlink{classAEAD_a532e28835508ff4d5d20e667a92161b8}{seal}}(plaintext, aad);}
 \DoxyCodeLine{    \textcolor{comment}{// Decrypt and authenticate}}
 \DoxyCodeLine{    aead.\mbox{\hyperlink{classAEAD_a86a17c5f1fd39ddf99d7d3c0a540cf1b}{open}}(ciphertext, aad);}
+\DoxyCodeLine{\}}
 \end{DoxyCode}
-\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md5}{}\doxysubsection{As a lone block cipher}\label{md__home_jonesy_git_rc6_README_autotoc_md5}
+\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md6}{}\doxysubsection{As a lone block cipher}\label{md__home_jonesy_git_rc6_README_autotoc_md6}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <rc6/mode/rc6.h>}}
@@ -59,14 +59,14 @@ Copy \href{src/types.h}{\texttt{ {\ttfamily types.\+h}}}, \href{src/binops.h}{\t
 \DoxyCodeLine{    rc6.\mbox{\hyperlink{classRC6_a67c810c95f5916b8e9640ff74f7aa761}{decrypt}}(block, key);}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
-\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md6}{}\doxysection{Building/\+Installation}\label{md__home_jonesy_git_rc6_README_autotoc_md6}
-\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md7}{}\doxysubsection{Requirements}\label{md__home_jonesy_git_rc6_README_autotoc_md7}
+\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md7}{}\doxysection{Building/\+Installation}\label{md__home_jonesy_git_rc6_README_autotoc_md7}
+\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md8}{}\doxysubsection{Requirements}\label{md__home_jonesy_git_rc6_README_autotoc_md8}
 
 \begin{DoxyItemize}
 \item C\+Make $>$= 3.\+18
 \item G\+Test
 \item G\+Mock
-\end{DoxyItemize}\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md8}{}\doxysubsection{The Build}\label{md__home_jonesy_git_rc6_README_autotoc_md8}
+\end{DoxyItemize}\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md9}{}\doxysubsection{The Build}\label{md__home_jonesy_git_rc6_README_autotoc_md9}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\$ mkdir build \&\& cd build \# Create and move into build directory}
@@ -76,13 +76,13 @@ Copy \href{src/types.h}{\texttt{ {\ttfamily types.\+h}}}, \href{src/binops.h}{\t
 \end{DoxyCode}
 
 
-The headers are now in {\ttfamily /usr/local/include/rc6}.\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md9}{}\doxysubsection{Uninstall}\label{md__home_jonesy_git_rc6_README_autotoc_md9}
+The headers are now in {\ttfamily /usr/local/include/rc6}.\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md10}{}\doxysubsection{Uninstall}\label{md__home_jonesy_git_rc6_README_autotoc_md10}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\$ sudo rm -\/rf /usr/local/include/rc6}
 \end{DoxyCode}
-\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md10}{}\doxysection{Running (from $<$tt$>$build/$<$/tt$>$ folder)}\label{md__home_jonesy_git_rc6_README_autotoc_md10}
-\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md11}{}\doxysubsection{Tests}\label{md__home_jonesy_git_rc6_README_autotoc_md11}
+\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md11}{}\doxysection{Running (from $<$tt$>$build/$<$/tt$>$ folder)}\label{md__home_jonesy_git_rc6_README_autotoc_md11}
+\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md12}{}\doxysubsection{Tests}\label{md__home_jonesy_git_rc6_README_autotoc_md12}
 Tests run a Google Test suite that test constraints of the paper as well as the test vectors.
 
 
@@ -103,5 +103,5 @@ Tests run a Google Test suite that test constraints of the paper as well as the 
 \DoxyCodeLine{...}
 \DoxyCodeLine{[  PASSED  ] X tests.}
 \end{DoxyCode}
-\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md12}{}\doxysection{License}\label{md__home_jonesy_git_rc6_README_autotoc_md12}
+\hypertarget{md__home_jonesy_git_rc6_README_autotoc_md13}{}\doxysection{License}\label{md__home_jonesy_git_rc6_README_autotoc_md13}
 None, everyone deserves strong encryption. 
