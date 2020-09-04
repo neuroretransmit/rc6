@@ -6,8 +6,8 @@
 #include <vector>
 #include <iostream>
 
-#include "types.h"
-#include "binops.h"
+#include "rc6/types.h"
+#include "rc6/binops.h"
 
 using std::size_t;
 using std::cerr;

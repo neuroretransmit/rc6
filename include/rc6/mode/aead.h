@@ -28,16 +28,6 @@ using std::numeric_limits;
 using std::equal;
 using random_bytes_engine = independent_bits_engine<default_random_engine, CHAR_BIT, u8>;
 
-#ifdef DEBUG
-#include <iomanip>
-#include "../debug.h"
-
-using std::cout;
-using std::hex;
-using std::setw;
-using std::setfill;
-#endif
-
 template<class T> class AEAD
 {
 public:
@@ -65,17 +55,10 @@ public:
         vector<u8> nonce(NONCE_BYTE_LEN);
         random_bytes_engine rbe;
         generate(begin(nonce), end(nonce), ref(rbe));
-        #ifdef DEBUG
-            print_bytes("AEAD PLAINTEXT", plaintext);
-            print_bytes("AEAD NONCE\t", nonce);
-        #endif
         // Encrypt
         seal(plaintext, aad, nonce);
         // Insert nonce into beginning of  plaintext
         plaintext.insert(plaintext.begin(), nonce.begin(), nonce.end());
-        #ifdef DEBUG
-            print_bytes("AEAD ENCRYPTED", plaintext);
-        #endif
     }
 
     /**
@@ -341,5 +324,25 @@ private:
             cerr << "ERROR: Authentication failed.\n";
             exit(1);
         }
+    }
+    
+    void in_place_update(vector<u8>& bytes, u32 n)
+    {
+        bytes[0] = (u8) n;
+        bytes[1] = (u8) (n >> 8);
+        bytes[2] = (u8) (n >> 16);
+        bytes[3] = (u8) (n >> 24);
+    }
+
+    void in_place_update(vector<u8>& bytes, u64 n, u32 offset)
+    {
+        bytes[offset] = (u8) n;
+        bytes[offset + 1] = (u8) (n >> 8);
+        bytes[offset + 2] = (u8) (n >> 16);
+        bytes[offset + 3] = (u8) (n >> 24);
+        bytes[offset + 4] = (u8) (n >> 32);
+        bytes[offset + 5] = (u8) (n >> 40);
+        bytes[offset + 6] = (u8) (n >> 48);
+        bytes[offset + 7] = (u8) (n >> 56);
     }
 };

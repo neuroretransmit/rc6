@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['polyval_57',['Polyval',['../classPolyval.html',1,'']]]
+  ['polyval_55',['Polyval',['../classPolyval.html',1,'']]]
 ];

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
-#include "cipher/rc6.h"
+#include "rc6/cipher/rc6.h"
 
 using namespace ::testing;
 

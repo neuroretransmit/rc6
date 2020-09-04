@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "types.h"
-#include "binops.h"
+#include "rc6/types.h"
+#include "rc6/binops.h"
 
 TEST(BinOps, ROL)
 {

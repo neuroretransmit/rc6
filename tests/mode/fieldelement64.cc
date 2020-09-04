@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "mode/polyval.h"
+#include "rc6/mode/polyval.h"
 
 using namespace ::testing;
 using std::cout;

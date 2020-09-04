@@ -1,6 +1,6 @@
-#include "binops.h"
+#include "rc6/binops.h"
 
-#include "types.h"
+#include "rc6/types.h"
 
 u64 rev64(u64 a)
 {

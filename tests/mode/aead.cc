@@ -3,7 +3,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include "mode/aead.h"
+#include "rc6/mode/aead.h"
 
 using std::cout;
 using std::setw;

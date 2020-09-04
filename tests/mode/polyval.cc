@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "mode/polyval.h"
+#include "rc6/mode/polyval.h"
 
 static Polyval POLYVAL_0 = Polyval<u32>(0L, 0L, 0L, 0L);
 static Polyval POLYVAL_A = Polyval<u32>(1L, 1L, 1L, 1L);

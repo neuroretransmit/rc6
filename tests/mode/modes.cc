@@ -4,8 +4,8 @@
 #include <iostream>
 #include <iomanip>
 
-#include "mode/ecb.h"
-#include "cipher/rc6.h"
+#include "rc6/mode/ecb.h"
+#include "rc6/cipher/rc6.h"
 
 using namespace ::testing;
 using std::cout;
@@ -50,12 +50,6 @@ TEST(Modes, ECB)
     vector<u8> plain = EXPECTED;
     ecb.encrypt(plain, key);
     ASSERT_NE(plain, EXPECTED);
-    for (u8 i : plain)
-        cout << hex << setfill('0') << setw(2) << (int)i;
-    cout << "\n";
     ecb.decrypt(plain, key);
-    for (u8 i : plain)
-        cout << hex << setfill('0') << setw(2) << (int)i;
-    cout << "\n";
     ASSERT_EQ(plain, EXPECTED);
 }
