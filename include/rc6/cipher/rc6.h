@@ -16,6 +16,7 @@ using std::ceil;
 using std::pow;
 using std::vector;
 
+/// Rivest cipher 6 implementation
 template<class T> class RC6 : CipherInterface<T>
 {
 public:

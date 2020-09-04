@@ -27,6 +27,9 @@ template<class T> inline T ror(T word, int shift)
 	return (word >> shift) | (word << (numeric_limits<T>::digits - shift));
 }
 
+/**
+ * Check if architecture is big or little endian
+ */
 inline bool is_big_endian()
 {
     union {
@@ -37,8 +40,11 @@ inline bool is_big_endian()
     return bint.c[0] == 1; 
 }
 
-template <typename T>
-T swap_endian(T u)
+/**
+ * Reverse endianness of a type
+ * @param u: value to flip endianness of
+ */
+template <typename T> T swap_endian(T u)
 {
     static_assert (CHAR_BIT == 8, "CHAR_BIT != 8");
 
