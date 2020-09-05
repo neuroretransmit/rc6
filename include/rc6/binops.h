@@ -12,7 +12,7 @@ using namespace std;
  * @param word: value to rotate
  * @param shift: bits to roll
  */
-template <class T> inline T rol(T word, int shift)
+template<class T> inline T rol(T word, int shift)
 {
     return (word << shift) | (word >> (numeric_limits<T>::digits - shift));
 }
@@ -22,7 +22,7 @@ template <class T> inline T rol(T word, int shift)
  * @param word: value to rotate
  * @param shift: bits to roll
  */
-template <class T> inline T ror(T word, int shift)
+template<class T> inline T ror(T word, int shift)
 {
     return (word >> shift) | (word << (numeric_limits<T>::digits - shift));
 }
@@ -44,7 +44,7 @@ inline bool is_big_endian()
  * Reverse endianness of a type
  * @param u: value to flip endianness of
  */
-template <typename T> T swap_endian(T u)
+template<typename T> T swap_endian(T u)
 {
     static_assert(CHAR_BIT == 8, "CHAR_BIT != 8");
 

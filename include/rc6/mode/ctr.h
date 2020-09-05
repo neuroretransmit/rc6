@@ -11,7 +11,7 @@ using std::vector;
 /// CTR mode of operation
 // TODO: See if specification different than default CTR, otherwise move into
 // modes and genericize
-template <class V> class CTR
+template<class V> class CTR
 {
   public:
     /**

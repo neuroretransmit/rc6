@@ -9,7 +9,7 @@ using std::iterator;
 using std::vector;
 
 /// Electronic Code Book mode of operation
-template <class T> class ECB : CipherInterface<T>
+template<class T> class ECB : CipherInterface<T>
 {
   public:
     ECB(T& cipher) : BLOCK_SIZE(4 * cipher.block_size()), cipher(cipher) {}

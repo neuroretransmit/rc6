@@ -26,7 +26,7 @@ using std::vector;
 using random_bytes_engine = independent_bits_engine<default_random_engine, CHAR_BIT, u8>;
 
 /// Authenticated Encryption with Additional Data
-template <class T> class AEAD
+template<class T> class AEAD
 {
   public:
     /**

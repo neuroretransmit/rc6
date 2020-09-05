@@ -24,7 +24,7 @@ class Authenticator
 };
 
 /// Polyval authenticator
-template <class T> class Polyval : public Authenticator
+template<class T> class Polyval : public Authenticator
 {
   private:
     const size_t BLOCK_SIZE = sizeof(T) * 4;

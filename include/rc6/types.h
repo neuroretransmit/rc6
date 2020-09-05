@@ -23,7 +23,7 @@ namespace BlockType
 }; // namespace BlockType
 
 /// Abstract block cipher interface
-template <class T> class CipherInterface
+template<class T> class CipherInterface
 {
   public:
     virtual void encrypt(vector<u8>& data, const vector<u8>& key) = 0;

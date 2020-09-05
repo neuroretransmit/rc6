@@ -16,7 +16,7 @@ using std::size_t;
 using std::vector;
 
 /// Rivest cipher 6 implementation
-template <class T> class RC6 : CipherInterface<T>
+template<class T> class RC6 : CipherInterface<T>
 {
   public:
     /// 2040-bit max key length
