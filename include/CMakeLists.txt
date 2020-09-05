@@ -1,5 +1,5 @@
 project(rc6)
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.13)
 
 mark_as_advanced(VERSION_MAJOR VERSION_MINOR VERSION_PATCH)
 set(VERSION_MAJOR   0   CACHE STRING "Project major version number.")
