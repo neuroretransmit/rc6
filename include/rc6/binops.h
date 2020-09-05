@@ -33,7 +33,7 @@ template <class T> inline T ror(T word, int shift)
 inline bool is_big_endian()
 {
     union {
-        uint32_t i;
+        u32 i;
         char c[4];
     } bint = {0x01020304};
 
