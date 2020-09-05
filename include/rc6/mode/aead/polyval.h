@@ -19,7 +19,7 @@ class Authenticator
 {
   public:
     virtual vector<u8> digest() = 0;
-    virtual void update(const vector<u8> &bytes) = 0;
+    virtual void update(const vector<u8>& bytes) = 0;
     virtual void reset() = 0;
 };
 
@@ -36,17 +36,17 @@ template <class T> class Polyval : public Authenticator
 
     Polyval(u64 h0, u64 h1, u64 s0, u64 s1) : h(FieldElement64(h0, h1)), s(FieldElement64(s0, s1)) {}
 
-    Polyval(const vector<u8> &h) : h(FieldElement64(h)), s(FieldElement64(0L, 0L)) {}
+    Polyval(const vector<u8>& h) : h(FieldElement64(h)), s(FieldElement64(0L, 0L)) {}
 
-    Polyval(const vector<u8> &h, const vector<u8> &s) : h(FieldElement64(h)), s(FieldElement64(s)) {}
+    Polyval(const vector<u8>& h, const vector<u8>& s) : h(FieldElement64(h)), s(FieldElement64(s)) {}
 
-    Polyval(const string &h_hex) : h(FieldElement64(h_hex)), s(FieldElement64(0L, 0L)) {}
+    Polyval(const string& h_hex) : h(FieldElement64(h_hex)), s(FieldElement64(0L, 0L)) {}
 
-    Polyval(const string &h_hex, const string &s_hex) : h(FieldElement64(h_hex)), s(FieldElement64(s_hex)) {}
+    Polyval(const string& h_hex, const string& s_hex) : h(FieldElement64(h_hex)), s(FieldElement64(s_hex)) {}
 
     vector<u8> digest() { return s.bytes(); }
 
-    void update(const vector<u8> &bytes)
+    void update(const vector<u8>& bytes)
     {
         const size_t remainder = 0 ? bytes.size() < BLOCK_SIZE : bytes.size() % BLOCK_SIZE;
 
@@ -62,7 +62,7 @@ template <class T> class Polyval : public Authenticator
         }
     }
 
-    void update(const string &hex_str)
+    void update(const string& hex_str)
     {
         const size_t remainder = hex_str.size() % (BLOCK_SIZE * 2);
 
@@ -79,9 +79,9 @@ template <class T> class Polyval : public Authenticator
         }
     }
 
-    void update_block(const FieldElement64 &update) { s = (s + update) * h; }
+    void update_block(const FieldElement64& update) { s = (s + update) * h; }
 
-    void update_block(const string &update_hex)
+    void update_block(const string& update_hex)
     {
         FieldElement64 update_element = FieldElement64(update_hex);
         update_block(update_element);

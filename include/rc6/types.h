@@ -26,8 +26,8 @@ namespace BlockType
 template <class T> class CipherInterface
 {
   public:
-    virtual void encrypt(vector<u8> &data, const vector<u8> &key) = 0;
-    virtual void decrypt(vector<u8> &data, const vector<u8> &key) = 0;
+    virtual void encrypt(vector<u8>& data, const vector<u8>& key) = 0;
+    virtual void decrypt(vector<u8>& data, const vector<u8>& key) = 0;
 
     virtual size_t block_size() { return sizeof(T); }
 };

@@ -3,5 +3,6 @@ BreakBeforeBraces: Linux
 ColumnLimit: '110'
 IndentWidth: '4'
 NamespaceIndentation: All
-
+PointerAlignment: Left
+SpaceAfterCStyleCast: 'true'
 ...

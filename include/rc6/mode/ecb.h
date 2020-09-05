@@ -12,9 +12,9 @@ using std::vector;
 template <class T> class ECB : CipherInterface<T>
 {
   public:
-    ECB(T &cipher) : BLOCK_SIZE(4 * cipher.block_size()), cipher(cipher) {}
+    ECB(T& cipher) : BLOCK_SIZE(4 * cipher.block_size()), cipher(cipher) {}
 
-    void encrypt(vector<u8> &data, const vector<u8> &key)
+    void encrypt(vector<u8>& data, const vector<u8>& key)
     {
         size_t offset = 0;
         for (auto block = data.begin(); block != data.end(); block += BLOCK_SIZE, offset += BLOCK_SIZE) {
@@ -26,7 +26,7 @@ template <class T> class ECB : CipherInterface<T>
         }
     }
 
-    void decrypt(vector<u8> &data, const vector<u8> &key)
+    void decrypt(vector<u8>& data, const vector<u8>& key)
     {
         size_t offset = 0;
         for (auto block = data.begin(); block != data.end(); block += BLOCK_SIZE, offset += BLOCK_SIZE) {
@@ -40,5 +40,5 @@ template <class T> class ECB : CipherInterface<T>
 
   private:
     const size_t BLOCK_SIZE;
-    T &cipher;
+    T& cipher;
 };

@@ -37,13 +37,13 @@ template <class T> class RC6 : CipherInterface<T>
      * @param block: plain text block to encrypt
      * @param key: key bytes
      */
-    void encrypt(vector<u8> &block, const vector<u8> &key)
+    void encrypt(vector<u8>& block, const vector<u8>& key)
     {
-        T *block_words = (T *)block.data();
-        T &A = block_words[0];
-        T &B = block_words[1];
-        T &C = block_words[2];
-        T &D = block_words[3];
+        T* block_words = (T*) block.data();
+        T& A = block_words[0];
+        T& B = block_words[1];
+        T& C = block_words[2];
+        T& D = block_words[3];
         vector<T> S(2 * r + 4);
         key_schedule(key, S);
         B += S[0];
@@ -70,13 +70,13 @@ template <class T> class RC6 : CipherInterface<T>
      * @param block: encrypted block to decrypt
      * @param key: key bytes
      */
-    void decrypt(vector<u8> &block, const vector<u8> &key)
+    void decrypt(vector<u8>& block, const vector<u8>& key)
     {
-        T *block_words = (T *)block.data();
-        T &A = block_words[0];
-        T &B = block_words[1];
-        T &C = block_words[2];
-        T &D = block_words[3];
+        T* block_words = (T*) block.data();
+        T& A = block_words[0];
+        T& B = block_words[1];
+        T& C = block_words[2];
+        T& D = block_words[3];
         vector<T> S(2 * r + 4);
         key_schedule(key, S);
         C -= S[2 * r + 3];
@@ -111,7 +111,7 @@ template <class T> class RC6 : CipherInterface<T>
      * @param key: key bytes
      * @param S: destination for key schedule
      */
-    void key_schedule(const vector<u8> &key, vector<T> &S)
+    void key_schedule(const vector<u8>& key, vector<T>& S)
     {
         // Copy key to not augment original by appending bytes and reinterpreting
         // pointer as L
@@ -127,8 +127,8 @@ template <class T> class RC6 : CipherInterface<T>
             key_copy.push_back(0);
 
         const size_t c = key_copy.size() / sizeof(T);
-        T *L = (T *)key_copy.data();
-        const size_t v = 3 * max((T)c, 2 * r + 4);
+        T* L = (T*) key_copy.data();
+        const size_t v = 3 * max((T) c, 2 * r + 4);
         T i = 0, j = 0;
 
         S[0] = P;

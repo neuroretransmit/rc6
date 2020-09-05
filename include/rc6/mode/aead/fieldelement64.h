@@ -19,17 +19,17 @@ class FieldElement64
   public:
     FieldElement64(u64 e0, u64 e1) : e0(e0), e1(e1) {}
 
-    FieldElement64(const vector<u8> &bytes) { from_bytes(bytes, 0); }
+    FieldElement64(const vector<u8>& bytes) { from_bytes(bytes, 0); }
 
-    FieldElement64(const vector<u8> &bytes, size_t offset) { from_bytes(bytes, offset); }
+    FieldElement64(const vector<u8>& bytes, size_t offset) { from_bytes(bytes, offset); }
 
-    FieldElement64(const string &hex)
+    FieldElement64(const string& hex)
     {
         vector<u8> bytes;
 
         for (size_t i = 0; i < hex.length(); i += 2) {
             string byte_str = hex.substr(i, 2);
-            u8 byte = (u8)strtol(byte_str.c_str(), NULL, 16);
+            u8 byte = (u8) strtol(byte_str.c_str(), NULL, 16);
             bytes.push_back(byte);
         }
 
@@ -42,22 +42,22 @@ class FieldElement64
         stringstream ss;
         ss << hex;
         for (size_t i = 0; i < bytes.size(); i++)
-            ss << setw(2) << setfill('0') << (u64)bytes[i];
+            ss << setw(2) << setfill('0') << (u64) bytes[i];
         return ss.str();
     }
 
     vector<u8> bytes()
     {
         vector<u8> result(16);
-        u64 *tmp = (u64 *)result.data();
+        u64* tmp = (u64*) result.data();
         tmp[0] = e0;
         tmp[1] = e1;
         return result;
     }
 
-    FieldElement64 operator+(const FieldElement64 &rhs) { return FieldElement64(e0 ^ rhs.e0, e1 ^ rhs.e1); }
+    FieldElement64 operator+(const FieldElement64& rhs) { return FieldElement64(e0 ^ rhs.e0, e1 ^ rhs.e1); }
 
-    FieldElement64 operator*(const FieldElement64 &rhs)
+    FieldElement64 operator*(const FieldElement64& rhs)
     {
         const u64 a0 = e0;
         const u64 a1 = e1;
@@ -122,16 +122,16 @@ class FieldElement64
 
     u64 mul_reverse_shift1(u64 a, u64 b) { return rev64(bmul64(a, b)) >> 1; }
 
-    void from_bytes(const vector<u8> &bytes, size_t offset)
+    void from_bytes(const vector<u8>& bytes, size_t offset)
     {
-        e0 = ((u64)bytes[offset + 7] << 56) | ((u64)bytes[offset + 6] & 0xff) << 48 |
-             ((u64)bytes[offset + 5] & 0xff) << 40 | ((u64)bytes[offset + 4] & 0xff) << 32 |
-             ((u64)bytes[offset + 3] & 0xff) << 24 | ((u64)bytes[offset + 2] & 0xff) << 16 |
-             ((u64)bytes[offset + 1] & 0xff) << 8 | ((u64)bytes[offset] & 0xff);
+        e0 = ((u64) bytes[offset + 7] << 56) | ((u64) bytes[offset + 6] & 0xff) << 48 |
+             ((u64) bytes[offset + 5] & 0xff) << 40 | ((u64) bytes[offset + 4] & 0xff) << 32 |
+             ((u64) bytes[offset + 3] & 0xff) << 24 | ((u64) bytes[offset + 2] & 0xff) << 16 |
+             ((u64) bytes[offset + 1] & 0xff) << 8 | ((u64) bytes[offset] & 0xff);
 
-        e1 = ((u64)bytes[offset + 15] << 56) | ((u64)bytes[offset + 14] & 0xff) << 48 |
-             ((u64)bytes[offset + 13] & 0xff) << 40 | ((u64)bytes[offset + 12] & 0xff) << 32 |
-             ((u64)bytes[offset + 11] & 0xff) << 24 | ((u64)bytes[offset + 10] & 0xff) << 16 |
-             ((u64)bytes[offset + 9] & 0xff) << 8 | ((u64)bytes[offset + 8] & 0xff);
+        e1 = ((u64) bytes[offset + 15] << 56) | ((u64) bytes[offset + 14] & 0xff) << 48 |
+             ((u64) bytes[offset + 13] & 0xff) << 40 | ((u64) bytes[offset + 12] & 0xff) << 32 |
+             ((u64) bytes[offset + 11] & 0xff) << 24 | ((u64) bytes[offset + 10] & 0xff) << 16 |
+             ((u64) bytes[offset + 9] & 0xff) << 8 | ((u64) bytes[offset + 8] & 0xff);
     }
 };

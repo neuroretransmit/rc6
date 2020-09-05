@@ -33,7 +33,7 @@ template <class T> class AEAD
      * Constructor for AEAD.
      * @param key_generating_key: key generating key to derive from
      */
-    AEAD(const vector<u8> &key_generating_key) : KEY_GENERATING_KEY(key_generating_key)
+    AEAD(const vector<u8>& key_generating_key) : KEY_GENERATING_KEY(key_generating_key)
     {
         if ((KEY_GENERATING_KEY.size() != (128 / 8) && KEY_GENERATING_KEY.size() != (256 / 8))) {
             cerr << "ERROR: Key generating key for AEAD must be 16 or 32 bytes. Got "
@@ -47,7 +47,7 @@ template <class T> class AEAD
      * @param plaintext: plaintext to encrypt
      * @param aad: additional authenticated data
      */
-    void seal(vector<u8> &plaintext, vector<u8> &aad)
+    void seal(vector<u8>& plaintext, vector<u8>& aad)
     {
         // Generate random nonce -- completely disallow misuse
         vector<u8> nonce(NONCE_BYTE_LEN);
@@ -64,7 +64,7 @@ template <class T> class AEAD
      * @param ciphertext: ciphertext to decrypt
      * @param aad: additional authenticated data
      */
-    void open(vector<u8> &ciphertext, vector<u8> &aad)
+    void open(vector<u8>& ciphertext, vector<u8>& aad)
     {
         size_t ciphertext_size = ciphertext.size();
 
@@ -89,7 +89,7 @@ template <class T> class AEAD
     const size_t NONCE_BYTE_LEN = 96 / 8;
     const size_t BLOCK_SIZE = sizeof(T) * 4;
     const size_t MAX_DATA_SIZE = pow(2, 36);
-    const vector<u8> &KEY_GENERATING_KEY;
+    const vector<u8>& KEY_GENERATING_KEY;
 
     /**
      * Calculate tag for authentication
@@ -99,11 +99,11 @@ template <class T> class AEAD
      * @param aad: authenticated additional data
      * @param nonce: nonce
      */
-    vector<u8> get_tag(const vector<u8> &message_encryption_key, const vector<u8> &message_authentication_key,
-                       const vector<u8> &plaintext, const vector<u8> &aad, const vector<u8> &nonce)
+    vector<u8> get_tag(const vector<u8>& message_encryption_key, const vector<u8>& message_authentication_key,
+                       const vector<u8>& plaintext, const vector<u8>& aad, const vector<u8>& nonce)
     {
         vector<u8> aad_plaintext_lengths(BLOCK_SIZE);
-        in_place_update(aad_plaintext_lengths, (u64)aad.size() * 8, 8);
+        in_place_update(aad_plaintext_lengths, (u64) aad.size() * 8, 8);
 
         // Digest
         Polyval<T> authenticator = Polyval<T>(message_authentication_key);
@@ -133,9 +133,9 @@ template <class T> class AEAD
      * @param key_ctr: key counter
      * @param nonce: nonce
      */
-    void encrypt_key_ctr_block(RC6<T> &rc6, vector<u8> &ctr_block, u32 key_ctr, const vector<u8> &nonce)
+    void encrypt_key_ctr_block(RC6<T>& rc6, vector<u8>& ctr_block, u32 key_ctr, const vector<u8>& nonce)
     {
-        u8 *byte_arr = (u8 *)&key_ctr;
+        u8* byte_arr = (u8*) &key_ctr;
 
         for (size_t i = 0; i < sizeof(T); i++)
             ctr_block.push_back(byte_arr[i]);
@@ -153,8 +153,8 @@ template <class T> class AEAD
      * authentication key
      * @param nonce: nonce
      */
-    void derive_keys(vector<u8> &message_authentication_key, vector<u8> &message_encryption_key,
-                     const vector<u8> &nonce)
+    void derive_keys(vector<u8>& message_authentication_key, vector<u8>& message_encryption_key,
+                     const vector<u8>& nonce)
     {
         RC6<T> rc6 = RC6<T>();
         u32 key_ctr;
@@ -190,7 +190,7 @@ template <class T> class AEAD
      * @param aad: additional authenticated data
      * @param nonce: user-provided nonce
      */
-    void seal(vector<u8> &plaintext, vector<u8> &aad, const vector<u8> &nonce)
+    void seal(vector<u8>& plaintext, vector<u8>& aad, const vector<u8>& nonce)
     {
         size_t nonce_size = nonce.size();
 
@@ -243,7 +243,7 @@ template <class T> class AEAD
      * @param aad: additional authenticated data
      * @param nonce: nonce
      */
-    void open(vector<u8> &ciphertext, vector<u8> &aad, const vector<u8> &nonce)
+    void open(vector<u8>& ciphertext, vector<u8>& aad, const vector<u8>& nonce)
     {
         // Extract tag/ciphertext
         vector<u8> tag(ciphertext.end() - BLOCK_SIZE, ciphertext.end());
@@ -289,22 +289,22 @@ template <class T> class AEAD
      * @param bytes: byte array to check
      * @param block_size: target block size
      */
-    bool needs_padding(const vector<u8> &bytes, size_t block_size)
+    bool needs_padding(const vector<u8>& bytes, size_t block_size)
     {
         return ((bytes.size() < block_size) && block_size - bytes.size()) || (bytes.size() % block_size);
     }
 
-    void in_place_update(vector<u8> &bytes, u32 n)
+    void in_place_update(vector<u8>& bytes, u32 n)
     {
-        bytes[0] = (u8)n;
+        bytes[0] = (u8) n;
         bytes[1] = (u8)(n >> 8);
         bytes[2] = (u8)(n >> 16);
         bytes[3] = (u8)(n >> 24);
     }
 
-    void in_place_update(vector<u8> &bytes, u64 n, u32 offset)
+    void in_place_update(vector<u8>& bytes, u64 n, u32 offset)
     {
-        bytes[offset] = (u8)n;
+        bytes[offset] = (u8) n;
         bytes[offset + 1] = (u8)(n >> 8);
         bytes[offset + 2] = (u8)(n >> 16);
         bytes[offset + 3] = (u8)(n >> 24);

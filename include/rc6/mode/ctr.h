@@ -19,7 +19,7 @@ template <class V> class CTR
      * @param cipher: cipher to use
      * @param block_size: block cipher size
      */
-    CTR(V &cipher, size_t block_size) : cipher(cipher), BLOCK_SIZE(block_size) {}
+    CTR(V& cipher, size_t block_size) : cipher(cipher), BLOCK_SIZE(block_size) {}
 
     /**
      * Crypt used for both encrypt and decrypt in counter mode
@@ -27,7 +27,7 @@ template <class V> class CTR
      * @param encryption_key: message encryption key
      * @param tag: calculated tag to use as counter
      */
-    void crypt(vector<u8> &input, const vector<u8> &encryption_key, const vector<u8> &tag)
+    void crypt(vector<u8>& input, const vector<u8>& encryption_key, const vector<u8>& tag)
     {
         vector<u8> counter = tag;
         counter[counter.size() - 1] |= 0x80;
@@ -47,6 +47,6 @@ template <class V> class CTR
     }
 
   private:
-    V &cipher;
+    V& cipher;
     size_t BLOCK_SIZE;
 };
