@@ -82,7 +82,7 @@ int main()
 
 ### Requirements
 
-* CMake >= 3.18
+* CMake >= 3.13
 * GTest
 * GMock
 
