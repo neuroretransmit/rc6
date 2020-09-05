@@ -1,0 +1,65 @@
+\hypertarget{binops_8h}{}\doxysection{/home/jonesy/git/rc6/include/rc6/binops.h File Reference}
+\label{binops_8h}\index{/home/jonesy/git/rc6/include/rc6/binops.h@{/home/jonesy/git/rc6/include/rc6/binops.h}}
+{\ttfamily \#include $<$climits$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\T \mbox{\hyperlink{binops_8h_af5aea3b2857e5648cbc66b960862993a}{rol}} (T word, int shift)
+\item 
+{\footnotesize template$<$class T $>$ }\\T \mbox{\hyperlink{binops_8h_ae125a4487df7033773045d8ee965188e}{ror}} (T word, int shift)
+\item 
+bool \mbox{\hyperlink{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}{is\+\_\+big\+\_\+endian}} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{binops_8h_abfe27713d539cebe09eb37bd83754da3}{swap\+\_\+endian}} (T u)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}\label{binops_8h_aed5f3e73e01248d8a2d6792a69081f9e}} 
+\index{binops.h@{binops.h}!is\_big\_endian@{is\_big\_endian}}
+\index{is\_big\_endian@{is\_big\_endian}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{is\_big\_endian()}{is\_big\_endian()}}
+{\footnotesize\ttfamily bool is\+\_\+big\+\_\+endian (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Check if architecture is big or little endian \mbox{\Hypertarget{binops_8h_af5aea3b2857e5648cbc66b960862993a}\label{binops_8h_af5aea3b2857e5648cbc66b960862993a}} 
+\index{binops.h@{binops.h}!rol@{rol}}
+\index{rol@{rol}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{rol()}{rol()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T rol (\begin{DoxyParamCaption}\item[{T}]{word,  }\item[{int}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotate a N-\/bit value left 
+\begin{DoxyParams}{Parameters}
+{\em word} & value to rotate \\
+\hline
+{\em shift} & bits to roll \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{binops_8h_ae125a4487df7033773045d8ee965188e}\label{binops_8h_ae125a4487df7033773045d8ee965188e}} 
+\index{binops.h@{binops.h}!ror@{ror}}
+\index{ror@{ror}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{ror()}{ror()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T ror (\begin{DoxyParamCaption}\item[{T}]{word,  }\item[{int}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Rotate a N-\/bit value right 
+\begin{DoxyParams}{Parameters}
+{\em word} & value to rotate \\
+\hline
+{\em shift} & bits to roll \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{binops_8h_abfe27713d539cebe09eb37bd83754da3}\label{binops_8h_abfe27713d539cebe09eb37bd83754da3}} 
+\index{binops.h@{binops.h}!swap\_endian@{swap\_endian}}
+\index{swap\_endian@{swap\_endian}!binops.h@{binops.h}}
+\doxysubsubsection{\texorpdfstring{swap\_endian()}{swap\_endian()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T swap\+\_\+endian (\begin{DoxyParamCaption}\item[{T}]{u }\end{DoxyParamCaption})}
+
+Reverse endianness of a type 
+\begin{DoxyParams}{Parameters}
+{\em u} & value to flip endianness of \\
+\hline
+\end{DoxyParams}
