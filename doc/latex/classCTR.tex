@@ -1,0 +1,65 @@
+\hypertarget{classCTR}{}\doxysection{C\+TR$<$ V $>$ Class Template Reference}
+\label{classCTR}\index{CTR$<$ V $>$@{CTR$<$ V $>$}}
+
+
+\mbox{\hyperlink{classCTR}{C\+TR}} mode of operation.  
+
+
+
+
+{\ttfamily \#include $<$ctr.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCTR_a78319ee7a16706fe8966e409f9a38a59}{C\+TR}} (V \&cipher, size\+\_\+t block\+\_\+size)
+\item 
+void \mbox{\hyperlink{classCTR_a9bb9083901a2e173592db1acab3104eb}{crypt}} (vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&input, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&encryption\+\_\+key, const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&tag)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class V$>$\newline
+class C\+T\+R$<$ V $>$}
+
+\mbox{\hyperlink{classCTR}{C\+TR}} mode of operation. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCTR_a78319ee7a16706fe8966e409f9a38a59}\label{classCTR_a78319ee7a16706fe8966e409f9a38a59}} 
+\index{CTR$<$ V $>$@{CTR$<$ V $>$}!CTR@{CTR}}
+\index{CTR@{CTR}!CTR$<$ V $>$@{CTR$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{CTR()}{CTR()}}
+{\footnotesize\ttfamily template$<$class V $>$ \\
+\mbox{\hyperlink{classCTR}{C\+TR}}$<$ V $>$\+::\mbox{\hyperlink{classCTR}{C\+TR}} (\begin{DoxyParamCaption}\item[{V \&}]{cipher,  }\item[{size\+\_\+t}]{block\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructor for \mbox{\hyperlink{classCTR}{C\+TR}} 
+\begin{DoxyParams}{Parameters}
+{\em cipher} & cipher to use \\
+\hline
+{\em block\+\_\+size} & block cipher size \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCTR_a9bb9083901a2e173592db1acab3104eb}\label{classCTR_a9bb9083901a2e173592db1acab3104eb}} 
+\index{CTR$<$ V $>$@{CTR$<$ V $>$}!crypt@{crypt}}
+\index{crypt@{crypt}!CTR$<$ V $>$@{CTR$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{crypt()}{crypt()}}
+{\footnotesize\ttfamily template$<$class V $>$ \\
+void \mbox{\hyperlink{classCTR}{C\+TR}}$<$ V $>$\+::crypt (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{input,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{encryption\+\_\+key,  }\item[{const vector$<$ \mbox{\hyperlink{types_8h_a92c50087ca0e64fa93fc59402c55f8ca}{u8}} $>$ \&}]{tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Crypt used for both encrypt and decrypt in counter mode 
+\begin{DoxyParams}{Parameters}
+{\em input} & message to encrypt \\
+\hline
+{\em encryption\+\_\+key} & message encryption key \\
+\hline
+{\em tag} & calculated tag to use as counter \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/jonesy/git/rc6/include/rc6/mode/\mbox{\hyperlink{ctr_8h}{ctr.\+h}}\end{DoxyCompactItemize}

@@ -1,16 +1,11 @@
 #include <gtest/gtest.h>
 
-#include "rc6/mode/polyval.h"
+#include "rc6/mode/aead/polyval.h"
 
 static Polyval POLYVAL_0 = Polyval<u32>(0L, 0L, 0L, 0L);
 static Polyval POLYVAL_A = Polyval<u32>(1L, 1L, 1L, 1L);
 
-static const vector<u8> BYTES_A = {
-    1, 0, 0 ,0,
-    0, 0, 0, 0,
-    1, 0, 0, 0,
-    0, 0, 0, 0
-};
+static const vector<u8> BYTES_A = {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0};
 
 TEST(Polyval, ConstructorFromHLongs)
 {
@@ -73,7 +68,8 @@ TEST(Polyval, UpdateBlock)
 TEST(Polyval, UpdateNotDependingOnZeroBlock)
 {
     Polyval ACTUAL = Polyval<u32>("25629347589242761d31f826ba4b757b");
-    ACTUAL.update("000000000000000000000000000000004f4f95668c83dfb6401762bb2d01a262d1a24ddd2721d006bbe45f20d3c9f362");
+    ACTUAL.update(
+        "000000000000000000000000000000004f4f95668c83dfb6401762bb2d01a262d1a24ddd2721d006bbe45f20d3c9f362");
     EXPECT_EQ("f7a3b47b846119fae5b7866cf5e5b77e", ACTUAL.str());
 }
 
@@ -98,5 +94,4 @@ TEST(Polyval, ResetSToZero)
     Polyval ACTUAL = Polyval<u32>(1L, 1L);
     ACTUAL.reset();
     EXPECT_EQ("00000000000000000000000000000000", ACTUAL.str());
-    
 }

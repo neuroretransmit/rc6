@@ -1,28 +1,17 @@
-#include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 #include <iostream>
 
-#include "rc6/mode/polyval.h"
+#include "rc6/mode/aead/polyval.h"
 
 using namespace ::testing;
 using std::cout;
 
 static FieldElement64 ELEMENT_A = FieldElement64(1L, 1L);
 static const FieldElement64 ELEMENT_B = FieldElement64(2L, 2L);
-static const vector<u8> BYTES_A = {
-    1, 0, 0, 0,
-    0, 0, 0, 0,
-    1, 0, 0, 0,
-    0, 0, 0, 0
-};
-static const vector<u8> BYTES = {
-    0, 0, 0, 0,
-    1, 0, 0, 0,
-    0, 0, 0, 0,
-    1, 0, 0, 0,
-    0, 0, 0, 0
-};
+static const vector<u8> BYTES_A = {1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0};
+static const vector<u8> BYTES = {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0};
 
 TEST(FieldElement64, ConstructorFromString)
 {
@@ -51,15 +40,9 @@ TEST(FieldElement64, ConstructorFromLongs)
     EXPECT_EQ(ELEMENT_A.str(), ACTUAL.str());
 }
 
-TEST(FieldElement64, str)
-{
-    EXPECT_EQ("01000000000000000100000000000000", ELEMENT_A.str());
-}
+TEST(FieldElement64, str) { EXPECT_EQ("01000000000000000100000000000000", ELEMENT_A.str()); }
 
-TEST(FieldElement64, bytes)
-{
-    EXPECT_EQ(BYTES_A, ELEMENT_A.bytes());
-}
+TEST(FieldElement64, bytes) { EXPECT_EQ(BYTES_A, ELEMENT_A.bytes()); }
 
 TEST(FieldElement64, OperatorAdd)
 {

@@ -40,7 +40,7 @@ int main()
     vector<u8> ciphertext = plaintext;
     
     // Encrypt
-    aead.seal(plaintext, aad);
+    aead.seal(ciphertext, aad);
     // Decrypt and authenticate
     aead.open(ciphertext, aad);
 }

@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 
-#include "rc6/types.h"
+#include "../../types.h"
 
 using std::hex;
 using std::setfill;
