@@ -1,17 +1,28 @@
-# rc6
+# rc6-gcm-siv
 
-RC6 block cipher implementation from the [paper](doc/586cc5d356330aef8a868aaa6c9bee493796.pdf) in C++ fully templated to accomodate different word sizes. RC6 was an AES candidate finalist that was [found being used in NSA implants](https://en.wikipedia.org/wiki/RC6#Possible_use_in_NSA_%22implants%22). The algorithm was an [RSA patent](https://patents.google.com/patent/US5835600A/en) but the patent expired between 2015 and 2017.
+Header only C++ implementation of the [RC6 block cipher](doc/papers/RC6_Block_Cipher_586cc5d356330aef8a868aaa6c9bee493796.pdf) implementation in [GCM-SIV operating mode](doc/papers/rfc8452.pdf)). Fully templated to accomodate different word sizes. 
+
+## Background
+
+RC6 was an AES candidate finalist that was [found being used in NSA implants](https://en.wikipedia.org/wiki/RC6#Possible_use_in_NSA_%22implants%22). The algorithm was an [RSA patent](https://patents.google.com/patent/US5835600A/en) but the patent expired between 2015 and 2017.
+
+GCM-SIV was picked as a mode of operation for the following reasons.
+
+1. Nonce misuse resistant mode, the same nonce will not produce the same message - the only information leaked is whether the two messages were equal or not.
+2. Encrypted data is authenticated using additional data.
+3. Parallelizable.
+4. Can be implemented using AES instructions (according to paper).
 
 ## Features
 
-* GCM-SIV ([RFC here](doc/rfc8452.pdf)) mode of operation
+* GCM-SIV mode of operation
     - Authenticated Encryption with Additional Data
-* Key size up to 2048 bits
+    - Nonce misuse resistant
+* Key size up to 2040 bits
 * Fully parameterized to support a variety of word lengths, key sizes and number of rounds.
 
 ### Planned Features
 
-* Flag to use [metamorphic engine from Stone Cipher-192](doc/091101.pdf)
 * Parallelize
 
 ## Usage

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['rc6_29',['rc6',['../md__home_jonesy_git_rc6_README.html',1,'']]],
+  ['rc6_2dgcm_2dsiv_29',['rc6-gcm-siv',['../md__home_jonesy_git_rc6_README.html',1,'']]],
   ['random_5fbytes_5fengine_30',['random_bytes_engine',['../aead_8h.html#aeec28ed2c996afddd490ab7e523e7cf6',1,'aead.h']]],
   ['rc6_31',['RC6',['../classRC6.html',1,'RC6&lt; T &gt;'],['../classRC6.html#a051c67b814b66b48ff91c36e21b47e54',1,'RC6::RC6()']]],
   ['rc6_2eh_32',['rc6.h',['../rc6_8h.html',1,'']]],

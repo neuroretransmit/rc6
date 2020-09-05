@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>rc6: rc6</title>
+<title>rc6: rc6-gcm-siv</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,32 +63,42 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">rc6 </div>  </div>
+<div class="title">rc6-gcm-siv </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="el" href="classRC6.html" title="Rivest cipher 6 implementation.">RC6</a> block cipher implementation from the <a href="doc/586cc5d356330aef8a868aaa6c9bee493796.pdf">paper</a> in C++ fully templated to accomodate different word sizes. <a class="el" href="classRC6.html" title="Rivest cipher 6 implementation.">RC6</a> was an AES candidate finalist that was <a href="https://en.wikipedia.org/wiki/RC6#Possible_use_in_NSA_%22implants%22">found being used in NSA implants</a>. The algorithm was an <a href="https://patents.google.com/patent/US5835600A/en">RSA patent</a> but the patent expired between 2015 and 2017.</p>
+<div class="textblock"><p>Header only C++ implementation of the <a href="doc/papers/RC6_Block_Cipher_586cc5d356330aef8a868aaa6c9bee493796.pdf">RC6 block cipher</a> implementation in <a href="doc/papers/rfc8452.pdf">GCM-SIV operating mode</a>). Fully templated to accomodate different word sizes.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
+Background</h1>
+<p><a class="el" href="classRC6.html" title="Rivest cipher 6 implementation.">RC6</a> was an AES candidate finalist that was <a href="https://en.wikipedia.org/wiki/RC6#Possible_use_in_NSA_%22implants%22">found being used in NSA implants</a>. The algorithm was an <a href="https://patents.google.com/patent/US5835600A/en">RSA patent</a> but the patent expired between 2015 and 2017.</p>
+<p>GCM-SIV was picked as a mode of operation for the following reasons.</p>
+<ol type="1">
+<li>Nonce misuse resistant mode, the same nonce will not produce the same message - the only information leaked is whether the two messages were equal or not.</li>
+<li>Encrypted data is authenticated using additional data.</li>
+<li>Parallelizable.</li>
+<li>Can be implemented using AES instructions (according to paper).</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Features</h1>
 <ul>
-<li>GCM-SIV (<a href="doc/rfc8452.pdf">RFC here</a>) mode of operation<ul>
+<li>GCM-SIV mode of operation<ul>
 <li>Authenticated Encryption with Additional Data</li>
+<li>Nonce misuse resistant</li>
 </ul>
 </li>
-<li>Key size up to 2048 bits</li>
+<li>Key size up to 2040 bits</li>
 <li>Fully parameterized to support a variety of word lengths, key sizes and number of rounds.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Planned Features</h2>
 <ul>
-<li>Flag to use <a href="doc/091101.pdf">metamorphic engine from Stone Cipher-192</a></li>
 <li>Parallelize</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Usage</h1>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Documentation</h2>
 <p>Doxygen generated files are in <a href="doc/latex"><code>doc/latex</code></a> and <a href="doc/html"><code>doc/html</code></a>.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 In GCM-SIV mode</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="aead_8h.html">rc6/mode/aead.h</a>&gt;</span></div>
 <div class="line"> </div>
@@ -111,7 +121,7 @@ In GCM-SIV mode</h2>
 <div class="line">    <span class="comment">// Decrypt and authenticate</span></div>
 <div class="line">    aead.<a class="code" href="classAEAD.html#a86a17c5f1fd39ddf99d7d3c0a540cf1b">open</a>(ciphertext, aad);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
 As a lone block cipher</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="rc6_8h.html">rc6/cipher/rc6.h</a>&gt;</span></div>
 <div class="line"> </div>
@@ -129,28 +139,28 @@ As a lone block cipher</h2>
 <div class="line">    <span class="comment">// Decrypt</span></div>
 <div class="line">    rc6.<a class="code" href="classRC6.html#a67c810c95f5916b8e9640ff74f7aa761">decrypt</a>(block, key);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 Building/Installation</h1>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Requirements</h2>
 <ul>
 <li>CMake &gt;= 3.18</li>
 <li>GTest</li>
 <li>GMock</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 The Build</h2>
 <div class="fragment"><div class="line">$ mkdir build &amp;&amp; cd build # Create and move into build directory</div>
 <div class="line">$ cmake ..                # Configure</div>
 <div class="line">$ make                    # Build</div>
 <div class="line">$ sudo make install       # Install headers</div>
 </div><!-- fragment --><p>The headers are now in <code>/usr/local/include/rc6</code>.</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Uninstall</h2>
 <div class="fragment"><div class="line">$ sudo rm -rf /usr/local/include/rc6</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md12"></a>
 Running (from &lt;tt&gt;build/&lt;/tt&gt; folder)</h1>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Tests</h2>
 <p>Tests run a Google Test suite that test constraints of the paper as well as the test vectors.</p>
 <div class="fragment"><div class="line">$ ./tests/tests</div>
@@ -168,7 +178,7 @@ Tests</h2>
 <div class="line"> </div>
 <div class="line">...</div>
 <div class="line">[  PASSED  ] X tests.</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md14"></a>
 License</h1>
 <p>None, everyone deserves strong encryption. </p>
 </div></div><!-- contents -->
