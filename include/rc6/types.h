@@ -16,11 +16,11 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 
 /// Block size constant container
-namespace BlockType
+namespace BlockWordSize
 {
     typedef u32 BLOCK_128;
     typedef u64 BLOCK_256;
-}; // namespace BlockType
+}; // namespace BlockWordSize
 
 /// Abstract block cipher interface
 template<class T> class CipherInterface
@@ -31,3 +31,5 @@ template<class T> class CipherInterface
 
     virtual size_t block_size() { return sizeof(T); }
 };
+
+template<class T> static inline size_t block_byte_size() { return sizeof(T) * 4; }

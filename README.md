@@ -15,15 +15,14 @@ GCM-SIV was picked as a mode of operation for the following reasons.
 
 ## Features
 
+* RC6
+    - Key size up to 2040 bits
+    - Fully parameterized to support a variety of word lengths, key sizes, and number of rounds
+
 * GCM-SIV mode of operation
     - Authenticated Encryption with Additional Data
     - Nonce misuse resistant
-* Key size up to 2040 bits
-* Fully parameterized to support a variety of word lengths, key sizes and number of rounds.
-
-### Planned Features
-
-* Parallelize
+    - Parallelized
 
 ## Usage
 
@@ -45,15 +44,17 @@ int main()
     // Master key to be used for derivation
     vector<u8> key_generating_key(32);
     // Initialize aead for 128-bit blocks
-    AEAD<BlockType::BLOCK_128> aead = AEAD<BlockType::BLOCK_128>(key_generating_key);
+    AEAD<BlockWordSize::BLOCK_128> aead(key_generating_key);
     
     // In place encryption, save plaintext if needed otherwise it will be modified.
     vector<u8> ciphertext = plaintext;
     
     // Encrypt
     aead.seal(ciphertext, aad);
+    // aead.seal(ciphertext, aad, false); // <--- synchronous
     // Decrypt and authenticate
     aead.open(ciphertext, aad);
+    // aead.open(ciphertext, aad, false); // <--- synchronous
 }
 ```
 
@@ -65,11 +66,11 @@ int main()
 int main()
 {
     // Initialize RC6 block cipher to use 128-bit blocks
-    RC6<BlockType::BLOCK_128> rc6 = RC6<BlockType::BLOCK_128>();
+    RC6<BlockWordSize::BLOCK_128> rc6{};
     
-    vector<u8> block(16);
-    // Create a random key, although RC5/RC6 has failed to reveal weakness in key-setup
-    vector<u8> key(32);
+    vector<u8> block(block_byte_size<BlockWordSize::BLOCK_128>());
+    // Create a random key
+    vector<u8> key(block_byte_size<BlockWordSize::BLOCK_128>());
     
     // Encrypt
     rc6.encrypt(block, key);
