@@ -24,6 +24,11 @@ GCM-SIV was picked as a mode of operation for the following reasons.
     - Nonce misuse resistant
     - Parallelized
 
+## Known Issues
+
+* `armv71` fails on 64-bit block sizes (Another little endian architecture, not sure what the deal is yet)
+* Little endian untested, but the code should theoretically be in place
+
 ## Usage
 
 ### Documentation
