@@ -4,6 +4,7 @@
 #include <climits>
 #include <cstdlib>
 #include <cstring>
+#include <exception>
 #include <functional>
 #include <iostream>
 #include <random>
@@ -47,14 +48,14 @@ template<class T> class AEAD
      * @param plaintext: plaintext to encrypt
      * @param aad: additional authenticated data
      */
-    void seal(vector<u8>& plaintext, vector<u8>& aad)
+    void seal(vector<u8>& plaintext, vector<u8>& aad, bool parallel = true)
     {
         // Generate random nonce -- completely disallow misuse
         vector<u8> nonce(NONCE_BYTE_LEN);
         random_bytes_engine rbe;
         generate(begin(nonce), end(nonce), ref(rbe));
         // Encrypt
-        seal(plaintext, aad, nonce);
+        seal(plaintext, aad, nonce, parallel);
         // Insert nonce into beginning of  plaintext
         plaintext.insert(plaintext.begin(), nonce.begin(), nonce.end());
     }
@@ -64,7 +65,7 @@ template<class T> class AEAD
      * @param ciphertext: ciphertext to decrypt
      * @param aad: additional authenticated data
      */
-    void open(vector<u8>& ciphertext, vector<u8>& aad)
+    void open(vector<u8>& ciphertext, vector<u8>& aad, bool parallel = true)
     {
         size_t ciphertext_size = ciphertext.size();
 
@@ -79,7 +80,7 @@ template<class T> class AEAD
         const vector<u8> nonce(ciphertext.begin(), ciphertext.begin() + NONCE_BYTE_LEN);
         // Remove nonce from ciphertext
         ciphertext = vector<u8>(ciphertext.begin() + NONCE_BYTE_LEN, ciphertext.end());
-        open(ciphertext, aad, nonce);
+        open(ciphertext, aad, nonce, parallel);
     }
 
 #ifndef DEBUG
@@ -87,7 +88,8 @@ template<class T> class AEAD
 #endif
 
     const size_t NONCE_BYTE_LEN = 96 / 8;
-    const size_t BLOCK_SIZE = sizeof(T) * 4;
+    const size_t BLOCK_BYTE_LEN = block_byte_size<T>();
+    /// 64GB data limit for GCM-SIV
     const size_t MAX_DATA_SIZE = pow(2, 36);
     const vector<u8>& KEY_GENERATING_KEY;
 
@@ -102,8 +104,9 @@ template<class T> class AEAD
     vector<u8> get_tag(const vector<u8>& message_encryption_key, const vector<u8>& message_authentication_key,
                        const vector<u8>& plaintext, const vector<u8>& aad, const vector<u8>& nonce)
     {
-        vector<u8> aad_plaintext_lengths(BLOCK_SIZE);
-        in_place_update(aad_plaintext_lengths, (u64) aad.size() * 8, 8);
+        vector<u8> aad_plaintext_lengths(BLOCK_BYTE_LEN);
+        in_place_update(aad_plaintext_lengths, aad.size() * 8, 0);
+        in_place_update(aad_plaintext_lengths, plaintext.size() * 8, 8);
 
         // Digest
         Polyval<T> authenticator = Polyval<T>(message_authentication_key);
@@ -119,8 +122,10 @@ template<class T> class AEAD
         digest[digest.size() - 1] &= ~0x80;
 
         // Encrypt digest
-        RC6<T> cipher = RC6<T>();
-        ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
+        RC6<T> cipher{};
+        // TODO: I remember a fancy way to instanciate a template parameter in the
+        //       inheriting class
+        ECB<RC6<T>> ecb(cipher);
         ecb.encrypt(digest, message_encryption_key);
 
         return digest;
@@ -185,24 +190,19 @@ template<class T> class AEAD
     }
 
     /**
-     * Encrypt message and append tag
-     * @param plaintext: plaintext to encrypt
+     * Validate nonce, plaintext and additional authenticated data
+     * @param nonce
+     * @param plaintext
      * @param aad: additional authenticated data
-     * @param nonce: user-provided nonce
      */
-    void seal(vector<u8>& plaintext, vector<u8>& aad, const vector<u8>& nonce)
+    void validate(const vector<u8>& nonce, const vector<u8>& plaintext, const vector<u8>& aad)
     {
+        // Validate nonce size
         size_t nonce_size = nonce.size();
-
         if (nonce_size != NONCE_BYTE_LEN) {
             cerr << "ERROR: Nonce must be 96-bits, got " << nonce_size << ".\n";
             exit(1);
         }
-
-        // Derive keys
-        vector<u8> authentication_key;
-        vector<u8> encryption_key;
-        derive_keys(authentication_key, encryption_key, nonce);
 
         // Validate data is < 64GB for plaintext and AAD
         u64 plaintext_size = plaintext.size();
@@ -214,27 +214,96 @@ template<class T> class AEAD
             cerr << "ERROR: Authenticated data must be < 64GB, got " << aad_size << ".\n";
             exit(1);
         }
+    }
+
+    /**
+     * Pad plaintext and additional authenticated data to block size
+     * @param plaintext
+     * @param aad: additional authenticated data
+     * @return plaintext padding length
+     */
+    size_t pad_to_block_size(vector<u8>& plaintext, vector<u8>& aad)
+    {
+        size_t plaintext_pad_len;
+        for (plaintext_pad_len = 0; needs_padding(plaintext, BLOCK_BYTE_LEN); plaintext_pad_len++)
+            plaintext.push_back(0);
+        while (needs_padding(aad, BLOCK_BYTE_LEN))
+            aad.push_back(0);
+        return plaintext_pad_len;
+    }
+
+    /**
+     * Remove padding and append tag
+     * @param ciphertext
+     * @param pad_len: number of padded bytes
+     * @param tag
+     */
+    void trim_padding_append_tag(vector<u8>& ciphertext, size_t pad_len, const vector<u8>& tag)
+    {
+        // Snip padding length
+        ciphertext.erase(ciphertext.end() - pad_len, ciphertext.end());
+        // Append tag
+        ciphertext.insert(ciphertext.end(), tag.begin(), tag.end());
+    }
+
+    /**
+     * Encrypt message and append tag
+     * @param plaintext: plaintext to encrypt
+     * @param aad: additional authenticated data
+     * @param nonce: user-provided nonce
+     */
+    void seal(vector<u8>& plaintext, vector<u8>& aad, const vector<u8>& nonce, bool parallel = true)
+    {
+        validate(nonce, plaintext, aad);
+
+        // Derive keys
+        vector<u8> authentication_key;
+        vector<u8> encryption_key;
+        derive_keys(authentication_key, encryption_key, nonce);
 
         // Pad plaintext/AAD
-        size_t plaintext_pad_len;
-        for (plaintext_pad_len = 0; needs_padding(plaintext, BLOCK_SIZE); plaintext_pad_len++)
-            plaintext.push_back(0);
-        while (needs_padding(aad, BLOCK_SIZE))
-            aad.push_back(0);
+        size_t pad_len = pad_to_block_size(plaintext, aad);
 
         // Calculate tag
         vector<u8> tag = get_tag(encryption_key, authentication_key, plaintext, aad, nonce);
 
         // Encrypt
-        RC6<T> cipher = RC6<T>();
-        ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
-        CTR<ECB<RC6<T>>> ctr = CTR<ECB<RC6<T>>>(ecb, BLOCK_SIZE);
-        ctr.crypt(plaintext, encryption_key, tag);
+        RC6<T> cipher{};
+        ECB<RC6<T>> ecb(cipher);
+        CTR<ECB<RC6<T>>> ctr(ecb, BLOCK_BYTE_LEN);
+        parallel ? ctr.crypt_parallel(plaintext, encryption_key, tag)
+                 : ctr.crypt(plaintext, encryption_key, tag);
 
-        // Snip padding length
-        plaintext.erase(plaintext.end() - plaintext_pad_len, plaintext.end());
-        // Append tag
-        plaintext.insert(plaintext.end(), tag.begin(), tag.end());
+        trim_padding_append_tag(plaintext, pad_len, tag);
+    }
+
+    /**
+     * Authenticate decrypted ciphertext
+     * @param ciphertext
+     * @param encryption_key
+     * @param authentication_key
+     * @param aad: additional authenticated data
+     * @param nonce
+     * @param tag
+     * @param pad_len: number of bytes padded to blocksize
+     */
+    void authenticate(vector<u8>& ciphertext, const vector<u8>& encryption_key,
+                      const vector<u8>& authentication_key, const vector<u8>& aad, const vector<u8>& nonce,
+                      const vector<u8>& tag, size_t pad_len)
+    {
+        // Replace padded portion of decrypted text with zeroes for tag calculation
+        for (size_t i = ciphertext.size() - pad_len; i < ciphertext.size(); i++)
+            ciphertext[i] = 0;
+
+        // Calculate tag
+        vector<u8> actual = get_tag(encryption_key, authentication_key, ciphertext, aad, nonce);
+
+        // Snip padding to original data size
+        ciphertext = vector<u8>(ciphertext.begin(), ciphertext.end() - pad_len);
+
+        // Authenticate TODO: Create custom authentication exception
+        if (!equal(actual.begin(), actual.end(), tag.begin()))
+            throw runtime_error("AEAD authentication failed");
     }
 
     /**
@@ -243,19 +312,14 @@ template<class T> class AEAD
      * @param aad: additional authenticated data
      * @param nonce: nonce
      */
-    void open(vector<u8>& ciphertext, vector<u8>& aad, const vector<u8>& nonce)
+    void open(vector<u8>& ciphertext, vector<u8>& aad, const vector<u8>& nonce, bool parallel)
     {
         // Extract tag/ciphertext
-        vector<u8> tag(ciphertext.end() - BLOCK_SIZE, ciphertext.end());
-        ciphertext = vector<u8>(ciphertext.begin(), ciphertext.end() - BLOCK_SIZE);
+        vector<u8> tag(ciphertext.end() - BLOCK_BYTE_LEN, ciphertext.end());
+        ciphertext = vector<u8>(ciphertext.begin(), ciphertext.end() - BLOCK_BYTE_LEN);
 
-        // Pad ciphertext
-        size_t ciphertext_pad_len = 0;
-        for (ciphertext_pad_len = 0; needs_padding(ciphertext, BLOCK_SIZE); ciphertext_pad_len++)
-            ciphertext.push_back(0);
-
-        while (needs_padding(aad, BLOCK_SIZE))
-            aad.push_back(0);
+        // Pad plaintext/AAD
+        size_t pad_len = pad_to_block_size(ciphertext, aad);
 
         // Derive keys
         vector<u8> authentication_key;
@@ -263,25 +327,14 @@ template<class T> class AEAD
         derive_keys(authentication_key, encryption_key, nonce);
 
         // Decrypt
-        RC6<T> cipher = RC6<T>();
-        ECB<RC6<T>> ecb = ECB<RC6<T>>(cipher);
-        CTR<ECB<RC6<T>>> ctr = CTR<ECB<RC6<T>>>(ecb, BLOCK_SIZE);
-        ctr.crypt(ciphertext, encryption_key, tag);
+        RC6<T> cipher{};
+        ECB<RC6<T>> ecb(cipher);
+        CTR<ECB<RC6<T>>> ctr(ecb, BLOCK_BYTE_LEN);
+        parallel ? ctr.crypt_parallel(ciphertext, encryption_key, tag)
+                 : ctr.crypt(ciphertext, encryption_key, tag);
 
-        // Replace padded portion of decrypted text with zeroes for tag calculation
-        for (size_t i = ciphertext.size() - ciphertext_pad_len; i < ciphertext.size(); i++)
-            ciphertext[i] = 0;
-
-        vector<u8> actual = get_tag(encryption_key, authentication_key, ciphertext, aad, nonce);
-
-        // Snip padding to retrieve encrypted data without modification
-        ciphertext = vector<u8>(ciphertext.begin(), ciphertext.end() - ciphertext_pad_len);
-
-        // Authenticate data
-        if (!equal(actual.begin(), actual.end(), tag.begin())) {
-            cerr << "ERROR: Authentication failed.\n";
-            exit(1);
-        }
+        // Authenticate
+        authenticate(ciphertext, encryption_key, authentication_key, aad, nonce, tag, pad_len);
     }
 
     /**
@@ -294,23 +347,15 @@ template<class T> class AEAD
         return ((bytes.size() < block_size) && block_size - bytes.size()) || (bytes.size() % block_size);
     }
 
-    void in_place_update(vector<u8>& bytes, u32 n)
+    /**
+     * Load N-bit value (n) into output vector for plaintext/aad sizes
+     * @param bytes: buffer to store representation of n
+     * @param n: N-bit value to load into bytes
+     * @param offset: offset in bytes vector to insert at
+     */
+    template<class U> void in_place_update(vector<u8>& bytes, U n, u32 offset = 0)
     {
-        bytes[0] = (u8) n;
-        bytes[1] = (u8)(n >> 8);
-        bytes[2] = (u8)(n >> 16);
-        bytes[3] = (u8)(n >> 24);
-    }
-
-    void in_place_update(vector<u8>& bytes, u64 n, u32 offset)
-    {
-        bytes[offset] = (u8) n;
-        bytes[offset + 1] = (u8)(n >> 8);
-        bytes[offset + 2] = (u8)(n >> 16);
-        bytes[offset + 3] = (u8)(n >> 24);
-        bytes[offset + 4] = (u8)(n >> 32);
-        bytes[offset + 5] = (u8)(n >> 40);
-        bytes[offset + 6] = (u8)(n >> 48);
-        bytes[offset + 7] = (u8)(n >> 56);
+        for (size_t i = 0, shift = 0; i < sizeof(U); i++, shift += 8)
+            bytes[offset + i] = (u8)(n >> shift);
     }
 };
