@@ -5,6 +5,24 @@
 
 using namespace ::testing;
 
+// Check windows
+#if _WIN32 || _WIN64
+#if _WIN64
+#define ENVIRONMENT64
+#else
+#define ENVIRONMENT32
+#endif
+#endif
+
+// Check GCC
+#if __GNUC__
+#if __x86_64__ || __ppc64__
+#define ENVIRONMENT64
+#else
+#define ENVIRONMENT32
+#endif
+#endif
+
 TEST(RC6, MagicConstantP32)
 {
     RC6<BlockWordSize::BLOCK_128> rc6 = RC6<BlockWordSize::BLOCK_128>();
@@ -38,6 +56,7 @@ TEST(RC6, WordSize32Bit)
     ASSERT_EQ(plain, decrypted);
 }
 
+#ifdef ENVIRONMENT64
 TEST(RC6, WordSize64Bit)
 {
     RC6<BlockWordSize::BLOCK_256> rc6 = RC6<BlockWordSize::BLOCK_256>();
@@ -50,6 +69,7 @@ TEST(RC6, WordSize64Bit)
     rc6.decrypt(decrypted, key);
     ASSERT_EQ(plain, decrypted);
 }
+#endif
 
 TEST(RC6, PaperTestVector1)
 {

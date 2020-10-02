@@ -30,6 +30,29 @@ template<class T> class RC6 : CipherInterface<T>
         : HALF_ROUNDS(half_rounds), WORD_BIT_LEN(numeric_limits<T>::digits),
           DEFAULT_ITERATION_LIMIT(2 * HALF_ROUNDS + 4)
     {
+// Check windows
+#if _WIN32 || _WIN64
+#if _WIN64
+#define ENV64BIT
+#else
+        if (WORD_BIT_LEN > 32) {
+            cerr << "ERROR: Trying to run 256-bit blocksize on a 32-bit CPU.\n";
+            exit(-1);
+        }
+#endif
+#endif
+
+// Check GCC
+#if __GNUC__
+#if __x86_64__ || __ppc64__
+#define ENV64BIT
+#else
+        if (WORD_BIT_LEN > 32) {
+            cerr << "ERROR: Trying to run 256-bit blocksize on a 32-bit CPU.\n";
+            exit(-1);
+        }
+#endif
+#endif
     }
 
     /**
