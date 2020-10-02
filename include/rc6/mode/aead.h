@@ -90,7 +90,7 @@ template<class T> class AEAD
     const size_t NONCE_BYTE_LEN = 96 / 8;
     const size_t BLOCK_BYTE_LEN = block_byte_size<T>();
     /// 64GB data limit for GCM-SIV
-    const size_t MAX_DATA_SIZE = pow(2, 36);
+    const double MAX_DATA_SIZE = pow(2, 36);
     const vector<u8>& KEY_GENERATING_KEY;
 
     /**
@@ -104,15 +104,19 @@ template<class T> class AEAD
     vector<u8> get_tag(const vector<u8>& message_encryption_key, const vector<u8>& message_authentication_key,
                        const vector<u8>& plaintext, const vector<u8>& aad, const vector<u8>& nonce)
     {
-        vector<u8> aad_plaintext_lengths(BLOCK_BYTE_LEN);
-        in_place_update(aad_plaintext_lengths, aad.size() * 8, 0);
-        in_place_update(aad_plaintext_lengths, plaintext.size() * 8, 8);
+        // Create length block
+        vector<u8> length_block(BLOCK_BYTE_LEN);
+        u64 aad_bit_len = aad.size() * 8;
+        u64 plaintext_bit_len = plaintext.size() * 8;
+        in_place_update(length_block, !is_big_endian() ? aad_bit_len : swap_endian(aad_bit_len), 0);
+        in_place_update(length_block, !is_big_endian() ? plaintext_bit_len : swap_endian(plaintext_bit_len),
+                        8);
 
         // Digest
         Polyval<T> authenticator = Polyval<T>(message_authentication_key);
         authenticator.update(aad);
         authenticator.update(plaintext);
-        authenticator.update(aad_plaintext_lengths);
+        authenticator.update(length_block);
         vector<u8> digest = authenticator.digest();
 
         // XOR first 96 bytes of digest with nonce
@@ -142,8 +146,13 @@ template<class T> class AEAD
     {
         u8* byte_arr = (u8*) &key_ctr;
 
-        for (size_t i = 0; i < sizeof(T); i++)
-            ctr_block.push_back(byte_arr[i]);
+        if (is_big_endian()) {
+            T* word_arr = (T*) &key_ctr;
+            for (size_t i = 0; i < sizeof(*word_arr) / sizeof(T); i++)
+                word_arr[i] = swap_endian(word_arr[i]);
+        }
+
+        ctr_block.insert(ctr_block.end(), byte_arr, byte_arr + sizeof(T));
 
         // Append nonce
         ctr_block.insert(ctr_block.end(), nonce.begin(), nonce.end());

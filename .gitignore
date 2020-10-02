@@ -3,4 +3,5 @@ build/
 *.kdev4
 **.kate-swp
 **CMakeLists.txt.user
+**.autosave
 

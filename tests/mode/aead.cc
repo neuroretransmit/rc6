@@ -70,7 +70,7 @@ TEST(AEAD, DecipheredEqualsPlaintext256)
     ASSERT_EQ(plaintext, ciphertext);
 }
 
-TEST(AEAD, NonParallelized)
+TEST(AEAD, SynchronousBlocks)
 {
     vector<u8> plaintext(2, 1);
     vector<u8> aad(2, 2);
